@@ -31,6 +31,7 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
@@ -47,7 +48,7 @@ struct TableStruct_mud_5flib_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[2]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[10]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -55,19 +56,184 @@ struct TableStruct_mud_5flib_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_mud_5flib_2eproto;
 namespace mud {
+class attribute;
+class attributeDefaultTypeInternal;
+extern attributeDefaultTypeInternal _attribute_default_instance_;
+class character;
+class characterDefaultTypeInternal;
+extern characterDefaultTypeInternal _character_default_instance_;
+class character_book;
+class character_bookDefaultTypeInternal;
+extern character_bookDefaultTypeInternal _character_book_default_instance_;
+class enemy;
+class enemyDefaultTypeInternal;
+extern enemyDefaultTypeInternal _enemy_default_instance_;
+class enemy_book;
+class enemy_bookDefaultTypeInternal;
+extern enemy_bookDefaultTypeInternal _enemy_book_default_instance_;
+class location;
+class locationDefaultTypeInternal;
+extern locationDefaultTypeInternal _location_default_instance_;
 class player;
 class playerDefaultTypeInternal;
 extern playerDefaultTypeInternal _player_default_instance_;
 class player_book;
 class player_bookDefaultTypeInternal;
 extern player_bookDefaultTypeInternal _player_book_default_instance_;
+class tile;
+class tileDefaultTypeInternal;
+extern tileDefaultTypeInternal _tile_default_instance_;
+class tile_book;
+class tile_bookDefaultTypeInternal;
+extern tile_bookDefaultTypeInternal _tile_book_default_instance_;
 }  // namespace mud
 PROTOBUF_NAMESPACE_OPEN
+template<> ::mud::attribute* Arena::CreateMaybeMessage<::mud::attribute>(Arena*);
+template<> ::mud::character* Arena::CreateMaybeMessage<::mud::character>(Arena*);
+template<> ::mud::character_book* Arena::CreateMaybeMessage<::mud::character_book>(Arena*);
+template<> ::mud::enemy* Arena::CreateMaybeMessage<::mud::enemy>(Arena*);
+template<> ::mud::enemy_book* Arena::CreateMaybeMessage<::mud::enemy_book>(Arena*);
+template<> ::mud::location* Arena::CreateMaybeMessage<::mud::location>(Arena*);
 template<> ::mud::player* Arena::CreateMaybeMessage<::mud::player>(Arena*);
 template<> ::mud::player_book* Arena::CreateMaybeMessage<::mud::player_book>(Arena*);
+template<> ::mud::tile* Arena::CreateMaybeMessage<::mud::tile>(Arena*);
+template<> ::mud::tile_book* Arena::CreateMaybeMessage<::mud::tile_book>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace mud {
 
+enum character_state : int {
+  NONE = 0,
+  WALKING = 1,
+  COMBAT = 2,
+  character_state_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  character_state_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool character_state_IsValid(int value);
+constexpr character_state character_state_MIN = NONE;
+constexpr character_state character_state_MAX = COMBAT;
+constexpr int character_state_ARRAYSIZE = character_state_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* character_state_descriptor();
+template<typename T>
+inline const std::string& character_state_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, character_state>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function character_state_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    character_state_descriptor(), enum_t_value);
+}
+inline bool character_state_Parse(
+    const std::string& name, character_state* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<character_state>(
+    character_state_descriptor(), name, value);
+}
+enum attribute_name : int {
+  LIFE = 0,
+  STRENGTH = 1,
+  AGILITY = 2,
+  INTELLIGENCE = 3,
+  attribute_name_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  attribute_name_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool attribute_name_IsValid(int value);
+constexpr attribute_name attribute_name_MIN = LIFE;
+constexpr attribute_name attribute_name_MAX = INTELLIGENCE;
+constexpr int attribute_name_ARRAYSIZE = attribute_name_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* attribute_name_descriptor();
+template<typename T>
+inline const std::string& attribute_name_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, attribute_name>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function attribute_name_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    attribute_name_descriptor(), enum_t_value);
+}
+inline bool attribute_name_Parse(
+    const std::string& name, attribute_name* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<attribute_name>(
+    attribute_name_descriptor(), name, value);
+}
+enum direction : int {
+  NORTH = 0,
+  SOUTH = 1,
+  EAST = 2,
+  WEST = 3,
+  direction_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  direction_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool direction_IsValid(int value);
+constexpr direction direction_MIN = NORTH;
+constexpr direction direction_MAX = WEST;
+constexpr int direction_ARRAYSIZE = direction_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* direction_descriptor();
+template<typename T>
+inline const std::string& direction_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, direction>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function direction_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    direction_descriptor(), enum_t_value);
+}
+inline bool direction_Parse(
+    const std::string& name, direction* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<direction>(
+    direction_descriptor(), name, value);
+}
+enum tile_type : int {
+  EMPTY = 0,
+  WALL = 1,
+  TREE = 2,
+  PORTAL = 3,
+  tile_type_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  tile_type_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool tile_type_IsValid(int value);
+constexpr tile_type tile_type_MIN = EMPTY;
+constexpr tile_type tile_type_MAX = PORTAL;
+constexpr int tile_type_ARRAYSIZE = tile_type_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* tile_type_descriptor();
+template<typename T>
+inline const std::string& tile_type_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, tile_type>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function tile_type_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    tile_type_descriptor(), enum_t_value);
+}
+inline bool tile_type_Parse(
+    const std::string& name, tile_type* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<tile_type>(
+    tile_type_descriptor(), name, value);
+}
+enum resident_type : int {
+  NOBODY = 0,
+  CHARACTER = 1,
+  ENEMY = 2,
+  resident_type_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  resident_type_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool resident_type_IsValid(int value);
+constexpr resident_type resident_type_MIN = NOBODY;
+constexpr resident_type resident_type_MAX = ENEMY;
+constexpr int resident_type_ARRAYSIZE = resident_type_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* resident_type_descriptor();
+template<typename T>
+inline const std::string& resident_type_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, resident_type>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function resident_type_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    resident_type_descriptor(), enum_t_value);
+}
+inline bool resident_type_Parse(
+    const std::string& name, resident_type* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<resident_type>(
+    resident_type_descriptor(), name, value);
+}
 // ===================================================================
 
 class player :
@@ -259,6 +425,892 @@ class player :
 };
 // -------------------------------------------------------------------
 
+class attribute :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:mud.attribute) */ {
+ public:
+  attribute();
+  virtual ~attribute();
+
+  attribute(const attribute& from);
+  attribute(attribute&& from) noexcept
+    : attribute() {
+    *this = ::std::move(from);
+  }
+
+  inline attribute& operator=(const attribute& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline attribute& operator=(attribute&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const attribute& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const attribute* internal_default_instance() {
+    return reinterpret_cast<const attribute*>(
+               &_attribute_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    1;
+
+  friend void swap(attribute& a, attribute& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(attribute* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline attribute* New() const final {
+    return CreateMaybeMessage<attribute>(nullptr);
+  }
+
+  attribute* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<attribute>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const attribute& from);
+  void MergeFrom(const attribute& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(attribute* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "mud.attribute";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_mud_5flib_2eproto);
+    return ::descriptor_table_mud_5flib_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kNameFieldNumber = 1,
+    kValueFieldNumber = 2,
+    kRegenFieldNumber = 3,
+  };
+  // .mud.attribute_name name = 1;
+  void clear_name();
+  ::mud::attribute_name name() const;
+  void set_name(::mud::attribute_name value);
+  private:
+  ::mud::attribute_name _internal_name() const;
+  void _internal_set_name(::mud::attribute_name value);
+  public:
+
+  // int32 value = 2;
+  void clear_value();
+  ::PROTOBUF_NAMESPACE_ID::int32 value() const;
+  void set_value(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_value() const;
+  void _internal_set_value(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // int32 regen = 3;
+  void clear_regen();
+  ::PROTOBUF_NAMESPACE_ID::int32 regen() const;
+  void set_regen(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_regen() const;
+  void _internal_set_regen(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:mud.attribute)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  int name_;
+  ::PROTOBUF_NAMESPACE_ID::int32 value_;
+  ::PROTOBUF_NAMESPACE_ID::int32 regen_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_mud_5flib_2eproto;
+};
+// -------------------------------------------------------------------
+
+class character :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:mud.character) */ {
+ public:
+  character();
+  virtual ~character();
+
+  character(const character& from);
+  character(character&& from) noexcept
+    : character() {
+    *this = ::std::move(from);
+  }
+
+  inline character& operator=(const character& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline character& operator=(character&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const character& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const character* internal_default_instance() {
+    return reinterpret_cast<const character*>(
+               &_character_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(character& a, character& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(character* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline character* New() const final {
+    return CreateMaybeMessage<character>(nullptr);
+  }
+
+  character* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<character>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const character& from);
+  void MergeFrom(const character& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(character* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "mud.character";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_mud_5flib_2eproto);
+    return ::descriptor_table_mud_5flib_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kAttributesFieldNumber = 5,
+    kNameFieldNumber = 1,
+    kIdFieldNumber = 2,
+    kTileIdFieldNumber = 3,
+    kFacingFieldNumber = 4,
+    kStateFieldNumber = 7,
+  };
+  // repeated .mud.attribute attributes = 5;
+  int attributes_size() const;
+  private:
+  int _internal_attributes_size() const;
+  public:
+  void clear_attributes();
+  ::mud::attribute* mutable_attributes(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::attribute >*
+      mutable_attributes();
+  private:
+  const ::mud::attribute& _internal_attributes(int index) const;
+  ::mud::attribute* _internal_add_attributes();
+  public:
+  const ::mud::attribute& attributes(int index) const;
+  ::mud::attribute* add_attributes();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::attribute >&
+      attributes() const;
+
+  // string name = 1;
+  void clear_name();
+  const std::string& name() const;
+  void set_name(const std::string& value);
+  void set_name(std::string&& value);
+  void set_name(const char* value);
+  void set_name(const char* value, size_t size);
+  std::string* mutable_name();
+  std::string* release_name();
+  void set_allocated_name(std::string* name);
+  private:
+  const std::string& _internal_name() const;
+  void _internal_set_name(const std::string& value);
+  std::string* _internal_mutable_name();
+  public:
+
+  // int64 id = 2;
+  void clear_id();
+  ::PROTOBUF_NAMESPACE_ID::int64 id() const;
+  void set_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_id() const;
+  void _internal_set_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int64 tile_id = 3;
+  void clear_tile_id();
+  ::PROTOBUF_NAMESPACE_ID::int64 tile_id() const;
+  void set_tile_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_tile_id() const;
+  void _internal_set_tile_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // .mud.direction facing = 4;
+  void clear_facing();
+  ::mud::direction facing() const;
+  void set_facing(::mud::direction value);
+  private:
+  ::mud::direction _internal_facing() const;
+  void _internal_set_facing(::mud::direction value);
+  public:
+
+  // .mud.character_state state = 7;
+  void clear_state();
+  ::mud::character_state state() const;
+  void set_state(::mud::character_state value);
+  private:
+  ::mud::character_state _internal_state() const;
+  void _internal_set_state(::mud::character_state value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:mud.character)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::attribute > attributes_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
+  ::PROTOBUF_NAMESPACE_ID::int64 id_;
+  ::PROTOBUF_NAMESPACE_ID::int64 tile_id_;
+  int facing_;
+  int state_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_mud_5flib_2eproto;
+};
+// -------------------------------------------------------------------
+
+class enemy :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:mud.enemy) */ {
+ public:
+  enemy();
+  virtual ~enemy();
+
+  enemy(const enemy& from);
+  enemy(enemy&& from) noexcept
+    : enemy() {
+    *this = ::std::move(from);
+  }
+
+  inline enemy& operator=(const enemy& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline enemy& operator=(enemy&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const enemy& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const enemy* internal_default_instance() {
+    return reinterpret_cast<const enemy*>(
+               &_enemy_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    3;
+
+  friend void swap(enemy& a, enemy& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(enemy* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline enemy* New() const final {
+    return CreateMaybeMessage<enemy>(nullptr);
+  }
+
+  enemy* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<enemy>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const enemy& from);
+  void MergeFrom(const enemy& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(enemy* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "mud.enemy";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_mud_5flib_2eproto);
+    return ::descriptor_table_mud_5flib_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kAttributesFieldNumber = 5,
+    kNameFieldNumber = 1,
+    kIdFieldNumber = 2,
+    kTileIdFieldNumber = 3,
+    kFacingFieldNumber = 4,
+    kStateFieldNumber = 6,
+  };
+  // repeated .mud.attribute attributes = 5;
+  int attributes_size() const;
+  private:
+  int _internal_attributes_size() const;
+  public:
+  void clear_attributes();
+  ::mud::attribute* mutable_attributes(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::attribute >*
+      mutable_attributes();
+  private:
+  const ::mud::attribute& _internal_attributes(int index) const;
+  ::mud::attribute* _internal_add_attributes();
+  public:
+  const ::mud::attribute& attributes(int index) const;
+  ::mud::attribute* add_attributes();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::attribute >&
+      attributes() const;
+
+  // string name = 1;
+  void clear_name();
+  const std::string& name() const;
+  void set_name(const std::string& value);
+  void set_name(std::string&& value);
+  void set_name(const char* value);
+  void set_name(const char* value, size_t size);
+  std::string* mutable_name();
+  std::string* release_name();
+  void set_allocated_name(std::string* name);
+  private:
+  const std::string& _internal_name() const;
+  void _internal_set_name(const std::string& value);
+  std::string* _internal_mutable_name();
+  public:
+
+  // int64 id = 2;
+  void clear_id();
+  ::PROTOBUF_NAMESPACE_ID::int64 id() const;
+  void set_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_id() const;
+  void _internal_set_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int64 tile_id = 3;
+  void clear_tile_id();
+  ::PROTOBUF_NAMESPACE_ID::int64 tile_id() const;
+  void set_tile_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_tile_id() const;
+  void _internal_set_tile_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // .mud.direction facing = 4;
+  void clear_facing();
+  ::mud::direction facing() const;
+  void set_facing(::mud::direction value);
+  private:
+  ::mud::direction _internal_facing() const;
+  void _internal_set_facing(::mud::direction value);
+  public:
+
+  // .mud.character_state state = 6;
+  void clear_state();
+  ::mud::character_state state() const;
+  void set_state(::mud::character_state value);
+  private:
+  ::mud::character_state _internal_state() const;
+  void _internal_set_state(::mud::character_state value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:mud.enemy)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::attribute > attributes_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
+  ::PROTOBUF_NAMESPACE_ID::int64 id_;
+  ::PROTOBUF_NAMESPACE_ID::int64 tile_id_;
+  int facing_;
+  int state_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_mud_5flib_2eproto;
+};
+// -------------------------------------------------------------------
+
+class location :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:mud.location) */ {
+ public:
+  location();
+  virtual ~location();
+
+  location(const location& from);
+  location(location&& from) noexcept
+    : location() {
+    *this = ::std::move(from);
+  }
+
+  inline location& operator=(const location& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline location& operator=(location&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const location& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const location* internal_default_instance() {
+    return reinterpret_cast<const location*>(
+               &_location_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    4;
+
+  friend void swap(location& a, location& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(location* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline location* New() const final {
+    return CreateMaybeMessage<location>(nullptr);
+  }
+
+  location* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<location>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const location& from);
+  void MergeFrom(const location& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(location* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "mud.location";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_mud_5flib_2eproto);
+    return ::descriptor_table_mud_5flib_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kIdFieldNumber = 2,
+    kDirectionFieldNumber = 1,
+  };
+  // int64 id = 2;
+  void clear_id();
+  ::PROTOBUF_NAMESPACE_ID::int64 id() const;
+  void set_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_id() const;
+  void _internal_set_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // .mud.direction direction = 1;
+  void clear_direction();
+  ::mud::direction direction() const;
+  void set_direction(::mud::direction value);
+  private:
+  ::mud::direction _internal_direction() const;
+  void _internal_set_direction(::mud::direction value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:mud.location)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::int64 id_;
+  int direction_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_mud_5flib_2eproto;
+};
+// -------------------------------------------------------------------
+
+class tile :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:mud.tile) */ {
+ public:
+  tile();
+  virtual ~tile();
+
+  tile(const tile& from);
+  tile(tile&& from) noexcept
+    : tile() {
+    *this = ::std::move(from);
+  }
+
+  inline tile& operator=(const tile& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline tile& operator=(tile&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const tile& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const tile* internal_default_instance() {
+    return reinterpret_cast<const tile*>(
+               &_tile_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  friend void swap(tile& a, tile& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(tile* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline tile* New() const final {
+    return CreateMaybeMessage<tile>(nullptr);
+  }
+
+  tile* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<tile>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const tile& from);
+  void MergeFrom(const tile& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(tile* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "mud.tile";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_mud_5flib_2eproto);
+    return ::descriptor_table_mud_5flib_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kNeighboursFieldNumber = 6,
+    kMoodFieldNumber = 5,
+    kIdFieldNumber = 1,
+    kTypeFieldNumber = 2,
+    kOccupantTypeFieldNumber = 3,
+    kOccupantIdFieldNumber = 4,
+  };
+  // repeated .mud.location neighbours = 6;
+  int neighbours_size() const;
+  private:
+  int _internal_neighbours_size() const;
+  public:
+  void clear_neighbours();
+  ::mud::location* mutable_neighbours(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::location >*
+      mutable_neighbours();
+  private:
+  const ::mud::location& _internal_neighbours(int index) const;
+  ::mud::location* _internal_add_neighbours();
+  public:
+  const ::mud::location& neighbours(int index) const;
+  ::mud::location* add_neighbours();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::location >&
+      neighbours() const;
+
+  // string mood = 5;
+  void clear_mood();
+  const std::string& mood() const;
+  void set_mood(const std::string& value);
+  void set_mood(std::string&& value);
+  void set_mood(const char* value);
+  void set_mood(const char* value, size_t size);
+  std::string* mutable_mood();
+  std::string* release_mood();
+  void set_allocated_mood(std::string* mood);
+  private:
+  const std::string& _internal_mood() const;
+  void _internal_set_mood(const std::string& value);
+  std::string* _internal_mutable_mood();
+  public:
+
+  // int64 id = 1;
+  void clear_id();
+  ::PROTOBUF_NAMESPACE_ID::int64 id() const;
+  void set_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_id() const;
+  void _internal_set_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // .mud.tile_type type = 2;
+  void clear_type();
+  ::mud::tile_type type() const;
+  void set_type(::mud::tile_type value);
+  private:
+  ::mud::tile_type _internal_type() const;
+  void _internal_set_type(::mud::tile_type value);
+  public:
+
+  // .mud.resident_type occupant_type = 3;
+  void clear_occupant_type();
+  ::mud::resident_type occupant_type() const;
+  void set_occupant_type(::mud::resident_type value);
+  private:
+  ::mud::resident_type _internal_occupant_type() const;
+  void _internal_set_occupant_type(::mud::resident_type value);
+  public:
+
+  // int64 occupant_id = 4;
+  void clear_occupant_id();
+  ::PROTOBUF_NAMESPACE_ID::int64 occupant_id() const;
+  void set_occupant_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_occupant_id() const;
+  void _internal_set_occupant_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:mud.tile)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::location > neighbours_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr mood_;
+  ::PROTOBUF_NAMESPACE_ID::int64 id_;
+  int type_;
+  int occupant_type_;
+  ::PROTOBUF_NAMESPACE_ID::int64 occupant_id_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_mud_5flib_2eproto;
+};
+// -------------------------------------------------------------------
+
 class player_book :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:mud.player_book) */ {
  public:
@@ -301,7 +1353,7 @@ class player_book :
                &_player_book_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    6;
 
   friend void swap(player_book& a, player_book& b) {
     a.Swap(&b);
@@ -391,6 +1443,417 @@ class player_book :
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::player > players_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_mud_5flib_2eproto;
+};
+// -------------------------------------------------------------------
+
+class tile_book :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:mud.tile_book) */ {
+ public:
+  tile_book();
+  virtual ~tile_book();
+
+  tile_book(const tile_book& from);
+  tile_book(tile_book&& from) noexcept
+    : tile_book() {
+    *this = ::std::move(from);
+  }
+
+  inline tile_book& operator=(const tile_book& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline tile_book& operator=(tile_book&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const tile_book& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const tile_book* internal_default_instance() {
+    return reinterpret_cast<const tile_book*>(
+               &_tile_book_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    7;
+
+  friend void swap(tile_book& a, tile_book& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(tile_book* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline tile_book* New() const final {
+    return CreateMaybeMessage<tile_book>(nullptr);
+  }
+
+  tile_book* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<tile_book>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const tile_book& from);
+  void MergeFrom(const tile_book& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(tile_book* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "mud.tile_book";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_mud_5flib_2eproto);
+    return ::descriptor_table_mud_5flib_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kTilesFieldNumber = 1,
+  };
+  // repeated .mud.tile tiles = 1;
+  int tiles_size() const;
+  private:
+  int _internal_tiles_size() const;
+  public:
+  void clear_tiles();
+  ::mud::tile* mutable_tiles(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::tile >*
+      mutable_tiles();
+  private:
+  const ::mud::tile& _internal_tiles(int index) const;
+  ::mud::tile* _internal_add_tiles();
+  public:
+  const ::mud::tile& tiles(int index) const;
+  ::mud::tile* add_tiles();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::tile >&
+      tiles() const;
+
+  // @@protoc_insertion_point(class_scope:mud.tile_book)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::tile > tiles_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_mud_5flib_2eproto;
+};
+// -------------------------------------------------------------------
+
+class character_book :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:mud.character_book) */ {
+ public:
+  character_book();
+  virtual ~character_book();
+
+  character_book(const character_book& from);
+  character_book(character_book&& from) noexcept
+    : character_book() {
+    *this = ::std::move(from);
+  }
+
+  inline character_book& operator=(const character_book& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline character_book& operator=(character_book&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const character_book& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const character_book* internal_default_instance() {
+    return reinterpret_cast<const character_book*>(
+               &_character_book_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    8;
+
+  friend void swap(character_book& a, character_book& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(character_book* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline character_book* New() const final {
+    return CreateMaybeMessage<character_book>(nullptr);
+  }
+
+  character_book* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<character_book>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const character_book& from);
+  void MergeFrom(const character_book& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(character_book* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "mud.character_book";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_mud_5flib_2eproto);
+    return ::descriptor_table_mud_5flib_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kCharactersFieldNumber = 1,
+  };
+  // repeated .mud.character characters = 1;
+  int characters_size() const;
+  private:
+  int _internal_characters_size() const;
+  public:
+  void clear_characters();
+  ::mud::character* mutable_characters(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::character >*
+      mutable_characters();
+  private:
+  const ::mud::character& _internal_characters(int index) const;
+  ::mud::character* _internal_add_characters();
+  public:
+  const ::mud::character& characters(int index) const;
+  ::mud::character* add_characters();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::character >&
+      characters() const;
+
+  // @@protoc_insertion_point(class_scope:mud.character_book)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::character > characters_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_mud_5flib_2eproto;
+};
+// -------------------------------------------------------------------
+
+class enemy_book :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:mud.enemy_book) */ {
+ public:
+  enemy_book();
+  virtual ~enemy_book();
+
+  enemy_book(const enemy_book& from);
+  enemy_book(enemy_book&& from) noexcept
+    : enemy_book() {
+    *this = ::std::move(from);
+  }
+
+  inline enemy_book& operator=(const enemy_book& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline enemy_book& operator=(enemy_book&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const enemy_book& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const enemy_book* internal_default_instance() {
+    return reinterpret_cast<const enemy_book*>(
+               &_enemy_book_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    9;
+
+  friend void swap(enemy_book& a, enemy_book& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(enemy_book* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline enemy_book* New() const final {
+    return CreateMaybeMessage<enemy_book>(nullptr);
+  }
+
+  enemy_book* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<enemy_book>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const enemy_book& from);
+  void MergeFrom(const enemy_book& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(enemy_book* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "mud.enemy_book";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_mud_5flib_2eproto);
+    return ::descriptor_table_mud_5flib_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kEnemiesFieldNumber = 1,
+  };
+  // repeated .mud.enemy enemies = 1;
+  int enemies_size() const;
+  private:
+  int _internal_enemies_size() const;
+  public:
+  void clear_enemies();
+  ::mud::enemy* mutable_enemies(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::enemy >*
+      mutable_enemies();
+  private:
+  const ::mud::enemy& _internal_enemies(int index) const;
+  ::mud::enemy* _internal_add_enemies();
+  public:
+  const ::mud::enemy& enemies(int index) const;
+  ::mud::enemy* add_enemies();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::enemy >&
+      enemies() const;
+
+  // @@protoc_insertion_point(class_scope:mud.enemy_book)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::enemy > enemies_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_mud_5flib_2eproto;
 };
@@ -594,6 +2057,663 @@ player::mutable_id_characters() {
 
 // -------------------------------------------------------------------
 
+// attribute
+
+// .mud.attribute_name name = 1;
+inline void attribute::clear_name() {
+  name_ = 0;
+}
+inline ::mud::attribute_name attribute::_internal_name() const {
+  return static_cast< ::mud::attribute_name >(name_);
+}
+inline ::mud::attribute_name attribute::name() const {
+  // @@protoc_insertion_point(field_get:mud.attribute.name)
+  return _internal_name();
+}
+inline void attribute::_internal_set_name(::mud::attribute_name value) {
+  
+  name_ = value;
+}
+inline void attribute::set_name(::mud::attribute_name value) {
+  _internal_set_name(value);
+  // @@protoc_insertion_point(field_set:mud.attribute.name)
+}
+
+// int32 value = 2;
+inline void attribute::clear_value() {
+  value_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 attribute::_internal_value() const {
+  return value_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 attribute::value() const {
+  // @@protoc_insertion_point(field_get:mud.attribute.value)
+  return _internal_value();
+}
+inline void attribute::_internal_set_value(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  value_ = value;
+}
+inline void attribute::set_value(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_value(value);
+  // @@protoc_insertion_point(field_set:mud.attribute.value)
+}
+
+// int32 regen = 3;
+inline void attribute::clear_regen() {
+  regen_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 attribute::_internal_regen() const {
+  return regen_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 attribute::regen() const {
+  // @@protoc_insertion_point(field_get:mud.attribute.regen)
+  return _internal_regen();
+}
+inline void attribute::_internal_set_regen(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  regen_ = value;
+}
+inline void attribute::set_regen(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_regen(value);
+  // @@protoc_insertion_point(field_set:mud.attribute.regen)
+}
+
+// -------------------------------------------------------------------
+
+// character
+
+// string name = 1;
+inline void character::clear_name() {
+  name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& character::name() const {
+  // @@protoc_insertion_point(field_get:mud.character.name)
+  return _internal_name();
+}
+inline void character::set_name(const std::string& value) {
+  _internal_set_name(value);
+  // @@protoc_insertion_point(field_set:mud.character.name)
+}
+inline std::string* character::mutable_name() {
+  // @@protoc_insertion_point(field_mutable:mud.character.name)
+  return _internal_mutable_name();
+}
+inline const std::string& character::_internal_name() const {
+  return name_.GetNoArena();
+}
+inline void character::_internal_set_name(const std::string& value) {
+  
+  name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+}
+inline void character::set_name(std::string&& value) {
+  
+  name_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:mud.character.name)
+}
+inline void character::set_name(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:mud.character.name)
+}
+inline void character::set_name(const char* value, size_t size) {
+  
+  name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:mud.character.name)
+}
+inline std::string* character::_internal_mutable_name() {
+  
+  return name_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* character::release_name() {
+  // @@protoc_insertion_point(field_release:mud.character.name)
+  
+  return name_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void character::set_allocated_name(std::string* name) {
+  if (name != nullptr) {
+    
+  } else {
+    
+  }
+  name_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:mud.character.name)
+}
+
+// int64 id = 2;
+inline void character::clear_id() {
+  id_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 character::_internal_id() const {
+  return id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 character::id() const {
+  // @@protoc_insertion_point(field_get:mud.character.id)
+  return _internal_id();
+}
+inline void character::_internal_set_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  id_ = value;
+}
+inline void character::set_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_id(value);
+  // @@protoc_insertion_point(field_set:mud.character.id)
+}
+
+// int64 tile_id = 3;
+inline void character::clear_tile_id() {
+  tile_id_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 character::_internal_tile_id() const {
+  return tile_id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 character::tile_id() const {
+  // @@protoc_insertion_point(field_get:mud.character.tile_id)
+  return _internal_tile_id();
+}
+inline void character::_internal_set_tile_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  tile_id_ = value;
+}
+inline void character::set_tile_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_tile_id(value);
+  // @@protoc_insertion_point(field_set:mud.character.tile_id)
+}
+
+// .mud.direction facing = 4;
+inline void character::clear_facing() {
+  facing_ = 0;
+}
+inline ::mud::direction character::_internal_facing() const {
+  return static_cast< ::mud::direction >(facing_);
+}
+inline ::mud::direction character::facing() const {
+  // @@protoc_insertion_point(field_get:mud.character.facing)
+  return _internal_facing();
+}
+inline void character::_internal_set_facing(::mud::direction value) {
+  
+  facing_ = value;
+}
+inline void character::set_facing(::mud::direction value) {
+  _internal_set_facing(value);
+  // @@protoc_insertion_point(field_set:mud.character.facing)
+}
+
+// repeated .mud.attribute attributes = 5;
+inline int character::_internal_attributes_size() const {
+  return attributes_.size();
+}
+inline int character::attributes_size() const {
+  return _internal_attributes_size();
+}
+inline void character::clear_attributes() {
+  attributes_.Clear();
+}
+inline ::mud::attribute* character::mutable_attributes(int index) {
+  // @@protoc_insertion_point(field_mutable:mud.character.attributes)
+  return attributes_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::attribute >*
+character::mutable_attributes() {
+  // @@protoc_insertion_point(field_mutable_list:mud.character.attributes)
+  return &attributes_;
+}
+inline const ::mud::attribute& character::_internal_attributes(int index) const {
+  return attributes_.Get(index);
+}
+inline const ::mud::attribute& character::attributes(int index) const {
+  // @@protoc_insertion_point(field_get:mud.character.attributes)
+  return _internal_attributes(index);
+}
+inline ::mud::attribute* character::_internal_add_attributes() {
+  return attributes_.Add();
+}
+inline ::mud::attribute* character::add_attributes() {
+  // @@protoc_insertion_point(field_add:mud.character.attributes)
+  return _internal_add_attributes();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::attribute >&
+character::attributes() const {
+  // @@protoc_insertion_point(field_list:mud.character.attributes)
+  return attributes_;
+}
+
+// .mud.character_state state = 7;
+inline void character::clear_state() {
+  state_ = 0;
+}
+inline ::mud::character_state character::_internal_state() const {
+  return static_cast< ::mud::character_state >(state_);
+}
+inline ::mud::character_state character::state() const {
+  // @@protoc_insertion_point(field_get:mud.character.state)
+  return _internal_state();
+}
+inline void character::_internal_set_state(::mud::character_state value) {
+  
+  state_ = value;
+}
+inline void character::set_state(::mud::character_state value) {
+  _internal_set_state(value);
+  // @@protoc_insertion_point(field_set:mud.character.state)
+}
+
+// -------------------------------------------------------------------
+
+// enemy
+
+// string name = 1;
+inline void enemy::clear_name() {
+  name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& enemy::name() const {
+  // @@protoc_insertion_point(field_get:mud.enemy.name)
+  return _internal_name();
+}
+inline void enemy::set_name(const std::string& value) {
+  _internal_set_name(value);
+  // @@protoc_insertion_point(field_set:mud.enemy.name)
+}
+inline std::string* enemy::mutable_name() {
+  // @@protoc_insertion_point(field_mutable:mud.enemy.name)
+  return _internal_mutable_name();
+}
+inline const std::string& enemy::_internal_name() const {
+  return name_.GetNoArena();
+}
+inline void enemy::_internal_set_name(const std::string& value) {
+  
+  name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+}
+inline void enemy::set_name(std::string&& value) {
+  
+  name_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:mud.enemy.name)
+}
+inline void enemy::set_name(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:mud.enemy.name)
+}
+inline void enemy::set_name(const char* value, size_t size) {
+  
+  name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:mud.enemy.name)
+}
+inline std::string* enemy::_internal_mutable_name() {
+  
+  return name_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* enemy::release_name() {
+  // @@protoc_insertion_point(field_release:mud.enemy.name)
+  
+  return name_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void enemy::set_allocated_name(std::string* name) {
+  if (name != nullptr) {
+    
+  } else {
+    
+  }
+  name_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:mud.enemy.name)
+}
+
+// int64 id = 2;
+inline void enemy::clear_id() {
+  id_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 enemy::_internal_id() const {
+  return id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 enemy::id() const {
+  // @@protoc_insertion_point(field_get:mud.enemy.id)
+  return _internal_id();
+}
+inline void enemy::_internal_set_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  id_ = value;
+}
+inline void enemy::set_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_id(value);
+  // @@protoc_insertion_point(field_set:mud.enemy.id)
+}
+
+// int64 tile_id = 3;
+inline void enemy::clear_tile_id() {
+  tile_id_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 enemy::_internal_tile_id() const {
+  return tile_id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 enemy::tile_id() const {
+  // @@protoc_insertion_point(field_get:mud.enemy.tile_id)
+  return _internal_tile_id();
+}
+inline void enemy::_internal_set_tile_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  tile_id_ = value;
+}
+inline void enemy::set_tile_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_tile_id(value);
+  // @@protoc_insertion_point(field_set:mud.enemy.tile_id)
+}
+
+// .mud.direction facing = 4;
+inline void enemy::clear_facing() {
+  facing_ = 0;
+}
+inline ::mud::direction enemy::_internal_facing() const {
+  return static_cast< ::mud::direction >(facing_);
+}
+inline ::mud::direction enemy::facing() const {
+  // @@protoc_insertion_point(field_get:mud.enemy.facing)
+  return _internal_facing();
+}
+inline void enemy::_internal_set_facing(::mud::direction value) {
+  
+  facing_ = value;
+}
+inline void enemy::set_facing(::mud::direction value) {
+  _internal_set_facing(value);
+  // @@protoc_insertion_point(field_set:mud.enemy.facing)
+}
+
+// repeated .mud.attribute attributes = 5;
+inline int enemy::_internal_attributes_size() const {
+  return attributes_.size();
+}
+inline int enemy::attributes_size() const {
+  return _internal_attributes_size();
+}
+inline void enemy::clear_attributes() {
+  attributes_.Clear();
+}
+inline ::mud::attribute* enemy::mutable_attributes(int index) {
+  // @@protoc_insertion_point(field_mutable:mud.enemy.attributes)
+  return attributes_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::attribute >*
+enemy::mutable_attributes() {
+  // @@protoc_insertion_point(field_mutable_list:mud.enemy.attributes)
+  return &attributes_;
+}
+inline const ::mud::attribute& enemy::_internal_attributes(int index) const {
+  return attributes_.Get(index);
+}
+inline const ::mud::attribute& enemy::attributes(int index) const {
+  // @@protoc_insertion_point(field_get:mud.enemy.attributes)
+  return _internal_attributes(index);
+}
+inline ::mud::attribute* enemy::_internal_add_attributes() {
+  return attributes_.Add();
+}
+inline ::mud::attribute* enemy::add_attributes() {
+  // @@protoc_insertion_point(field_add:mud.enemy.attributes)
+  return _internal_add_attributes();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::attribute >&
+enemy::attributes() const {
+  // @@protoc_insertion_point(field_list:mud.enemy.attributes)
+  return attributes_;
+}
+
+// .mud.character_state state = 6;
+inline void enemy::clear_state() {
+  state_ = 0;
+}
+inline ::mud::character_state enemy::_internal_state() const {
+  return static_cast< ::mud::character_state >(state_);
+}
+inline ::mud::character_state enemy::state() const {
+  // @@protoc_insertion_point(field_get:mud.enemy.state)
+  return _internal_state();
+}
+inline void enemy::_internal_set_state(::mud::character_state value) {
+  
+  state_ = value;
+}
+inline void enemy::set_state(::mud::character_state value) {
+  _internal_set_state(value);
+  // @@protoc_insertion_point(field_set:mud.enemy.state)
+}
+
+// -------------------------------------------------------------------
+
+// location
+
+// .mud.direction direction = 1;
+inline void location::clear_direction() {
+  direction_ = 0;
+}
+inline ::mud::direction location::_internal_direction() const {
+  return static_cast< ::mud::direction >(direction_);
+}
+inline ::mud::direction location::direction() const {
+  // @@protoc_insertion_point(field_get:mud.location.direction)
+  return _internal_direction();
+}
+inline void location::_internal_set_direction(::mud::direction value) {
+  
+  direction_ = value;
+}
+inline void location::set_direction(::mud::direction value) {
+  _internal_set_direction(value);
+  // @@protoc_insertion_point(field_set:mud.location.direction)
+}
+
+// int64 id = 2;
+inline void location::clear_id() {
+  id_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 location::_internal_id() const {
+  return id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 location::id() const {
+  // @@protoc_insertion_point(field_get:mud.location.id)
+  return _internal_id();
+}
+inline void location::_internal_set_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  id_ = value;
+}
+inline void location::set_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_id(value);
+  // @@protoc_insertion_point(field_set:mud.location.id)
+}
+
+// -------------------------------------------------------------------
+
+// tile
+
+// int64 id = 1;
+inline void tile::clear_id() {
+  id_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 tile::_internal_id() const {
+  return id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 tile::id() const {
+  // @@protoc_insertion_point(field_get:mud.tile.id)
+  return _internal_id();
+}
+inline void tile::_internal_set_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  id_ = value;
+}
+inline void tile::set_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_id(value);
+  // @@protoc_insertion_point(field_set:mud.tile.id)
+}
+
+// .mud.tile_type type = 2;
+inline void tile::clear_type() {
+  type_ = 0;
+}
+inline ::mud::tile_type tile::_internal_type() const {
+  return static_cast< ::mud::tile_type >(type_);
+}
+inline ::mud::tile_type tile::type() const {
+  // @@protoc_insertion_point(field_get:mud.tile.type)
+  return _internal_type();
+}
+inline void tile::_internal_set_type(::mud::tile_type value) {
+  
+  type_ = value;
+}
+inline void tile::set_type(::mud::tile_type value) {
+  _internal_set_type(value);
+  // @@protoc_insertion_point(field_set:mud.tile.type)
+}
+
+// .mud.resident_type occupant_type = 3;
+inline void tile::clear_occupant_type() {
+  occupant_type_ = 0;
+}
+inline ::mud::resident_type tile::_internal_occupant_type() const {
+  return static_cast< ::mud::resident_type >(occupant_type_);
+}
+inline ::mud::resident_type tile::occupant_type() const {
+  // @@protoc_insertion_point(field_get:mud.tile.occupant_type)
+  return _internal_occupant_type();
+}
+inline void tile::_internal_set_occupant_type(::mud::resident_type value) {
+  
+  occupant_type_ = value;
+}
+inline void tile::set_occupant_type(::mud::resident_type value) {
+  _internal_set_occupant_type(value);
+  // @@protoc_insertion_point(field_set:mud.tile.occupant_type)
+}
+
+// int64 occupant_id = 4;
+inline void tile::clear_occupant_id() {
+  occupant_id_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 tile::_internal_occupant_id() const {
+  return occupant_id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 tile::occupant_id() const {
+  // @@protoc_insertion_point(field_get:mud.tile.occupant_id)
+  return _internal_occupant_id();
+}
+inline void tile::_internal_set_occupant_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  occupant_id_ = value;
+}
+inline void tile::set_occupant_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_occupant_id(value);
+  // @@protoc_insertion_point(field_set:mud.tile.occupant_id)
+}
+
+// string mood = 5;
+inline void tile::clear_mood() {
+  mood_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& tile::mood() const {
+  // @@protoc_insertion_point(field_get:mud.tile.mood)
+  return _internal_mood();
+}
+inline void tile::set_mood(const std::string& value) {
+  _internal_set_mood(value);
+  // @@protoc_insertion_point(field_set:mud.tile.mood)
+}
+inline std::string* tile::mutable_mood() {
+  // @@protoc_insertion_point(field_mutable:mud.tile.mood)
+  return _internal_mutable_mood();
+}
+inline const std::string& tile::_internal_mood() const {
+  return mood_.GetNoArena();
+}
+inline void tile::_internal_set_mood(const std::string& value) {
+  
+  mood_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+}
+inline void tile::set_mood(std::string&& value) {
+  
+  mood_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:mud.tile.mood)
+}
+inline void tile::set_mood(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  mood_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:mud.tile.mood)
+}
+inline void tile::set_mood(const char* value, size_t size) {
+  
+  mood_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:mud.tile.mood)
+}
+inline std::string* tile::_internal_mutable_mood() {
+  
+  return mood_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* tile::release_mood() {
+  // @@protoc_insertion_point(field_release:mud.tile.mood)
+  
+  return mood_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void tile::set_allocated_mood(std::string* mood) {
+  if (mood != nullptr) {
+    
+  } else {
+    
+  }
+  mood_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), mood);
+  // @@protoc_insertion_point(field_set_allocated:mud.tile.mood)
+}
+
+// repeated .mud.location neighbours = 6;
+inline int tile::_internal_neighbours_size() const {
+  return neighbours_.size();
+}
+inline int tile::neighbours_size() const {
+  return _internal_neighbours_size();
+}
+inline void tile::clear_neighbours() {
+  neighbours_.Clear();
+}
+inline ::mud::location* tile::mutable_neighbours(int index) {
+  // @@protoc_insertion_point(field_mutable:mud.tile.neighbours)
+  return neighbours_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::location >*
+tile::mutable_neighbours() {
+  // @@protoc_insertion_point(field_mutable_list:mud.tile.neighbours)
+  return &neighbours_;
+}
+inline const ::mud::location& tile::_internal_neighbours(int index) const {
+  return neighbours_.Get(index);
+}
+inline const ::mud::location& tile::neighbours(int index) const {
+  // @@protoc_insertion_point(field_get:mud.tile.neighbours)
+  return _internal_neighbours(index);
+}
+inline ::mud::location* tile::_internal_add_neighbours() {
+  return neighbours_.Add();
+}
+inline ::mud::location* tile::add_neighbours() {
+  // @@protoc_insertion_point(field_add:mud.tile.neighbours)
+  return _internal_add_neighbours();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::location >&
+tile::neighbours() const {
+  // @@protoc_insertion_point(field_list:mud.tile.neighbours)
+  return neighbours_;
+}
+
+// -------------------------------------------------------------------
+
 // player_book
 
 // repeated .mud.player players = 1;
@@ -635,15 +2755,190 @@ player_book::players() const {
   return players_;
 }
 
+// -------------------------------------------------------------------
+
+// tile_book
+
+// repeated .mud.tile tiles = 1;
+inline int tile_book::_internal_tiles_size() const {
+  return tiles_.size();
+}
+inline int tile_book::tiles_size() const {
+  return _internal_tiles_size();
+}
+inline void tile_book::clear_tiles() {
+  tiles_.Clear();
+}
+inline ::mud::tile* tile_book::mutable_tiles(int index) {
+  // @@protoc_insertion_point(field_mutable:mud.tile_book.tiles)
+  return tiles_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::tile >*
+tile_book::mutable_tiles() {
+  // @@protoc_insertion_point(field_mutable_list:mud.tile_book.tiles)
+  return &tiles_;
+}
+inline const ::mud::tile& tile_book::_internal_tiles(int index) const {
+  return tiles_.Get(index);
+}
+inline const ::mud::tile& tile_book::tiles(int index) const {
+  // @@protoc_insertion_point(field_get:mud.tile_book.tiles)
+  return _internal_tiles(index);
+}
+inline ::mud::tile* tile_book::_internal_add_tiles() {
+  return tiles_.Add();
+}
+inline ::mud::tile* tile_book::add_tiles() {
+  // @@protoc_insertion_point(field_add:mud.tile_book.tiles)
+  return _internal_add_tiles();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::tile >&
+tile_book::tiles() const {
+  // @@protoc_insertion_point(field_list:mud.tile_book.tiles)
+  return tiles_;
+}
+
+// -------------------------------------------------------------------
+
+// character_book
+
+// repeated .mud.character characters = 1;
+inline int character_book::_internal_characters_size() const {
+  return characters_.size();
+}
+inline int character_book::characters_size() const {
+  return _internal_characters_size();
+}
+inline void character_book::clear_characters() {
+  characters_.Clear();
+}
+inline ::mud::character* character_book::mutable_characters(int index) {
+  // @@protoc_insertion_point(field_mutable:mud.character_book.characters)
+  return characters_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::character >*
+character_book::mutable_characters() {
+  // @@protoc_insertion_point(field_mutable_list:mud.character_book.characters)
+  return &characters_;
+}
+inline const ::mud::character& character_book::_internal_characters(int index) const {
+  return characters_.Get(index);
+}
+inline const ::mud::character& character_book::characters(int index) const {
+  // @@protoc_insertion_point(field_get:mud.character_book.characters)
+  return _internal_characters(index);
+}
+inline ::mud::character* character_book::_internal_add_characters() {
+  return characters_.Add();
+}
+inline ::mud::character* character_book::add_characters() {
+  // @@protoc_insertion_point(field_add:mud.character_book.characters)
+  return _internal_add_characters();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::character >&
+character_book::characters() const {
+  // @@protoc_insertion_point(field_list:mud.character_book.characters)
+  return characters_;
+}
+
+// -------------------------------------------------------------------
+
+// enemy_book
+
+// repeated .mud.enemy enemies = 1;
+inline int enemy_book::_internal_enemies_size() const {
+  return enemies_.size();
+}
+inline int enemy_book::enemies_size() const {
+  return _internal_enemies_size();
+}
+inline void enemy_book::clear_enemies() {
+  enemies_.Clear();
+}
+inline ::mud::enemy* enemy_book::mutable_enemies(int index) {
+  // @@protoc_insertion_point(field_mutable:mud.enemy_book.enemies)
+  return enemies_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::enemy >*
+enemy_book::mutable_enemies() {
+  // @@protoc_insertion_point(field_mutable_list:mud.enemy_book.enemies)
+  return &enemies_;
+}
+inline const ::mud::enemy& enemy_book::_internal_enemies(int index) const {
+  return enemies_.Get(index);
+}
+inline const ::mud::enemy& enemy_book::enemies(int index) const {
+  // @@protoc_insertion_point(field_get:mud.enemy_book.enemies)
+  return _internal_enemies(index);
+}
+inline ::mud::enemy* enemy_book::_internal_add_enemies() {
+  return enemies_.Add();
+}
+inline ::mud::enemy* enemy_book::add_enemies() {
+  // @@protoc_insertion_point(field_add:mud.enemy_book.enemies)
+  return _internal_add_enemies();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::mud::enemy >&
+enemy_book::enemies() const {
+  // @@protoc_insertion_point(field_list:mud.enemy_book.enemies)
+  return enemies_;
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 
 // @@protoc_insertion_point(namespace_scope)
 
 }  // namespace mud
+
+PROTOBUF_NAMESPACE_OPEN
+
+template <> struct is_proto_enum< ::mud::character_state> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::mud::character_state>() {
+  return ::mud::character_state_descriptor();
+}
+template <> struct is_proto_enum< ::mud::attribute_name> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::mud::attribute_name>() {
+  return ::mud::attribute_name_descriptor();
+}
+template <> struct is_proto_enum< ::mud::direction> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::mud::direction>() {
+  return ::mud::direction_descriptor();
+}
+template <> struct is_proto_enum< ::mud::tile_type> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::mud::tile_type>() {
+  return ::mud::tile_type_descriptor();
+}
+template <> struct is_proto_enum< ::mud::resident_type> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::mud::resident_type>() {
+  return ::mud::resident_type_descriptor();
+}
+
+PROTOBUF_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)
 

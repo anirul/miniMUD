@@ -13,6 +13,7 @@ find_package(protobuf CONFIG REQUIRED)
 add_library(protobuf_mud_lib
 	${CMAKE_CURRENT_SOURCE_DIR}/protobuf_mud_lib/mud_lib.pb.cc
 	${CMAKE_CURRENT_SOURCE_DIR}/protobuf_mud_lib/mud_lib.pb.h
+	${CMAKE_CURRENT_SOURCE_DIR}/protobuf_mud_lib/helper.h
 )
 
 target_link_libraries(protobuf_mud_lib
@@ -22,6 +23,14 @@ target_link_libraries(protobuf_mud_lib
 
 add_executable(server
 	${CMAKE_CURRENT_SOURCE_DIR}/server/main.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/server/process_game.h
+	${CMAKE_CURRENT_SOURCE_DIR}/server/process_game.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/server/process_character.h
+	${CMAKE_CURRENT_SOURCE_DIR}/server/process_character.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/server/process_enemy.h
+	${CMAKE_CURRENT_SOURCE_DIR}/server/process_enemy.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/server/process_keyboard.h
+	${CMAKE_CURRENT_SOURCE_DIR}/server/process_keyboard.cpp
 )
 
 target_link_libraries(server

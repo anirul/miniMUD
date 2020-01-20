@@ -9,6 +9,89 @@ message player {
 	repeated int64 id_characters = 4;
 }
 
+enum character_state {
+	NONE = 0;
+	WALKING = 1;
+	COMBAT = 2;
+}
+
+enum attribute_name {
+	LIFE = 0;
+	STRENGTH = 1;
+	AGILITY = 2;
+	INTELLIGENCE = 3;
+}
+
+enum direction {
+	NORTH = 0;
+	SOUTH = 1;
+	EAST = 2;
+	WEST = 3;
+}
+
+message attribute {
+	attribute_name name = 1;
+	int32 value = 2;
+	int32 regen = 3;
+}
+
+message character {
+	string name = 1;
+	int64 id = 2;
+	int64 tile_id = 3;
+	direction facing = 4;
+	repeated attribute attributes = 5;
+	character_state state = 7;
+}
+
+message enemy {
+	string name = 1;
+	int64 id = 2;
+	int64 tile_id = 3;
+	direction facing = 4;
+	repeated attribute attributes = 5;
+	character_state state = 6;
+}
+
+enum tile_type {
+	EMPTY = 0;
+	WALL = 1;
+	TREE = 2;
+	PORTAL = 3;
+}
+
+message location {
+	direction direction = 1;
+	int64 id = 2;
+}
+
+enum resident_type {
+	NOBODY = 0;
+	CHARACTER = 1;
+	ENEMY = 2;
+}
+
+message tile {
+	int64 id = 1;
+	tile_type type = 2;
+	resident_type occupant_type = 3;
+	int64 occupant_id = 4;
+	string mood = 5;
+	repeated location neighbours = 6;
+}
+
 message player_book {
 	repeated player players = 1;
+}
+
+message tile_book {
+	repeated tile tiles = 1;
+}
+
+message character_book {
+	repeated character characters = 1;
+}
+
+message enemy_book {
+	repeated enemy enemies = 1;
 }

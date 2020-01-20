@@ -14,17 +14,142 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
+extern PROTOBUF_INTERNAL_EXPORT_mud_5flib_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_attribute_mud_5flib_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_mud_5flib_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_character_mud_5flib_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_mud_5flib_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_enemy_mud_5flib_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_mud_5flib_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_location_mud_5flib_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_mud_5flib_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_player_mud_5flib_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_mud_5flib_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_tile_mud_5flib_2eproto;
 namespace mud {
 class playerDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<player> _instance;
 } _player_default_instance_;
+class attributeDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<attribute> _instance;
+} _attribute_default_instance_;
+class characterDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<character> _instance;
+} _character_default_instance_;
+class enemyDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<enemy> _instance;
+} _enemy_default_instance_;
+class locationDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<location> _instance;
+} _location_default_instance_;
+class tileDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<tile> _instance;
+} _tile_default_instance_;
 class player_bookDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<player_book> _instance;
 } _player_book_default_instance_;
+class tile_bookDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<tile_book> _instance;
+} _tile_book_default_instance_;
+class character_bookDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<character_book> _instance;
+} _character_book_default_instance_;
+class enemy_bookDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<enemy_book> _instance;
+} _enemy_book_default_instance_;
 }  // namespace mud
+static void InitDefaultsscc_info_attribute_mud_5flib_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::mud::_attribute_default_instance_;
+    new (ptr) ::mud::attribute();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::mud::attribute::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_attribute_mud_5flib_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_attribute_mud_5flib_2eproto}, {}};
+
+static void InitDefaultsscc_info_character_mud_5flib_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::mud::_character_default_instance_;
+    new (ptr) ::mud::character();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::mud::character::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_character_mud_5flib_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_character_mud_5flib_2eproto}, {
+      &scc_info_attribute_mud_5flib_2eproto.base,}};
+
+static void InitDefaultsscc_info_character_book_mud_5flib_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::mud::_character_book_default_instance_;
+    new (ptr) ::mud::character_book();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::mud::character_book::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_character_book_mud_5flib_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_character_book_mud_5flib_2eproto}, {
+      &scc_info_character_mud_5flib_2eproto.base,}};
+
+static void InitDefaultsscc_info_enemy_mud_5flib_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::mud::_enemy_default_instance_;
+    new (ptr) ::mud::enemy();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::mud::enemy::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_enemy_mud_5flib_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_enemy_mud_5flib_2eproto}, {
+      &scc_info_attribute_mud_5flib_2eproto.base,}};
+
+static void InitDefaultsscc_info_enemy_book_mud_5flib_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::mud::_enemy_book_default_instance_;
+    new (ptr) ::mud::enemy_book();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::mud::enemy_book::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_enemy_book_mud_5flib_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_enemy_book_mud_5flib_2eproto}, {
+      &scc_info_enemy_mud_5flib_2eproto.base,}};
+
+static void InitDefaultsscc_info_location_mud_5flib_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::mud::_location_default_instance_;
+    new (ptr) ::mud::location();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::mud::location::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_location_mud_5flib_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_location_mud_5flib_2eproto}, {}};
+
 static void InitDefaultsscc_info_player_mud_5flib_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -54,8 +179,38 @@ static void InitDefaultsscc_info_player_book_mud_5flib_2eproto() {
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_player_book_mud_5flib_2eproto}, {
       &scc_info_player_mud_5flib_2eproto.base,}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_mud_5flib_2eproto[2];
-static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_mud_5flib_2eproto = nullptr;
+static void InitDefaultsscc_info_tile_mud_5flib_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::mud::_tile_default_instance_;
+    new (ptr) ::mud::tile();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::mud::tile::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_tile_mud_5flib_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_tile_mud_5flib_2eproto}, {
+      &scc_info_location_mud_5flib_2eproto.base,}};
+
+static void InitDefaultsscc_info_tile_book_mud_5flib_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::mud::_tile_book_default_instance_;
+    new (ptr) ::mud::tile_book();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::mud::tile_book::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_tile_book_mud_5flib_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_tile_book_mud_5flib_2eproto}, {
+      &scc_info_tile_mud_5flib_2eproto.base,}};
+
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_mud_5flib_2eproto[10];
+static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_mud_5flib_2eproto[5];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_mud_5flib_2eproto = nullptr;
 
 const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_mud_5flib_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
@@ -69,46 +224,241 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_mud_5flib_2eproto::offsets[] P
   PROTOBUF_FIELD_OFFSET(::mud::player, id_),
   PROTOBUF_FIELD_OFFSET(::mud::player, id_characters_),
   ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::mud::attribute, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::mud::attribute, name_),
+  PROTOBUF_FIELD_OFFSET(::mud::attribute, value_),
+  PROTOBUF_FIELD_OFFSET(::mud::attribute, regen_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::mud::character, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::mud::character, name_),
+  PROTOBUF_FIELD_OFFSET(::mud::character, id_),
+  PROTOBUF_FIELD_OFFSET(::mud::character, tile_id_),
+  PROTOBUF_FIELD_OFFSET(::mud::character, facing_),
+  PROTOBUF_FIELD_OFFSET(::mud::character, attributes_),
+  PROTOBUF_FIELD_OFFSET(::mud::character, state_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::mud::enemy, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::mud::enemy, name_),
+  PROTOBUF_FIELD_OFFSET(::mud::enemy, id_),
+  PROTOBUF_FIELD_OFFSET(::mud::enemy, tile_id_),
+  PROTOBUF_FIELD_OFFSET(::mud::enemy, facing_),
+  PROTOBUF_FIELD_OFFSET(::mud::enemy, attributes_),
+  PROTOBUF_FIELD_OFFSET(::mud::enemy, state_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::mud::location, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::mud::location, direction_),
+  PROTOBUF_FIELD_OFFSET(::mud::location, id_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::mud::tile, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::mud::tile, id_),
+  PROTOBUF_FIELD_OFFSET(::mud::tile, type_),
+  PROTOBUF_FIELD_OFFSET(::mud::tile, occupant_type_),
+  PROTOBUF_FIELD_OFFSET(::mud::tile, occupant_id_),
+  PROTOBUF_FIELD_OFFSET(::mud::tile, mood_),
+  PROTOBUF_FIELD_OFFSET(::mud::tile, neighbours_),
+  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::mud::player_book, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::mud::player_book, players_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::mud::tile_book, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::mud::tile_book, tiles_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::mud::character_book, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::mud::character_book, characters_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::mud::enemy_book, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::mud::enemy_book, enemies_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::mud::player)},
-  { 9, -1, sizeof(::mud::player_book)},
+  { 9, -1, sizeof(::mud::attribute)},
+  { 17, -1, sizeof(::mud::character)},
+  { 28, -1, sizeof(::mud::enemy)},
+  { 39, -1, sizeof(::mud::location)},
+  { 46, -1, sizeof(::mud::tile)},
+  { 57, -1, sizeof(::mud::player_book)},
+  { 63, -1, sizeof(::mud::tile_book)},
+  { 69, -1, sizeof(::mud::character_book)},
+  { 75, -1, sizeof(::mud::enemy_book)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::mud::_player_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::mud::_attribute_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::mud::_character_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::mud::_enemy_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::mud::_location_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::mud::_tile_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::mud::_player_book_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::mud::_tile_book_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::mud::_character_book_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::mud::_enemy_book_default_instance_),
 };
 
 const char descriptor_table_protodef_mud_5flib_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\rmud_lib.proto\022\003mud\"P\n\006player\022\014\n\004name\030\001"
   " \001(\t\022\025\n\rpassword_hash\030\002 \001(\t\022\n\n\002id\030\003 \001(\003\022"
-  "\025\n\rid_characters\030\004 \003(\003\"+\n\013player_book\022\034\n"
-  "\007players\030\001 \003(\0132\013.mud.playerb\006proto3"
+  "\025\n\rid_characters\030\004 \003(\003\"L\n\tattribute\022!\n\004n"
+  "ame\030\001 \001(\0162\023.mud.attribute_name\022\r\n\005value\030"
+  "\002 \001(\005\022\r\n\005regen\030\003 \001(\005\"\237\001\n\tcharacter\022\014\n\004na"
+  "me\030\001 \001(\t\022\n\n\002id\030\002 \001(\003\022\017\n\007tile_id\030\003 \001(\003\022\036\n"
+  "\006facing\030\004 \001(\0162\016.mud.direction\022\"\n\nattribu"
+  "tes\030\005 \003(\0132\016.mud.attribute\022#\n\005state\030\007 \001(\016"
+  "2\024.mud.character_state\"\233\001\n\005enemy\022\014\n\004name"
+  "\030\001 \001(\t\022\n\n\002id\030\002 \001(\003\022\017\n\007tile_id\030\003 \001(\003\022\036\n\006f"
+  "acing\030\004 \001(\0162\016.mud.direction\022\"\n\nattribute"
+  "s\030\005 \003(\0132\016.mud.attribute\022#\n\005state\030\006 \001(\0162\024"
+  ".mud.character_state\"9\n\010location\022!\n\tdire"
+  "ction\030\001 \001(\0162\016.mud.direction\022\n\n\002id\030\002 \001(\003\""
+  "\241\001\n\004tile\022\n\n\002id\030\001 \001(\003\022\034\n\004type\030\002 \001(\0162\016.mud"
+  ".tile_type\022)\n\roccupant_type\030\003 \001(\0162\022.mud."
+  "resident_type\022\023\n\013occupant_id\030\004 \001(\003\022\014\n\004mo"
+  "od\030\005 \001(\t\022!\n\nneighbours\030\006 \003(\0132\r.mud.locat"
+  "ion\"+\n\013player_book\022\034\n\007players\030\001 \003(\0132\013.mu"
+  "d.player\"%\n\ttile_book\022\030\n\005tiles\030\001 \003(\0132\t.m"
+  "ud.tile\"4\n\016character_book\022\"\n\ncharacters\030"
+  "\001 \003(\0132\016.mud.character\")\n\nenemy_book\022\033\n\007e"
+  "nemies\030\001 \003(\0132\n.mud.enemy*4\n\017character_st"
+  "ate\022\010\n\004NONE\020\000\022\013\n\007WALKING\020\001\022\n\n\006COMBAT\020\002*G"
+  "\n\016attribute_name\022\010\n\004LIFE\020\000\022\014\n\010STRENGTH\020\001"
+  "\022\013\n\007AGILITY\020\002\022\020\n\014INTELLIGENCE\020\003*5\n\tdirec"
+  "tion\022\t\n\005NORTH\020\000\022\t\n\005SOUTH\020\001\022\010\n\004EAST\020\002\022\010\n\004"
+  "WEST\020\003*6\n\ttile_type\022\t\n\005EMPTY\020\000\022\010\n\004WALL\020\001"
+  "\022\010\n\004TREE\020\002\022\n\n\006PORTAL\020\003*5\n\rresident_type\022"
+  "\n\n\006NOBODY\020\000\022\r\n\tCHARACTER\020\001\022\t\n\005ENEMY\020\002b\006p"
+  "roto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_mud_5flib_2eproto_deps[1] = {
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_mud_5flib_2eproto_sccs[2] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_mud_5flib_2eproto_sccs[10] = {
+  &scc_info_attribute_mud_5flib_2eproto.base,
+  &scc_info_character_mud_5flib_2eproto.base,
+  &scc_info_character_book_mud_5flib_2eproto.base,
+  &scc_info_enemy_mud_5flib_2eproto.base,
+  &scc_info_enemy_book_mud_5flib_2eproto.base,
+  &scc_info_location_mud_5flib_2eproto.base,
   &scc_info_player_mud_5flib_2eproto.base,
   &scc_info_player_book_mud_5flib_2eproto.base,
+  &scc_info_tile_mud_5flib_2eproto.base,
+  &scc_info_tile_book_mud_5flib_2eproto.base,
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_mud_5flib_2eproto_once;
 static bool descriptor_table_mud_5flib_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_mud_5flib_2eproto = {
-  &descriptor_table_mud_5flib_2eproto_initialized, descriptor_table_protodef_mud_5flib_2eproto, "mud_lib.proto", 155,
-  &descriptor_table_mud_5flib_2eproto_once, descriptor_table_mud_5flib_2eproto_sccs, descriptor_table_mud_5flib_2eproto_deps, 2, 0,
+  &descriptor_table_mud_5flib_2eproto_initialized, descriptor_table_protodef_mud_5flib_2eproto, "mud_lib.proto", 1205,
+  &descriptor_table_mud_5flib_2eproto_once, descriptor_table_mud_5flib_2eproto_sccs, descriptor_table_mud_5flib_2eproto_deps, 10, 0,
   schemas, file_default_instances, TableStruct_mud_5flib_2eproto::offsets,
-  file_level_metadata_mud_5flib_2eproto, 2, file_level_enum_descriptors_mud_5flib_2eproto, file_level_service_descriptors_mud_5flib_2eproto,
+  file_level_metadata_mud_5flib_2eproto, 10, file_level_enum_descriptors_mud_5flib_2eproto, file_level_service_descriptors_mud_5flib_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
 static bool dynamic_init_dummy_mud_5flib_2eproto = (  ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_mud_5flib_2eproto), true);
 namespace mud {
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* character_state_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_mud_5flib_2eproto);
+  return file_level_enum_descriptors_mud_5flib_2eproto[0];
+}
+bool character_state_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* attribute_name_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_mud_5flib_2eproto);
+  return file_level_enum_descriptors_mud_5flib_2eproto[1];
+}
+bool attribute_name_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* direction_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_mud_5flib_2eproto);
+  return file_level_enum_descriptors_mud_5flib_2eproto[2];
+}
+bool direction_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* tile_type_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_mud_5flib_2eproto);
+  return file_level_enum_descriptors_mud_5flib_2eproto[3];
+}
+bool tile_type_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* resident_type_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_mud_5flib_2eproto);
+  return file_level_enum_descriptors_mud_5flib_2eproto[4];
+}
+bool resident_type_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
 
 // ===================================================================
 
@@ -415,6 +765,1475 @@ void player::InternalSwap(player* other) {
 
 // ===================================================================
 
+void attribute::InitAsDefaultInstance() {
+}
+class attribute::_Internal {
+ public:
+};
+
+attribute::attribute()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:mud.attribute)
+}
+attribute::attribute(const attribute& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::memcpy(&name_, &from.name_,
+    static_cast<size_t>(reinterpret_cast<char*>(&regen_) -
+    reinterpret_cast<char*>(&name_)) + sizeof(regen_));
+  // @@protoc_insertion_point(copy_constructor:mud.attribute)
+}
+
+void attribute::SharedCtor() {
+  ::memset(&name_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&regen_) -
+      reinterpret_cast<char*>(&name_)) + sizeof(regen_));
+}
+
+attribute::~attribute() {
+  // @@protoc_insertion_point(destructor:mud.attribute)
+  SharedDtor();
+}
+
+void attribute::SharedDtor() {
+}
+
+void attribute::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const attribute& attribute::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_attribute_mud_5flib_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void attribute::Clear() {
+// @@protoc_insertion_point(message_clear_start:mud.attribute)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&name_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&regen_) -
+      reinterpret_cast<char*>(&name_)) + sizeof(regen_));
+  _internal_metadata_.Clear();
+}
+
+const char* attribute::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // .mud.attribute_name name = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+          _internal_set_name(static_cast<::mud::attribute_name>(val));
+        } else goto handle_unusual;
+        continue;
+      // int32 value = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          value_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 regen = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          regen_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* attribute::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:mud.attribute)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .mud.attribute_name name = 1;
+  if (this->name() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      1, this->_internal_name(), target);
+  }
+
+  // int32 value = 2;
+  if (this->value() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_value(), target);
+  }
+
+  // int32 regen = 3;
+  if (this->regen() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_regen(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:mud.attribute)
+  return target;
+}
+
+size_t attribute::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:mud.attribute)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .mud.attribute_name name = 1;
+  if (this->name() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_name());
+  }
+
+  // int32 value = 2;
+  if (this->value() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_value());
+  }
+
+  // int32 regen = 3;
+  if (this->regen() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_regen());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void attribute::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:mud.attribute)
+  GOOGLE_DCHECK_NE(&from, this);
+  const attribute* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<attribute>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:mud.attribute)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:mud.attribute)
+    MergeFrom(*source);
+  }
+}
+
+void attribute::MergeFrom(const attribute& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:mud.attribute)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.name() != 0) {
+    _internal_set_name(from._internal_name());
+  }
+  if (from.value() != 0) {
+    _internal_set_value(from._internal_value());
+  }
+  if (from.regen() != 0) {
+    _internal_set_regen(from._internal_regen());
+  }
+}
+
+void attribute::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:mud.attribute)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void attribute::CopyFrom(const attribute& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:mud.attribute)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool attribute::IsInitialized() const {
+  return true;
+}
+
+void attribute::InternalSwap(attribute* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(name_, other->name_);
+  swap(value_, other->value_);
+  swap(regen_, other->regen_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata attribute::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void character::InitAsDefaultInstance() {
+}
+class character::_Internal {
+ public:
+};
+
+character::character()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:mud.character)
+}
+character::character(const character& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr),
+      attributes_(from.attributes_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_name().empty()) {
+    name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  ::memcpy(&id_, &from.id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&state_) -
+    reinterpret_cast<char*>(&id_)) + sizeof(state_));
+  // @@protoc_insertion_point(copy_constructor:mud.character)
+}
+
+void character::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_character_mud_5flib_2eproto.base);
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(&id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&state_) -
+      reinterpret_cast<char*>(&id_)) + sizeof(state_));
+}
+
+character::~character() {
+  // @@protoc_insertion_point(destructor:mud.character)
+  SharedDtor();
+}
+
+void character::SharedDtor() {
+  name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void character::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const character& character::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_character_mud_5flib_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void character::Clear() {
+// @@protoc_insertion_point(message_clear_start:mud.character)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  attributes_.Clear();
+  name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(&id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&state_) -
+      reinterpret_cast<char*>(&id_)) + sizeof(state_));
+  _internal_metadata_.Clear();
+}
+
+const char* character::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // string name = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          auto str = _internal_mutable_name();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "mud.character.name"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 id = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 tile_id = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          tile_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .mud.direction facing = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+          _internal_set_facing(static_cast<::mud::direction>(val));
+        } else goto handle_unusual;
+        continue;
+      // repeated .mud.attribute attributes = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_attributes(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<42>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // .mud.character_state state = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 56)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+          _internal_set_state(static_cast<::mud::character_state>(val));
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* character::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:mud.character)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string name = 1;
+  if (this->name().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "mud.character.name");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_name(), target);
+  }
+
+  // int64 id = 2;
+  if (this->id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_id(), target);
+  }
+
+  // int64 tile_id = 3;
+  if (this->tile_id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(3, this->_internal_tile_id(), target);
+  }
+
+  // .mud.direction facing = 4;
+  if (this->facing() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      4, this->_internal_facing(), target);
+  }
+
+  // repeated .mud.attribute attributes = 5;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_attributes_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(5, this->_internal_attributes(i), target, stream);
+  }
+
+  // .mud.character_state state = 7;
+  if (this->state() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      7, this->_internal_state(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:mud.character)
+  return target;
+}
+
+size_t character::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:mud.character)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .mud.attribute attributes = 5;
+  total_size += 1UL * this->_internal_attributes_size();
+  for (const auto& msg : this->attributes_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // string name = 1;
+  if (this->name().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_name());
+  }
+
+  // int64 id = 2;
+  if (this->id() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_id());
+  }
+
+  // int64 tile_id = 3;
+  if (this->tile_id() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_tile_id());
+  }
+
+  // .mud.direction facing = 4;
+  if (this->facing() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_facing());
+  }
+
+  // .mud.character_state state = 7;
+  if (this->state() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_state());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void character::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:mud.character)
+  GOOGLE_DCHECK_NE(&from, this);
+  const character* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<character>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:mud.character)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:mud.character)
+    MergeFrom(*source);
+  }
+}
+
+void character::MergeFrom(const character& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:mud.character)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  attributes_.MergeFrom(from.attributes_);
+  if (from.name().size() > 0) {
+
+    name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  if (from.id() != 0) {
+    _internal_set_id(from._internal_id());
+  }
+  if (from.tile_id() != 0) {
+    _internal_set_tile_id(from._internal_tile_id());
+  }
+  if (from.facing() != 0) {
+    _internal_set_facing(from._internal_facing());
+  }
+  if (from.state() != 0) {
+    _internal_set_state(from._internal_state());
+  }
+}
+
+void character::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:mud.character)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void character::CopyFrom(const character& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:mud.character)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool character::IsInitialized() const {
+  return true;
+}
+
+void character::InternalSwap(character* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  attributes_.InternalSwap(&other->attributes_);
+  name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(id_, other->id_);
+  swap(tile_id_, other->tile_id_);
+  swap(facing_, other->facing_);
+  swap(state_, other->state_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata character::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void enemy::InitAsDefaultInstance() {
+}
+class enemy::_Internal {
+ public:
+};
+
+enemy::enemy()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:mud.enemy)
+}
+enemy::enemy(const enemy& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr),
+      attributes_(from.attributes_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_name().empty()) {
+    name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  ::memcpy(&id_, &from.id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&state_) -
+    reinterpret_cast<char*>(&id_)) + sizeof(state_));
+  // @@protoc_insertion_point(copy_constructor:mud.enemy)
+}
+
+void enemy::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_enemy_mud_5flib_2eproto.base);
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(&id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&state_) -
+      reinterpret_cast<char*>(&id_)) + sizeof(state_));
+}
+
+enemy::~enemy() {
+  // @@protoc_insertion_point(destructor:mud.enemy)
+  SharedDtor();
+}
+
+void enemy::SharedDtor() {
+  name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void enemy::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const enemy& enemy::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_enemy_mud_5flib_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void enemy::Clear() {
+// @@protoc_insertion_point(message_clear_start:mud.enemy)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  attributes_.Clear();
+  name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(&id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&state_) -
+      reinterpret_cast<char*>(&id_)) + sizeof(state_));
+  _internal_metadata_.Clear();
+}
+
+const char* enemy::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // string name = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          auto str = _internal_mutable_name();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "mud.enemy.name"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 id = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 tile_id = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          tile_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .mud.direction facing = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+          _internal_set_facing(static_cast<::mud::direction>(val));
+        } else goto handle_unusual;
+        continue;
+      // repeated .mud.attribute attributes = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_attributes(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<42>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // .mud.character_state state = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 48)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+          _internal_set_state(static_cast<::mud::character_state>(val));
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* enemy::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:mud.enemy)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string name = 1;
+  if (this->name().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "mud.enemy.name");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_name(), target);
+  }
+
+  // int64 id = 2;
+  if (this->id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_id(), target);
+  }
+
+  // int64 tile_id = 3;
+  if (this->tile_id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(3, this->_internal_tile_id(), target);
+  }
+
+  // .mud.direction facing = 4;
+  if (this->facing() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      4, this->_internal_facing(), target);
+  }
+
+  // repeated .mud.attribute attributes = 5;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_attributes_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(5, this->_internal_attributes(i), target, stream);
+  }
+
+  // .mud.character_state state = 6;
+  if (this->state() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      6, this->_internal_state(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:mud.enemy)
+  return target;
+}
+
+size_t enemy::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:mud.enemy)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .mud.attribute attributes = 5;
+  total_size += 1UL * this->_internal_attributes_size();
+  for (const auto& msg : this->attributes_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // string name = 1;
+  if (this->name().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_name());
+  }
+
+  // int64 id = 2;
+  if (this->id() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_id());
+  }
+
+  // int64 tile_id = 3;
+  if (this->tile_id() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_tile_id());
+  }
+
+  // .mud.direction facing = 4;
+  if (this->facing() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_facing());
+  }
+
+  // .mud.character_state state = 6;
+  if (this->state() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_state());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void enemy::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:mud.enemy)
+  GOOGLE_DCHECK_NE(&from, this);
+  const enemy* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<enemy>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:mud.enemy)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:mud.enemy)
+    MergeFrom(*source);
+  }
+}
+
+void enemy::MergeFrom(const enemy& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:mud.enemy)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  attributes_.MergeFrom(from.attributes_);
+  if (from.name().size() > 0) {
+
+    name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  if (from.id() != 0) {
+    _internal_set_id(from._internal_id());
+  }
+  if (from.tile_id() != 0) {
+    _internal_set_tile_id(from._internal_tile_id());
+  }
+  if (from.facing() != 0) {
+    _internal_set_facing(from._internal_facing());
+  }
+  if (from.state() != 0) {
+    _internal_set_state(from._internal_state());
+  }
+}
+
+void enemy::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:mud.enemy)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void enemy::CopyFrom(const enemy& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:mud.enemy)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool enemy::IsInitialized() const {
+  return true;
+}
+
+void enemy::InternalSwap(enemy* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  attributes_.InternalSwap(&other->attributes_);
+  name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(id_, other->id_);
+  swap(tile_id_, other->tile_id_);
+  swap(facing_, other->facing_);
+  swap(state_, other->state_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata enemy::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void location::InitAsDefaultInstance() {
+}
+class location::_Internal {
+ public:
+};
+
+location::location()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:mud.location)
+}
+location::location(const location& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::memcpy(&id_, &from.id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&direction_) -
+    reinterpret_cast<char*>(&id_)) + sizeof(direction_));
+  // @@protoc_insertion_point(copy_constructor:mud.location)
+}
+
+void location::SharedCtor() {
+  ::memset(&id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&direction_) -
+      reinterpret_cast<char*>(&id_)) + sizeof(direction_));
+}
+
+location::~location() {
+  // @@protoc_insertion_point(destructor:mud.location)
+  SharedDtor();
+}
+
+void location::SharedDtor() {
+}
+
+void location::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const location& location::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_location_mud_5flib_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void location::Clear() {
+// @@protoc_insertion_point(message_clear_start:mud.location)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&direction_) -
+      reinterpret_cast<char*>(&id_)) + sizeof(direction_));
+  _internal_metadata_.Clear();
+}
+
+const char* location::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // .mud.direction direction = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+          _internal_set_direction(static_cast<::mud::direction>(val));
+        } else goto handle_unusual;
+        continue;
+      // int64 id = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* location::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:mud.location)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .mud.direction direction = 1;
+  if (this->direction() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      1, this->_internal_direction(), target);
+  }
+
+  // int64 id = 2;
+  if (this->id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_id(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:mud.location)
+  return target;
+}
+
+size_t location::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:mud.location)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // int64 id = 2;
+  if (this->id() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_id());
+  }
+
+  // .mud.direction direction = 1;
+  if (this->direction() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_direction());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void location::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:mud.location)
+  GOOGLE_DCHECK_NE(&from, this);
+  const location* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<location>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:mud.location)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:mud.location)
+    MergeFrom(*source);
+  }
+}
+
+void location::MergeFrom(const location& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:mud.location)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.id() != 0) {
+    _internal_set_id(from._internal_id());
+  }
+  if (from.direction() != 0) {
+    _internal_set_direction(from._internal_direction());
+  }
+}
+
+void location::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:mud.location)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void location::CopyFrom(const location& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:mud.location)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool location::IsInitialized() const {
+  return true;
+}
+
+void location::InternalSwap(location* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(id_, other->id_);
+  swap(direction_, other->direction_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata location::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void tile::InitAsDefaultInstance() {
+}
+class tile::_Internal {
+ public:
+};
+
+tile::tile()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:mud.tile)
+}
+tile::tile(const tile& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr),
+      neighbours_(from.neighbours_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  mood_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_mood().empty()) {
+    mood_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.mood_);
+  }
+  ::memcpy(&id_, &from.id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&occupant_id_) -
+    reinterpret_cast<char*>(&id_)) + sizeof(occupant_id_));
+  // @@protoc_insertion_point(copy_constructor:mud.tile)
+}
+
+void tile::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_tile_mud_5flib_2eproto.base);
+  mood_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(&id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&occupant_id_) -
+      reinterpret_cast<char*>(&id_)) + sizeof(occupant_id_));
+}
+
+tile::~tile() {
+  // @@protoc_insertion_point(destructor:mud.tile)
+  SharedDtor();
+}
+
+void tile::SharedDtor() {
+  mood_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void tile::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const tile& tile::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_tile_mud_5flib_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void tile::Clear() {
+// @@protoc_insertion_point(message_clear_start:mud.tile)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  neighbours_.Clear();
+  mood_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(&id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&occupant_id_) -
+      reinterpret_cast<char*>(&id_)) + sizeof(occupant_id_));
+  _internal_metadata_.Clear();
+}
+
+const char* tile::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // int64 id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .mud.tile_type type = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+          _internal_set_type(static_cast<::mud::tile_type>(val));
+        } else goto handle_unusual;
+        continue;
+      // .mud.resident_type occupant_type = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+          _internal_set_occupant_type(static_cast<::mud::resident_type>(val));
+        } else goto handle_unusual;
+        continue;
+      // int64 occupant_id = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          occupant_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string mood = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
+          auto str = _internal_mutable_mood();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "mud.tile.mood"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // repeated .mud.location neighbours = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_neighbours(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<50>(ptr));
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* tile::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:mud.tile)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int64 id = 1;
+  if (this->id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(1, this->_internal_id(), target);
+  }
+
+  // .mud.tile_type type = 2;
+  if (this->type() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      2, this->_internal_type(), target);
+  }
+
+  // .mud.resident_type occupant_type = 3;
+  if (this->occupant_type() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      3, this->_internal_occupant_type(), target);
+  }
+
+  // int64 occupant_id = 4;
+  if (this->occupant_id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(4, this->_internal_occupant_id(), target);
+  }
+
+  // string mood = 5;
+  if (this->mood().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_mood().data(), static_cast<int>(this->_internal_mood().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "mud.tile.mood");
+    target = stream->WriteStringMaybeAliased(
+        5, this->_internal_mood(), target);
+  }
+
+  // repeated .mud.location neighbours = 6;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_neighbours_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(6, this->_internal_neighbours(i), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:mud.tile)
+  return target;
+}
+
+size_t tile::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:mud.tile)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .mud.location neighbours = 6;
+  total_size += 1UL * this->_internal_neighbours_size();
+  for (const auto& msg : this->neighbours_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // string mood = 5;
+  if (this->mood().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_mood());
+  }
+
+  // int64 id = 1;
+  if (this->id() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_id());
+  }
+
+  // .mud.tile_type type = 2;
+  if (this->type() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_type());
+  }
+
+  // .mud.resident_type occupant_type = 3;
+  if (this->occupant_type() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_occupant_type());
+  }
+
+  // int64 occupant_id = 4;
+  if (this->occupant_id() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_occupant_id());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void tile::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:mud.tile)
+  GOOGLE_DCHECK_NE(&from, this);
+  const tile* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<tile>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:mud.tile)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:mud.tile)
+    MergeFrom(*source);
+  }
+}
+
+void tile::MergeFrom(const tile& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:mud.tile)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  neighbours_.MergeFrom(from.neighbours_);
+  if (from.mood().size() > 0) {
+
+    mood_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.mood_);
+  }
+  if (from.id() != 0) {
+    _internal_set_id(from._internal_id());
+  }
+  if (from.type() != 0) {
+    _internal_set_type(from._internal_type());
+  }
+  if (from.occupant_type() != 0) {
+    _internal_set_occupant_type(from._internal_occupant_type());
+  }
+  if (from.occupant_id() != 0) {
+    _internal_set_occupant_id(from._internal_occupant_id());
+  }
+}
+
+void tile::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:mud.tile)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void tile::CopyFrom(const tile& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:mud.tile)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool tile::IsInitialized() const {
+  return true;
+}
+
+void tile::InternalSwap(tile* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  neighbours_.InternalSwap(&other->neighbours_);
+  mood_.Swap(&other->mood_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(id_, other->id_);
+  swap(type_, other->type_);
+  swap(occupant_type_, other->occupant_type_);
+  swap(occupant_id_, other->occupant_id_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata tile::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
 void player_book::InitAsDefaultInstance() {
 }
 class player_book::_Internal {
@@ -604,14 +2423,611 @@ void player_book::InternalSwap(player_book* other) {
 }
 
 
+// ===================================================================
+
+void tile_book::InitAsDefaultInstance() {
+}
+class tile_book::_Internal {
+ public:
+};
+
+tile_book::tile_book()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:mud.tile_book)
+}
+tile_book::tile_book(const tile_book& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr),
+      tiles_(from.tiles_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:mud.tile_book)
+}
+
+void tile_book::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_tile_book_mud_5flib_2eproto.base);
+}
+
+tile_book::~tile_book() {
+  // @@protoc_insertion_point(destructor:mud.tile_book)
+  SharedDtor();
+}
+
+void tile_book::SharedDtor() {
+}
+
+void tile_book::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const tile_book& tile_book::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_tile_book_mud_5flib_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void tile_book::Clear() {
+// @@protoc_insertion_point(message_clear_start:mud.tile_book)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  tiles_.Clear();
+  _internal_metadata_.Clear();
+}
+
+const char* tile_book::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // repeated .mud.tile tiles = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_tiles(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* tile_book::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:mud.tile_book)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .mud.tile tiles = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_tiles_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, this->_internal_tiles(i), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:mud.tile_book)
+  return target;
+}
+
+size_t tile_book::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:mud.tile_book)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .mud.tile tiles = 1;
+  total_size += 1UL * this->_internal_tiles_size();
+  for (const auto& msg : this->tiles_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void tile_book::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:mud.tile_book)
+  GOOGLE_DCHECK_NE(&from, this);
+  const tile_book* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<tile_book>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:mud.tile_book)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:mud.tile_book)
+    MergeFrom(*source);
+  }
+}
+
+void tile_book::MergeFrom(const tile_book& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:mud.tile_book)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  tiles_.MergeFrom(from.tiles_);
+}
+
+void tile_book::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:mud.tile_book)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void tile_book::CopyFrom(const tile_book& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:mud.tile_book)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool tile_book::IsInitialized() const {
+  return true;
+}
+
+void tile_book::InternalSwap(tile_book* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  tiles_.InternalSwap(&other->tiles_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata tile_book::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void character_book::InitAsDefaultInstance() {
+}
+class character_book::_Internal {
+ public:
+};
+
+character_book::character_book()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:mud.character_book)
+}
+character_book::character_book(const character_book& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr),
+      characters_(from.characters_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:mud.character_book)
+}
+
+void character_book::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_character_book_mud_5flib_2eproto.base);
+}
+
+character_book::~character_book() {
+  // @@protoc_insertion_point(destructor:mud.character_book)
+  SharedDtor();
+}
+
+void character_book::SharedDtor() {
+}
+
+void character_book::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const character_book& character_book::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_character_book_mud_5flib_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void character_book::Clear() {
+// @@protoc_insertion_point(message_clear_start:mud.character_book)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  characters_.Clear();
+  _internal_metadata_.Clear();
+}
+
+const char* character_book::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // repeated .mud.character characters = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_characters(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* character_book::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:mud.character_book)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .mud.character characters = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_characters_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, this->_internal_characters(i), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:mud.character_book)
+  return target;
+}
+
+size_t character_book::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:mud.character_book)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .mud.character characters = 1;
+  total_size += 1UL * this->_internal_characters_size();
+  for (const auto& msg : this->characters_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void character_book::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:mud.character_book)
+  GOOGLE_DCHECK_NE(&from, this);
+  const character_book* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<character_book>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:mud.character_book)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:mud.character_book)
+    MergeFrom(*source);
+  }
+}
+
+void character_book::MergeFrom(const character_book& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:mud.character_book)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  characters_.MergeFrom(from.characters_);
+}
+
+void character_book::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:mud.character_book)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void character_book::CopyFrom(const character_book& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:mud.character_book)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool character_book::IsInitialized() const {
+  return true;
+}
+
+void character_book::InternalSwap(character_book* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  characters_.InternalSwap(&other->characters_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata character_book::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void enemy_book::InitAsDefaultInstance() {
+}
+class enemy_book::_Internal {
+ public:
+};
+
+enemy_book::enemy_book()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:mud.enemy_book)
+}
+enemy_book::enemy_book(const enemy_book& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr),
+      enemies_(from.enemies_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:mud.enemy_book)
+}
+
+void enemy_book::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_enemy_book_mud_5flib_2eproto.base);
+}
+
+enemy_book::~enemy_book() {
+  // @@protoc_insertion_point(destructor:mud.enemy_book)
+  SharedDtor();
+}
+
+void enemy_book::SharedDtor() {
+}
+
+void enemy_book::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const enemy_book& enemy_book::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_enemy_book_mud_5flib_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void enemy_book::Clear() {
+// @@protoc_insertion_point(message_clear_start:mud.enemy_book)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  enemies_.Clear();
+  _internal_metadata_.Clear();
+}
+
+const char* enemy_book::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // repeated .mud.enemy enemies = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_enemies(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* enemy_book::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:mud.enemy_book)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .mud.enemy enemies = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_enemies_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, this->_internal_enemies(i), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:mud.enemy_book)
+  return target;
+}
+
+size_t enemy_book::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:mud.enemy_book)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .mud.enemy enemies = 1;
+  total_size += 1UL * this->_internal_enemies_size();
+  for (const auto& msg : this->enemies_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void enemy_book::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:mud.enemy_book)
+  GOOGLE_DCHECK_NE(&from, this);
+  const enemy_book* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<enemy_book>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:mud.enemy_book)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:mud.enemy_book)
+    MergeFrom(*source);
+  }
+}
+
+void enemy_book::MergeFrom(const enemy_book& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:mud.enemy_book)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  enemies_.MergeFrom(from.enemies_);
+}
+
+void enemy_book::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:mud.enemy_book)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void enemy_book::CopyFrom(const enemy_book& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:mud.enemy_book)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool enemy_book::IsInitialized() const {
+  return true;
+}
+
+void enemy_book::InternalSwap(enemy_book* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  enemies_.InternalSwap(&other->enemies_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata enemy_book::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace mud
 PROTOBUF_NAMESPACE_OPEN
 template<> PROTOBUF_NOINLINE ::mud::player* Arena::CreateMaybeMessage< ::mud::player >(Arena* arena) {
   return Arena::CreateInternal< ::mud::player >(arena);
 }
+template<> PROTOBUF_NOINLINE ::mud::attribute* Arena::CreateMaybeMessage< ::mud::attribute >(Arena* arena) {
+  return Arena::CreateInternal< ::mud::attribute >(arena);
+}
+template<> PROTOBUF_NOINLINE ::mud::character* Arena::CreateMaybeMessage< ::mud::character >(Arena* arena) {
+  return Arena::CreateInternal< ::mud::character >(arena);
+}
+template<> PROTOBUF_NOINLINE ::mud::enemy* Arena::CreateMaybeMessage< ::mud::enemy >(Arena* arena) {
+  return Arena::CreateInternal< ::mud::enemy >(arena);
+}
+template<> PROTOBUF_NOINLINE ::mud::location* Arena::CreateMaybeMessage< ::mud::location >(Arena* arena) {
+  return Arena::CreateInternal< ::mud::location >(arena);
+}
+template<> PROTOBUF_NOINLINE ::mud::tile* Arena::CreateMaybeMessage< ::mud::tile >(Arena* arena) {
+  return Arena::CreateInternal< ::mud::tile >(arena);
+}
 template<> PROTOBUF_NOINLINE ::mud::player_book* Arena::CreateMaybeMessage< ::mud::player_book >(Arena* arena) {
   return Arena::CreateInternal< ::mud::player_book >(arena);
+}
+template<> PROTOBUF_NOINLINE ::mud::tile_book* Arena::CreateMaybeMessage< ::mud::tile_book >(Arena* arena) {
+  return Arena::CreateInternal< ::mud::tile_book >(arena);
+}
+template<> PROTOBUF_NOINLINE ::mud::character_book* Arena::CreateMaybeMessage< ::mud::character_book >(Arena* arena) {
+  return Arena::CreateInternal< ::mud::character_book >(arena);
+}
+template<> PROTOBUF_NOINLINE ::mud::enemy_book* Arena::CreateMaybeMessage< ::mud::enemy_book >(Arena* arena) {
+  return Arena::CreateInternal< ::mud::enemy_book >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 
