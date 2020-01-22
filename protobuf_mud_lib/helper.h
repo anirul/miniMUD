@@ -9,6 +9,7 @@
 #pragma warning(disable: 4996)
 #endif
 #include "mud_lib.pb.h"
+#include <google/protobuf/util/json_util.h>
 #if defined(_WIN32) || defined(_WIN64)
 #pragma warning(pop)
 #endif
@@ -44,6 +45,36 @@ Book read_file(const std::string& filename)
 }
 
 template <typename Book>
+Book read_json(const std::string& filename)
+{
+	Book book;
+	std::ifstream ifs(filename, std::ios::in);
+	if (!ifs)
+	{
+		std::cerr
+			<< filename
+			<< " : file cannot be converted to json."
+			<< std::endl;
+	}
+	else
+	{
+		std::string contents(std::istreambuf_iterator<char>(ifs), {});
+		google::protobuf::util::JsonParseOptions options{};
+		options.ignore_unknown_fields = true;
+		auto status = 
+			google::protobuf::util::JsonStringToMessage(
+				contents, 
+				&book, 
+				options);
+		if (!status.ok()) 
+		{
+			std::cout << status << std::endl;
+		}
+	}
+	return book;
+}
+
+template <typename Book>
 void write_file(const std::string& filename, const Book& book)
 {
 	std::ofstream ofs(filename, std::ios::out | std::ios::binary);
@@ -53,117 +84,39 @@ void write_file(const std::string& filename, const Book& book)
 	}
 }
 
-inline std::ostream& operator<< (
-	std::ostream& os,
-	const mud::player& player)
+template <typename Book>
+void write_json(const std::string& filename, const Book& book)
 {
-	os << "name     : " << player.name() << std::endl;
-	os << "password : " << player.password_hash() << std::endl;
-	os << "id       : " << player.id() << std::endl;
-	os << "characters(" << player.id_characters().size() << ")" << std::endl;
-	for (const auto& id : player.id_characters())
+	std::ofstream ofs(filename, std::ios::out);
+	std::string out;
+	google::protobuf::util::JsonOptions options{};
+	options.add_whitespace = true;
+	options.always_print_primitive_fields = true;
+	options.always_print_enums_as_ints = false;
+	options.preserve_proto_field_names = true;
+	auto status = 
+		google::protobuf::util::MessageToJsonString(book, &out, options);
+	if (!status.ok()) 
 	{
-		os << "\t" << id << std::endl;
+		std::cout << status << std::endl;
 	}
-	return os;
+	ofs << out;
+	ofs.flush();
 }
 
-inline std::ostream& operator<< (
-	std::ostream& os,
-	const mud::character& character)
-{
-	os << "name     : " << character.name() << std::endl;
-	os << "id       : " << character.id() << std::endl;
-	os << "tile id  : " << character.tile_id() << std::endl;
-	os << "facing   : " << character.facing() << std::endl;
-	os << "state    : " << character.state() << std::endl;
-	std::for_each(
-		character.attributes().begin(),
-		character.attributes().end(),
-		[&os](const mud::attribute& attribute)
-	{
-		os << "\tname      : " << attribute.name() << std::endl;
-		os << "\tvalue     : " << attribute.value() << std::endl;
-		os << "\tregen     : " << attribute.regen() << std::endl;
-	});
-	return os;
-}
+std::ostream& operator<< (std::ostream& os, const mud::player& player);
 
-inline std::ostream& operator<< (
-	std::ostream& os,
-	const mud::tile& tile)
-{
-	os << "mood     : " << tile.mood() << std::endl;
-	os << "type     : " << tile.type() << std::endl;
-	os << "id       : " << tile.id() << std::endl;
-	os << "occ type : " << tile.occupant_type() << std::endl;
-	os << "occ id   : " << tile.occupant_id() << std::endl;
-	os << "neighbours(" << tile.neighbours().size() << ")" << std::endl;
-	for (const auto& field : tile.neighbours()) {
-		os << "\tlocation direction : " << field.direction() << std::endl;
-		os << "\tlocation id        : " << field.id() << std::endl;
-	}
-	return os;
-}
+std::ostream& operator<< (std::ostream& os, const mud::character& character);
 
-inline mud::direction get_invert_direction(const mud::direction& dir) 
-{
-	switch (dir)
-	{
-	case mud::NORTH:
-		return mud::WEST;
-	case mud::SOUTH:
-		return mud::EAST;
-	case mud::EAST:
-		return mud::NORTH;
-	case mud::WEST:
-	default:
-		return mud::SOUTH;
-	}
-}
+std::ostream& operator<< (std::ostream& os, const mud::tile& tile);
 
-inline mud::direction get_left_direction(const mud::direction& dir)
-{
-	switch (dir)
-	{
-	case mud::NORTH:
-		return mud::WEST;
-	case mud::SOUTH:
-		return mud::EAST;
-	case mud::EAST:
-		return mud::NORTH;
-	case mud::WEST:
-	default:
-		return mud::SOUTH;
-	}
-}
+mud::direction get_invert_direction(const mud::direction& dir);
 
-inline mud::direction get_right_direction(const mud::direction& dir)
-{
-	switch (dir)
-	{
-	case mud::NORTH:
-		return mud::EAST;
-	case mud::SOUTH:
-		return mud::WEST;
-	case mud::EAST:
-		return mud::SOUTH;
-	case mud::WEST:
-	default:
-		return mud::NORTH;
-	}
-}
+mud::direction get_left_direction(const mud::direction& dir);
 
-inline std::map<mud::direction, mud::tile> around_tiles(
+mud::direction get_right_direction(const mud::direction& dir);
+
+std::map<mud::direction, mud::tile> around_tiles(
 	const mud::tile& current_tile,
-	const std::map<std::int64_t, mud::tile>& id_tiles)
-{
-	std::map<mud::direction, mud::tile> neighbour;
-	for (const auto& location : current_tile.neighbours())
-	{
-		mud::tile tile = id_tiles.find(location.id())->second;
-		neighbour.insert({ location.direction(), tile });
-	}
-	return neighbour;
-}
+	const std::map<std::int64_t, mud::tile>& id_tiles);
 

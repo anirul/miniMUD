@@ -21,7 +21,7 @@ namespace server {
 		tile_file_(tile_file)
 	{
 		{
-			mud::player_book book = read_file<mud::player_book>(player_file_);
+			mud::player_book book = read_json<mud::player_book>(player_file_);
 			std::for_each(
 				book.players().begin(),
 				book.players().end(),
@@ -31,7 +31,7 @@ namespace server {
 			});
 		}
 		{
-			mud::character_book book = read_file<mud::character_book>(
+			mud::character_book book = read_json<mud::character_book>(
 				character_file_);
 			std::for_each(
 				book.characters().begin(),
@@ -42,7 +42,7 @@ namespace server {
 			});
 		}
 		{
-			mud::enemy_book book = read_file<mud::enemy_book>(enemy_file_);
+			mud::enemy_book book = read_json<mud::enemy_book>(enemy_file_);
 			std::for_each(
 				book.enemies().begin(),
 				book.enemies().end(),
@@ -52,65 +52,14 @@ namespace server {
 			});
 		}
 		{
-			mud::tile_book book = read_file<mud::tile_book>(tile_file_);
-			if (book.tiles().size() > 1) 
+			mud::tile_book book = read_json<mud::tile_book>(tile_file_);
+			std::for_each(
+				book.tiles().begin(),
+				book.tiles().end(),
+				[this](const mud::tile& tile)
 			{
-				std::for_each(
-					book.tiles().begin(),
-					book.tiles().end(),
-					[this](const mud::tile& tile)
-				{
-					id_tiles_.insert({ tile.id(), tile });
-				});
-			}
-			else
-			{
-				// Fill up the tiles in case there is nothing.
-				{
-					mud::tile t0{};
-					t0.set_mood("this is tile 0");
-					t0.set_id(0);
-					t0.set_type(mud::TREE);
-					id_tiles_.insert({ 0, t0 });
-				}
-				{
-					mud::tile t1{};
-					t1.set_mood("this is the starting tile!");
-					t1.set_id(1);
-					t1.set_type(mud::EMPTY);
-					mud::location t2_location{};
-					t2_location.set_direction(mud::EAST);
-					t2_location.set_id(2);
-					mud::location t3_location{};
-					t3_location.set_direction(mud::SOUTH);
-					t3_location.set_id(3);
-					*t1.add_neighbours() = t2_location;
-					*t1.add_neighbours() = t3_location;
-					id_tiles_.insert({ 1, t1 });
-				}
-				{
-					mud::tile t2{};
-					t2.set_mood("this is a tile on the right of t1");
-					t2.set_id(2);
-					t2.set_type(mud::EMPTY);
-					mud::location t1_location{};
-					t1_location.set_direction(mud::WEST);
-					t1_location.set_id(1);
-					*t2.add_neighbours() = t1_location;
-					id_tiles_.insert({ 2, t2 });
-				}
-				{
-					mud::tile t3{};
-					t3.set_mood("this is an edge");
-					t3.set_id(3);
-					t3.set_type(mud::EMPTY);
-					mud::location t1_location{};
-					t1_location.set_direction(mud::NORTH);
-					t1_location.set_id(1);
-					*t3.add_neighbours() = t1_location;
-					id_tiles_.insert({ 3, t3 });
-				}
-			}
+				id_tiles_.insert({ tile.id(), tile });
+			});
 		}
 	}
 
@@ -125,7 +74,7 @@ namespace server {
 			{
 				*book.add_players() = pair.second;
 			});
-			write_file(player_file_, book);
+			write_json(player_file_, book);
 		}
 		{
 			mud::character_book book;
@@ -136,7 +85,7 @@ namespace server {
 			{
 				*book.add_characters() = pair.second;
 			});
-			write_file(character_file_, book);
+			write_json(character_file_, book);
 		}
 		{
 			mud::enemy_book book;
@@ -147,7 +96,7 @@ namespace server {
 			{
 				*book.add_enemies() = pair.second;
 			});
-			write_file(enemy_file_, book);
+			write_json(enemy_file_, book);
 		}
 		{
 			mud::tile_book book;
@@ -158,9 +107,8 @@ namespace server {
 			{
 				*book.add_tiles() = pair.second;
 			});
-			write_file(tile_file_, book);
+			write_json(tile_file_, book);
 		}
-
 	}
 
 	void process_game::run()

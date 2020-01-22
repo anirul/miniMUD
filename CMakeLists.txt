@@ -13,6 +13,7 @@ find_package(protobuf CONFIG REQUIRED)
 add_library(protobuf_mud_lib
 	${CMAKE_CURRENT_SOURCE_DIR}/protobuf_mud_lib/mud_lib.pb.cc
 	${CMAKE_CURRENT_SOURCE_DIR}/protobuf_mud_lib/mud_lib.pb.h
+	${CMAKE_CURRENT_SOURCE_DIR}/protobuf_mud_lib/helper.cc
 	${CMAKE_CURRENT_SOURCE_DIR}/protobuf_mud_lib/helper.h
 )
 
