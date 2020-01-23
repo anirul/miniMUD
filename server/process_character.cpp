@@ -57,7 +57,10 @@ namespace server {
 		break;
 		case input::INFO:
 		{
+			std::cout << "Who am I" << std::endl;
 			std::cout << character_;
+			std::cout << "Where am I" << std::endl;
+			std::cout << present_tile;
 		}
 		break;
 		}

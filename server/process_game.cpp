@@ -1,5 +1,6 @@
 #include "process_game.h"
 
+#include <type_traits>
 #include "../protobuf_mud_lib/helper.h"
 #include "process_character.h"
 #include "process_enemy.h"
@@ -9,19 +10,33 @@
 namespace server {
 
 	process_game::process_game(
-		double total_time,
+		const std::chrono::duration<double> total_time,
 		const std::string& player_file,
 		const std::string& character_file,
 		const std::string& enemy_file,
-		const std::string& tile_file) :
+		const std::string& tile_file,
+		binary_or_json_t binary_or_json) :
 		total_time_(total_time),
 		player_file_(player_file),
 		character_file_(character_file),
 		enemy_file_(enemy_file),
-		tile_file_(tile_file)
+		tile_file_(tile_file),
+		binary_or_json_(binary_or_json)
 	{
+		auto load = [this](const std::string& file, auto& book)
 		{
-			mud::player_book book = read_json<mud::player_book>(player_file_);
+			if (binary_or_json_ == binary_or_json_t::BINARY)
+			{
+				book = read_file<std::decay_t<decltype(book)>>(file);
+			}
+			if (binary_or_json_ == binary_or_json_t::JSON)
+			{
+				book = read_json<std::decay_t<decltype(book)>>(file);
+			}
+		};
+		{
+			mud::player_book book;
+			load(player_file_, book);
 			std::for_each(
 				book.players().begin(),
 				book.players().end(),
@@ -31,8 +46,8 @@ namespace server {
 			});
 		}
 		{
-			mud::character_book book = read_json<mud::character_book>(
-				character_file_);
+			mud::character_book book;
+			load(character_file_, book);
 			std::for_each(
 				book.characters().begin(),
 				book.characters().end(),
@@ -42,7 +57,8 @@ namespace server {
 			});
 		}
 		{
-			mud::enemy_book book = read_json<mud::enemy_book>(enemy_file_);
+			mud::enemy_book book;
+			load(enemy_file_, book);
 			std::for_each(
 				book.enemies().begin(),
 				book.enemies().end(),
@@ -52,7 +68,8 @@ namespace server {
 			});
 		}
 		{
-			mud::tile_book book = read_json<mud::tile_book>(tile_file_);
+			mud::tile_book book;
+			load(tile_file_, book);
 			std::for_each(
 				book.tiles().begin(),
 				book.tiles().end(),
@@ -65,6 +82,17 @@ namespace server {
 
 	process_game::~process_game()
 	{
+		auto save = [this](const std::string& file, const auto& book)
+		{
+			if (binary_or_json_ == binary_or_json_t::BINARY)
+			{
+				write_file(file, book);
+			}
+			if (binary_or_json_ == binary_or_json_t::JSON)
+			{
+				write_json(file, book);
+			}
+		};
 		{
 			mud::player_book book;
 			std::for_each(
@@ -74,7 +102,7 @@ namespace server {
 			{
 				*book.add_players() = pair.second;
 			});
-			write_json(player_file_, book);
+			save(player_file_, book);
 		}
 		{
 			mud::character_book book;
@@ -85,7 +113,7 @@ namespace server {
 			{
 				*book.add_characters() = pair.second;
 			});
-			write_json(character_file_, book);
+			save(character_file_, book);
 		}
 		{
 			mud::enemy_book book;
@@ -96,7 +124,7 @@ namespace server {
 			{
 				*book.add_enemies() = pair.second;
 			});
-			write_json(enemy_file_, book);
+			save(enemy_file_, book);
 		}
 		{
 			mud::tile_book book;
@@ -107,7 +135,7 @@ namespace server {
 			{
 				*book.add_tiles() = pair.second;
 			});
-			write_json(tile_file_, book);
+			save(tile_file_, book);
 		}
 	}
 
@@ -124,7 +152,8 @@ namespace server {
 			auto start_time = std::chrono::high_resolution_clock::now();
 			// Get keyboard entries.
 			entry = process_keyboard::run();
-			if (entry == input::QUIT) {
+			if (entry == input::QUIT) 
+			{
 				// Reset all character to nothing before shutdown.
 				for (auto& field : id_characters_)
 				{
@@ -189,13 +218,9 @@ namespace server {
 			}
 			auto end_time = std::chrono::high_resolution_clock::now();
 			std::chrono::duration<double> duration = end_time - start_time;
-			if (total_time_ > duration.count())
+			if (total_time_ > duration)
 			{
-				int wait_to = 
-					static_cast<int>(
-					(total_time_ - duration.count()) * 1000.0);
-				std::this_thread::sleep_for(
-					std::chrono::milliseconds(wait_to));
+				std::this_thread::sleep_for(total_time_ - duration);
 			}
 			else
 			{

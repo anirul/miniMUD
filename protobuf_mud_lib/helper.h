@@ -23,6 +23,7 @@ enum class input {
 	ATTACK = 5,
 	QUIT = 6,
 	INFO = 7,
+	PRINT = 8,
 };
 
 template <typename Book>
@@ -105,15 +106,17 @@ void write_json(const std::string& filename, const Book& book)
 }
 
 std::ostream& operator<< (std::ostream& os, const mud::player& player);
-
 std::ostream& operator<< (std::ostream& os, const mud::character& character);
-
 std::ostream& operator<< (std::ostream& os, const mud::tile& tile);
 
+std::ostream& operator<< (std::ostream& os, const mud::direction& direction);
+std::ostream& operator<< (std::ostream& os, const mud::character_state& state);
+std::ostream& operator<< (std::ostream& os, const mud::resident_type& resident);
+std::ostream& operator<< (std::ostream& os, const mud::tile_type& tile);
+std::ostream& operator<< (std::ostream& os, const mud::attribute_name& name);
+
 mud::direction get_invert_direction(const mud::direction& dir);
-
 mud::direction get_left_direction(const mud::direction& dir);
-
 mud::direction get_right_direction(const mud::direction& dir);
 
 std::map<mud::direction, mud::tile> around_tiles(

@@ -47,6 +47,100 @@ std::ostream& operator<< (std::ostream& os, const mud::tile& tile)
 	return os;
 }
 
+std::ostream& operator<< (std::ostream& os, const mud::direction& direction)
+{
+	switch (direction) 
+	{
+	case mud::NORTH:
+		os << "NORTH";
+		break;
+	case mud::SOUTH:
+		os << "SOUTH";
+		break;
+	case mud::WEST:
+		os << "WEST";
+		break;
+	case mud::EAST:
+		os << "EAST";
+		break;
+	}
+	return os;
+}
+
+std::ostream& operator<< (std::ostream& os, const mud::character_state& state)
+{
+	switch (state) 
+	{
+	case mud::NONE:
+		os << "NONE";
+		break;
+	case mud::WALKING:
+		os << "WALKING";
+		break;
+	case mud::COMBAT:
+		os << "COMBAT";
+		break;
+	}
+	return os;
+}
+
+std::ostream& operator<< (std::ostream& os, const mud::resident_type& resident)
+{
+	switch (resident)
+	{
+	case mud::NOBODY:
+		os << "NOBODY";
+		break;
+	case mud::CHARACTER:
+		os << "CHARACTER";
+		break;
+	case mud::ENEMY:
+		os << "ENEMY";
+		break;
+	}
+	return os;
+}
+
+std::ostream& operator<< (std::ostream& os, const mud::tile_type& tile)
+{
+	switch (tile)
+	{
+	case mud::EMPTY:
+		os << "EMPTY";
+		break;
+	case mud::WALL:
+		os << "WALL";
+		break;
+	case mud::TREE:
+		os << "TREE";
+		break;
+	case mud::PORTAL:
+		os << "PORTAL";
+		break;
+	}
+	return os;
+}
+
+std::ostream& operator<< (std::ostream& os, const mud::attribute_name& name)
+{
+	switch (name)
+	{
+	case mud::LIFE:
+		os << "LIFE";
+		break;
+	case mud::STRENGTH:
+		os << "STRENGTH";
+		break;
+	case mud::AGILITY:
+		os << "AGILITY";
+		break;
+	case mud::INTELLIGENCE:
+		os << "INTELLIGENCE";
+		break;
+	}
+	return os;
+}
+
 mud::direction get_invert_direction(const mud::direction& dir)
 {
 	switch (dir)
