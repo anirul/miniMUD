@@ -142,17 +142,28 @@ namespace server {
 	void process_game::run()
 	{
 		bool running = true;
-		bool has_valid_character = false;
 		std::int64_t current_tile_id = 0;
 		mud::tile& current_tile = mud::tile{};
-		input entry = input::NONE;
+		// This is a hack to select a character.
+		if (!has_actif_character()) select_character();
 		process_enemy pe(id_enemies_, id_tiles_);
+		process_keyboard pk{};
+		pk.run();
 		while (running) 
 		{
+			input entry = input::NONE;
 			auto start_time = std::chrono::high_resolution_clock::now();
 			// Get keyboard entries.
-			entry = process_keyboard::run();
-			if (entry == input::QUIT) 
+			for (const auto& field : pk.input_key)
+			{
+				if (pk.check_released_input(field.first))
+				{
+					entry = field.first;
+					break;
+				}
+			}
+			// Special case of quit.
+			if (entry == input::QUIT)
 			{
 				// Reset all character to nothing before shutdown.
 				for (auto& field : id_characters_)
@@ -176,7 +187,6 @@ namespace server {
 			{
 				if (id_character.second.state() != mud::NONE)
 				{
-					has_valid_character = true;
 					process_character pc(id_character.second);
 					current_tile = id_tiles_[id_character.second.tile_id()];
 					// Set the character in the gaming field.
@@ -203,11 +213,6 @@ namespace server {
 					}
 				}
 			}
-			// This is a hack to select a character this should be moved.
-			if (!has_valid_character) 
-			{
-				select_character();
-			}
 			// Set the enemy moves.
 			pe.run();
 			// Output the map.
@@ -227,6 +232,7 @@ namespace server {
 				std::cerr << "too long..." << std::endl;
 			}
 		}
+		pk.stop();
 	}
 
 	void process_game::select_character()
@@ -237,7 +243,9 @@ namespace server {
 			if (field.second.id() == free_id) free_id++;
 			std::cout << field.second;
 		}
-		std::cout << "enter the name of the character you wanna play" << std::endl;
+		std::cout 
+			<< "enter the name of the character you wanna play" 
+			<< std::endl;
 		std::cout << " > ";
 		std::string name;
 		std::cin >> name;
@@ -263,6 +271,18 @@ namespace server {
 				}
 			}
 		}
+	}
+
+	bool process_game::has_actif_character()
+	{
+		for (auto& id_character : id_characters_)
+		{
+			if (id_character.second.state() != mud::NONE)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 } // End namespace server.

@@ -1,46 +1,66 @@
 #include "process_keyboard.h"
 
-input server::process_keyboard::run()
-{
-	if (GetAsyncKeyState(VK_UP) < 0) 
+namespace server {
+
+	void process_keyboard::run()
 	{
-		std::cout << "UP" << std::endl;
-		return input::FORWARD;
+		if (running_) return;
+		running_ = true;
+		backgroud_thread_ = std::thread([this]
+		{
+			bool local_running = true;
+			do {
+				for (int i = 0; i < 256; ++i) {
+					new_key_states_[i] = GetAsyncKeyState(i);
+					key_state_inputs_[i].pressed_ = false;
+					key_state_inputs_[i].released_ = false;
+					if (new_key_states_[i] != old_key_states_[i])
+					{
+						if (new_key_states_[i] & 0x8000)
+						{
+							key_state_inputs_[i].pressed_ = 
+								key_state_inputs_[i].held_;
+							key_state_inputs_[i].held_ = true;
+						}
+						else
+						{
+							key_state_inputs_[i].released_ = true;
+							key_state_inputs_[i].held_ = false;
+						}
+					}
+					old_key_states_[i] = new_key_states_[i];
+				}
+				{
+					std::lock_guard l(mutex_);
+					local_running = running_;
+					for (const auto& key : input_key) {
+						if (key_state_inputs_[key.second].released_)
+						{
+							key_released_[key.first] = true;
+						}
+					}
+				}
+			} while (local_running);
+		});
 	}
-	if (GetAsyncKeyState(VK_DOWN) < 0) 
+
+	bool process_keyboard::check_released_input(input key)
 	{
-		std::cout << "DOWN" << std::endl;
-		return input::BACKWARD;
+		std::lock_guard l(mutex_);
+		if (key_released_[key]) {
+			std::cout << key << std::endl;
+			key_released_[key] = false;
+			return true;
+		}
+		return false;
 	}
-	if (GetAsyncKeyState(VK_LEFT) < 0) 
-	{
-		std::cout << "LEFT" << std::endl;
-		return input::LEFT;
+
+	void process_keyboard::stop() {
+		{
+			std::lock_guard l(mutex_);
+			running_ = false;
+		}
+		backgroud_thread_.join();
 	}
-	if (GetAsyncKeyState(VK_RIGHT) < 0) 
-	{
-		std::cout << "RIGHT" << std::endl;
-		return input::RIGHT;
-	}
-	if (GetAsyncKeyState(VK_ESCAPE) < 0) 
-	{
-		std::cout << "ESC" << std::endl;
-		return input::QUIT;
-	}
-	if (GetAsyncKeyState(VK_TAB) < 0) 
-	{
-		std::cout << "TAB" << std::endl;
-		return input::INFO;
-	}
-	if (GetAsyncKeyState(VK_RETURN) < 0) 
-	{
-		std::cout << "RETURN" << std::endl;
-		return input::ATTACK;
-	}
-	if (GetAsyncKeyState(VK_SNAPSHOT) < 0)
-	{
-		std::cout << "PRINT" << std::endl;
-		return input::PRINT;
-	}
-	return input::NONE;
+
 }

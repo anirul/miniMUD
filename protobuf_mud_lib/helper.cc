@@ -141,6 +141,41 @@ std::ostream& operator<< (std::ostream& os, const mud::attribute_name& name)
 	return os;
 }
 
+std::ostream& operator<< (std::ostream& os, const input& key)
+{
+	switch (key)
+	{
+	case input::ATTACK:
+		os << "ATTACK";
+		break;
+	case input::BACKWARD:
+		os << "BACKWARD";
+		break;
+	case input::FORWARD:
+		os << "FORWARD";
+		break;
+	case input::INFO:
+		os << "INFO";
+		break;
+	case input::LEFT:
+		os << "LEFT";
+		break;
+	case input::NONE:
+		os << "NONE";
+		break;
+	case input::PRINT:
+		os << "PRINT";
+		break;
+	case input::QUIT:
+		os << "QUIT";
+		break;
+	case input::RIGHT:
+		os << "RIGHT";
+		break;
+	}
+	return os;
+}
+
 mud::direction get_invert_direction(const mud::direction& dir)
 {
 	switch (dir)

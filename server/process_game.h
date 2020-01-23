@@ -39,6 +39,7 @@ namespace server {
 		void run();
 	protected:
 		void select_character();
+		bool has_actif_character();
 	protected:
 		const std::chrono::duration<double> total_time_;
 		const std::string player_file_;

@@ -115,6 +115,8 @@ std::ostream& operator<< (std::ostream& os, const mud::resident_type& resident);
 std::ostream& operator<< (std::ostream& os, const mud::tile_type& tile);
 std::ostream& operator<< (std::ostream& os, const mud::attribute_name& name);
 
+std::ostream& operator<< (std::ostream& os, const input& key);
+
 mud::direction get_invert_direction(const mud::direction& dir);
 mud::direction get_left_direction(const mud::direction& dir);
 mud::direction get_right_direction(const mud::direction& dir);
