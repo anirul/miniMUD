@@ -4,13 +4,13 @@
 namespace server {
 
 	bool process_character::run(
-		input entry, 
+		const input_t& entry, 
 		mud::tile& present_tile,
 		std::map<mud::direction, mud::tile>& surrounding_tiles)
 	{
 		if (character_.state() == mud::NONE) return true;
 		switch (entry) {
-		case input::FORWARD:
+		case input_t::FORWARD:
 		{
 			auto& it = surrounding_tiles.find(character_.facing());
 			if (it == surrounding_tiles.end()) break;
@@ -22,7 +22,7 @@ namespace server {
 			}
 		}
 		break;
-		case input::BACKWARD:
+		case input_t::BACKWARD:
 		{
 			auto& it = surrounding_tiles.find(
 				get_invert_direction(character_.facing()));
@@ -35,27 +35,28 @@ namespace server {
 			}
 		}
 		break;
-		case input::LEFT:
+		case input_t::LEFT:
 		{
 			character_.set_facing(get_left_direction(character_.facing()));
 		}
 		break;
-		case input::RIGHT:
+		case input_t::RIGHT:
 		{
 			character_.set_facing(get_right_direction(character_.facing()));
 		}
 		break;
-		case input::ATTACK:
+		case input_t::ATTACK:
 		{
 			// TODO make an attack on the character that is in front me.
+			std::cout << "\a" << std::flush;
 		}
 		break;
-		case input::QUIT:
+		case input_t::QUIT:
 		{
 			return false;
 		}
 		break;
-		case input::INFO:
+		case input_t::INFO:
 		{
 			std::cout << "Who am I" << std::endl;
 			std::cout << character_;

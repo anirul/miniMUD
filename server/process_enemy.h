@@ -24,6 +24,8 @@ namespace server {
 			id_tiles_(id_tiles) {}
 		void run();
 	protected:
+		void move_to(const mud::enemy& enemy, const mud::tile& tile);
+	private:
 		std::map<std::int64_t, mud::enemy>& id_enemies_;
 		std::map<std::int64_t, mud::tile>& id_tiles_;
 	};

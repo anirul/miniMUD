@@ -14,7 +14,7 @@
 #pragma warning(pop)
 #endif
 
-enum class input {
+enum class input_t {
 	NONE = 0,
 	FORWARD = 1,
 	BACKWARD = 2,
@@ -115,13 +115,20 @@ std::ostream& operator<< (std::ostream& os, const mud::resident_type& resident);
 std::ostream& operator<< (std::ostream& os, const mud::tile_type& tile);
 std::ostream& operator<< (std::ostream& os, const mud::attribute_name& name);
 
-std::ostream& operator<< (std::ostream& os, const input& key);
+std::ostream& operator<< (std::ostream& os, const input_t& key);
 
 mud::direction get_invert_direction(const mud::direction& dir);
 mud::direction get_left_direction(const mud::direction& dir);
 mud::direction get_right_direction(const mud::direction& dir);
+mud::direction get_random_direction();
 
+// Get a map of the surrounding tiles.
 std::map<mud::direction, mud::tile> around_tiles(
 	const mud::tile& current_tile,
 	const std::map<std::int64_t, mud::tile>& id_tiles);
 
+// Get the tiles you can see (hear) around you.
+std::vector<std::pair<mud::direction, mud::tile>> see_around_tiles(
+	const mud::tile& current_tile,
+	const std::map<std::int64_t, mud::tile>& id_tiles,
+	const int range = 2);

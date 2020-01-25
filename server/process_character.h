@@ -10,7 +10,7 @@ namespace server {
 	public:
 		process_character(mud::character& character) : character_(character) {}
 		bool run(
-			input entry,
+			const input_t& entry,
 			mud::tile& present_tile,
 			std::map<mud::direction, mud::tile>& surrounding_tiles);
 	protected:

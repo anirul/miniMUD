@@ -12,17 +12,16 @@
 #if defined(_WIN32) || defined(_WIN64)
 #pragma warning(pop)
 #endif
+#include "../protobuf_mud_lib/helper.h"
+#include "process_keyboard.h"
 
 namespace server {
 
-	enum class binary_or_json_t 
-	{
-		BINARY,
-		JSON,
-	};
-
 	class process_game
 	{
+	public:
+		// Decide if you want binary or json as output and input.
+		enum class binary_or_json_t { BINARY, JSON, };
 	public:
 		// Initiate the game structure.
 		process_game(
@@ -40,7 +39,11 @@ namespace server {
 	protected:
 		void select_character();
 		bool has_actif_character();
-	protected:
+		input_t execute_keyboard();
+		void exit_game();
+		bool execute_characters(const input_t& entry, mud::tile& current_tile);
+	private:
+		process_keyboard pk_;
 		const std::chrono::duration<double> total_time_;
 		const std::string player_file_;
 		const std::string character_file_;

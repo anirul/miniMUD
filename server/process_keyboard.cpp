@@ -44,7 +44,7 @@ namespace server {
 		});
 	}
 
-	bool process_keyboard::check_released_input(input key)
+	bool process_keyboard::check_released_input(const input_t& key)
 	{
 		std::lock_guard l(mutex_);
 		if (key_released_[key]) {

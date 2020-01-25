@@ -37,46 +37,34 @@ namespace server {
 		{
 			mud::player_book book;
 			load(player_file_, book);
-			std::for_each(
-				book.players().begin(),
-				book.players().end(),
-				[this](const mud::player& player) 
+			for (const mud::player& player : book.players()) 
 			{
 				id_players_.insert({ player.id(), player });
-			});
+			}
 		}
 		{
 			mud::character_book book;
 			load(character_file_, book);
-			std::for_each(
-				book.characters().begin(),
-				book.characters().end(),
-				[this](const mud::character& character) 
+			for (const mud::character& character : book.characters()) 
 			{
 				id_characters_.insert({ character.id(), character });
-			});
+			}
 		}
 		{
 			mud::enemy_book book;
 			load(enemy_file_, book);
-			std::for_each(
-				book.enemies().begin(),
-				book.enemies().end(),
-				[this](const mud::enemy& enemy) 
+			for (const mud::enemy& enemy : book.enemies()) 
 			{
 				id_enemies_.insert({ enemy.id(), enemy });
-			});
+			}
 		}
 		{
 			mud::tile_book book;
 			load(tile_file_, book);
-			std::for_each(
-				book.tiles().begin(),
-				book.tiles().end(),
-				[this](const mud::tile& tile)
+			for (const mud::tile& tile : book.tiles())
 			{
 				id_tiles_.insert({ tile.id(), tile });
-			});
+			}
 		}
 	}
 
@@ -95,46 +83,34 @@ namespace server {
 		};
 		{
 			mud::player_book book;
-			std::for_each(
-				id_players_.begin(),
-				id_players_.end(),
-				[&book](const std::pair<std::int64_t, mud::player>& pair)
+			for (const auto& pair : id_players_)
 			{
 				*book.add_players() = pair.second;
-			});
+			}
 			save(player_file_, book);
 		}
 		{
 			mud::character_book book;
-			std::for_each(
-				id_characters_.begin(),
-				id_characters_.end(),
-				[&book](const std::pair<std::int64_t, mud::character>& pair)
+			for (const auto& pair : id_characters_)
 			{
 				*book.add_characters() = pair.second;
-			});
+			}
 			save(character_file_, book);
 		}
 		{
 			mud::enemy_book book;
-			std::for_each(
-				id_enemies_.begin(),
-				id_enemies_.end(),
-				[&book](const std::pair<std::int64_t, mud::enemy>& pair)
+			for (const auto& pair : id_enemies_)
 			{
 				*book.add_enemies() = pair.second;
-			});
+			}
 			save(enemy_file_, book);
 		}
 		{
 			mud::tile_book book;
-			std::for_each(
-				id_tiles_.begin(),
-				id_tiles_.end(),
-				[&book](const std::pair<std::int64_t, mud::tile>& pair)
+			for (const auto& pair : id_tiles_)
 			{
 				*book.add_tiles() = pair.second;
-			});
+			}
 			save(tile_file_, book);
 		}
 	}
@@ -147,72 +123,21 @@ namespace server {
 		// This is a hack to select a character.
 		if (!has_actif_character()) select_character();
 		process_enemy pe(id_enemies_, id_tiles_);
-		process_keyboard pk{};
-		pk.run();
+		pk_.run();
 		while (running) 
 		{
-			input entry = input::NONE;
 			auto start_time = std::chrono::high_resolution_clock::now();
-			// Get keyboard entries.
-			for (const auto& field : pk.input_key)
-			{
-				if (pk.check_released_input(field.first))
-				{
-					entry = field.first;
-					break;
-				}
-			}
+			// Check keyboard.
+			input_t entry = execute_keyboard();
 			// Special case of quit.
-			if (entry == input::QUIT)
+			if (entry == input_t::QUIT)
 			{
-				// Reset all character to nothing before shutdown.
-				for (auto& field : id_characters_)
-				{
-					field.second.set_state(mud::NONE);
-				}
-				// Remove all character from the game.
-				for (auto& field : id_tiles_)
-				{
-					if (field.second.occupant_type() == mud::CHARACTER)
-					{
-						field.second.set_occupant_type(mud::NOBODY);
-						field.second.set_occupant_id(0);
-					}
-				}
+				exit_game();
 				running = false;
 				continue;
 			}
 			// Set character moves
-			for (auto& id_character : id_characters_)
-			{
-				if (id_character.second.state() != mud::NONE)
-				{
-					process_character pc(id_character.second);
-					current_tile = id_tiles_[id_character.second.tile_id()];
-					// Set the character in the gaming field.
-					// CHECKME this is potentialy dangerous in multiplayer.
-					if (current_tile.occupant_type() == mud::NOBODY)
-					{
-						current_tile.set_occupant_type(mud::CHARACTER);
-						current_tile.set_occupant_id(id_character.first);
-					}
-					running = pc.run(
-						entry, 
-						current_tile, 
-						around_tiles(current_tile, id_tiles_));
-					// Check if character moved update if it did.
-					if (current_tile.id() != id_character.second.tile_id())
-					{
-						current_tile.set_occupant_type(mud::NOBODY);
-						current_tile.set_occupant_id(0);
-						mud::tile& new_tile = 
-							id_tiles_[id_character.second.tile_id()];
-						new_tile.set_occupant_type(mud::CHARACTER);
-						new_tile.set_occupant_id(id_character.second.id());
-						current_tile = new_tile;
-					}
-				}
-			}
+			running = execute_characters(entry, current_tile);
 			// Set the enemy moves.
 			pe.run();
 			// Output the map.
@@ -232,7 +157,7 @@ namespace server {
 				std::cerr << "too long..." << std::endl;
 			}
 		}
-		pk.stop();
+		pk_.stop();
 	}
 
 	void process_game::select_character()
@@ -283,6 +208,76 @@ namespace server {
 			}
 		}
 		return false;
+	}
+
+	input_t process_game::execute_keyboard()
+	{
+		input_t entry = input_t::NONE;
+		// Get keyboard entries.
+		for (const auto& field : pk_.input_key)
+		{
+			if (pk_.check_released_input(field.first))
+			{
+				return field.first;
+			}
+		}
+		return entry;
+	}
+
+	void process_game::exit_game()
+	{
+		// Reset all character to nothing before shutdown.
+		for (auto& field : id_characters_)
+		{
+			field.second.set_state(mud::NONE);
+		}
+		// Remove all character from the game.
+		for (auto& field : id_tiles_)
+		{
+			if (field.second.occupant_type() == mud::CHARACTER)
+			{
+				field.second.set_occupant_type(mud::NOBODY);
+				field.second.set_occupant_id(0);
+			}
+		}
+	}
+
+	bool process_game::execute_characters(
+		const input_t& entry, 
+		mud::tile& current_tile)
+	{
+		bool running = true;
+		for (auto& id_character : id_characters_)
+		{
+			if (id_character.second.state() != mud::NONE)
+			{
+				process_character pc(id_character.second);
+				current_tile = id_tiles_[id_character.second.tile_id()];
+				// Set the character in the gaming field.
+				// CHECKME this is potentialy dangerous in multiplayer.
+				if (current_tile.occupant_type() == mud::NOBODY)
+				{
+					current_tile.set_occupant_type(mud::CHARACTER);
+					current_tile.set_occupant_id(id_character.first);
+				}
+				running = pc.run(
+					entry,
+					current_tile,
+					around_tiles(current_tile, id_tiles_));
+				// Check if character moved update if it did.
+				if (current_tile.id() != id_character.second.tile_id())
+				{
+					current_tile.set_occupant_type(mud::NOBODY);
+					current_tile.set_occupant_id(0);
+					mud::tile& new_tile =
+						id_tiles_[id_character.second.tile_id()];
+					new_tile.set_occupant_type(mud::CHARACTER);
+					new_tile.set_occupant_id(id_character.second.id());
+					current_tile = new_tile;
+				}
+			}
+		}
+		return running;
 	}
 
 } // End namespace server.
