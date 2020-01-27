@@ -8,15 +8,15 @@ namespace server {
 		mud::tile& present_tile,
 		std::map<mud::direction, mud::tile>& surrounding_tiles)
 	{
-		if (character_.state() == mud::NONE) return true;
+		if (character_.state() == mud::character::NONE) return true;
 		switch (entry) {
 		case input_t::FORWARD:
 		{
 			auto& it = surrounding_tiles.find(character_.facing());
 			if (it == surrounding_tiles.end()) break;
 			const mud::tile& front = it->second;
-			if (front.type() == mud::EMPTY && 
-				front.occupant_type() == mud::NOBODY)
+			if (front.type() == mud::tile::EMPTY && 
+				front.occupant_type() == mud::tile::NOBODY)
 			{
 				character_.set_tile_id(front.id());
 			}
@@ -28,8 +28,8 @@ namespace server {
 				get_invert_direction(character_.facing()));
 			if (it == surrounding_tiles.end()) break;
 			const mud::tile& back = it->second;
-			if (back.type() == mud::EMPTY &&
-				back.occupant_type() == mud::NOBODY)
+			if (back.type() == mud::tile::EMPTY &&
+				back.occupant_type() == mud::tile::NOBODY)
 			{
 				character_.set_tile_id(back.id());
 			}
@@ -37,12 +37,14 @@ namespace server {
 		break;
 		case input_t::LEFT:
 		{
-			character_.set_facing(get_left_direction(character_.facing()));
+			*character_.mutable_facing() = 
+				get_left_direction(character_.facing());
 		}
 		break;
 		case input_t::RIGHT:
 		{
-			character_.set_facing(get_right_direction(character_.facing()));
+			*character_.mutable_facing() = 
+				get_right_direction(character_.facing());
 		}
 		break;
 		case input_t::ATTACK:

@@ -192,7 +192,7 @@ namespace server {
 			{
 				if (field.second.name() == name) 
 				{
-					field.second.set_state(mud::WALKING);
+					field.second.set_state(mud::character::WALKING);
 				}
 			}
 		}
@@ -202,7 +202,7 @@ namespace server {
 	{
 		for (auto& id_character : id_characters_)
 		{
-			if (id_character.second.state() != mud::NONE)
+			if (id_character.second.state() != mud::character::NONE)
 			{
 				return true;
 			}
@@ -229,14 +229,14 @@ namespace server {
 		// Reset all character to nothing before shutdown.
 		for (auto& field : id_characters_)
 		{
-			field.second.set_state(mud::NONE);
+			field.second.set_state(mud::character::NONE);
 		}
 		// Remove all character from the game.
 		for (auto& field : id_tiles_)
 		{
-			if (field.second.occupant_type() == mud::CHARACTER)
+			if (field.second.occupant_type() == mud::tile::CHARACTER)
 			{
-				field.second.set_occupant_type(mud::NOBODY);
+				field.second.set_occupant_type(mud::tile::NOBODY);
 				field.second.set_occupant_id(0);
 			}
 		}
@@ -249,15 +249,15 @@ namespace server {
 		bool running = true;
 		for (auto& id_character : id_characters_)
 		{
-			if (id_character.second.state() != mud::NONE)
+			if (id_character.second.state() != mud::character::NONE)
 			{
 				process_character pc(id_character.second);
 				current_tile = id_tiles_[id_character.second.tile_id()];
 				// Set the character in the gaming field.
 				// CHECKME this is potentialy dangerous in multiplayer.
-				if (current_tile.occupant_type() == mud::NOBODY)
+				if (current_tile.occupant_type() == mud::tile::NOBODY)
 				{
-					current_tile.set_occupant_type(mud::CHARACTER);
+					current_tile.set_occupant_type(mud::tile::CHARACTER);
 					current_tile.set_occupant_id(id_character.first);
 				}
 				running = pc.run(
@@ -267,11 +267,11 @@ namespace server {
 				// Check if character moved update if it did.
 				if (current_tile.id() != id_character.second.tile_id())
 				{
-					current_tile.set_occupant_type(mud::NOBODY);
+					current_tile.set_occupant_type(mud::tile::NOBODY);
 					current_tile.set_occupant_id(0);
 					mud::tile& new_tile =
 						id_tiles_[id_character.second.tile_id()];
-					new_tile.set_occupant_type(mud::CHARACTER);
+					new_tile.set_occupant_type(mud::tile::CHARACTER);
 					new_tile.set_occupant_id(id_character.second.id());
 					current_tile = new_tile;
 				}

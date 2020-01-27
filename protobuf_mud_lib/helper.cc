@@ -4,6 +4,16 @@
 #include <algorithm>
 #include <random>
 
+bool operator==(const mud::direction& l, const mud::direction& r)
+{
+	return l.value() == r.value();
+}
+
+bool operator!=(const mud::direction& l, const mud::direction& r)
+{
+	return l.value() != r.value();
+}
+
 std::ostream& operator<< (std::ostream& os, const mud::player& player)
 {
 	os << "name     : " << player.name() << std::endl;
@@ -51,92 +61,100 @@ std::ostream& operator<< (std::ostream& os, const mud::tile& tile)
 
 std::ostream& operator<< (std::ostream& os, const mud::direction& direction)
 {
-	switch (direction) 
+	switch (direction.value()) 
 	{
-	case mud::NORTH:
+	case mud::direction::NORTH:
 		os << "NORTH";
 		break;
-	case mud::SOUTH:
+	case mud::direction::SOUTH:
 		os << "SOUTH";
 		break;
-	case mud::WEST:
+	case mud::direction::WEST:
 		os << "WEST";
 		break;
-	case mud::EAST:
+	case mud::direction::EAST:
 		os << "EAST";
 		break;
 	}
 	return os;
 }
 
-std::ostream& operator<< (std::ostream& os, const mud::character_state& state)
+std::ostream& operator<< (
+	std::ostream& os, 
+	const mud::character::character_state_enum& state)
 {
 	switch (state) 
 	{
-	case mud::NONE:
+	case mud::character::NONE:
 		os << "NONE";
 		break;
-	case mud::WALKING:
+	case mud::character::WALKING:
 		os << "WALKING";
 		break;
-	case mud::COMBAT:
+	case mud::character::COMBAT:
 		os << "COMBAT";
 		break;
 	}
 	return os;
 }
 
-std::ostream& operator<< (std::ostream& os, const mud::resident_type& resident)
+std::ostream& operator<< (
+	std::ostream& os, 
+	const mud::tile::resident_type_enum& resident)
 {
 	switch (resident)
 	{
-	case mud::NOBODY:
+	case mud::tile::NOBODY:
 		os << "NOBODY";
 		break;
-	case mud::CHARACTER:
+	case mud::tile::CHARACTER:
 		os << "CHARACTER";
 		break;
-	case mud::ENEMY:
+	case mud::tile::ENEMY:
 		os << "ENEMY";
 		break;
 	}
 	return os;
 }
 
-std::ostream& operator<< (std::ostream& os, const mud::tile_type& tile)
+std::ostream& operator<< (
+	std::ostream& os, 
+	const mud::tile::tile_type_enum& tile)
 {
 	switch (tile)
 	{
-	case mud::EMPTY:
+	case mud::tile::EMPTY:
 		os << "EMPTY";
 		break;
-	case mud::WALL:
+	case mud::tile::WALL:
 		os << "WALL";
 		break;
-	case mud::TREE:
+	case mud::tile::TREE:
 		os << "TREE";
 		break;
-	case mud::PORTAL:
+	case mud::tile::PORTAL:
 		os << "PORTAL";
 		break;
 	}
 	return os;
 }
 
-std::ostream& operator<< (std::ostream& os, const mud::attribute_name& name)
+std::ostream& operator<< (
+	std::ostream& os,
+	const mud::attribute::attribute_name_enum& name)
 {
 	switch (name)
 	{
-	case mud::LIFE:
+	case mud::attribute::LIFE:
 		os << "LIFE";
 		break;
-	case mud::STRENGTH:
+	case mud::attribute::STRENGTH:
 		os << "STRENGTH";
 		break;
-	case mud::AGILITY:
+	case mud::attribute::AGILITY:
 		os << "AGILITY";
 		break;
-	case mud::INTELLIGENCE:
+	case mud::attribute::INTELLIGENCE:
 		os << "INTELLIGENCE";
 		break;
 	}
@@ -180,59 +198,89 @@ std::ostream& operator<< (std::ostream& os, const input_t& key)
 
 mud::direction get_invert_direction(const mud::direction& dir)
 {
-	switch (dir)
+	mud::direction out{};
+	switch (dir.value())
 	{
-	case mud::NORTH:
-		return mud::SOUTH;
-	case mud::SOUTH:
-		return mud::NORTH;
-	case mud::EAST:
-		return mud::WEST;
-	case mud::WEST:
+	case mud::direction::NORTH:
+		out.set_value(mud::direction::SOUTH);
+		break;
+	case mud::direction::SOUTH:
+		out.set_value(mud::direction::NORTH);
+		break;
+	case mud::direction::EAST:
+		out.set_value(mud::direction::WEST);
+		break;
+	case mud::direction::WEST:
+		out.set_value(mud::direction::EAST);
+		break;
 	default:
-		return mud::EAST;
+		out = get_random_direction();
+		break;
 	}
+	return out;
 }
 
 mud::direction get_left_direction(const mud::direction& dir)
 {
-	switch (dir)
+	mud::direction out{};
+	switch (dir.value())
 	{
-	case mud::NORTH:
-		return mud::WEST;
-	case mud::SOUTH:
-		return mud::EAST;
-	case mud::EAST:
-		return mud::NORTH;
-	case mud::WEST:
+	case mud::direction::NORTH:
+		out.set_value(mud::direction::WEST);
+		break;
+	case mud::direction::SOUTH:
+		out.set_value(mud::direction::EAST);
+		break;
+	case mud::direction::EAST:
+		out.set_value(mud::direction::NORTH);
+		break;
+	case mud::direction::WEST:
+		out.set_value(mud::direction::SOUTH);
+		break;
 	default:
-		return mud::SOUTH;
+		out = get_random_direction();
+		break;
 	}
+	return out;
 }
 
 mud::direction get_right_direction(const mud::direction& dir)
 {
-	switch (dir)
+	mud::direction out{};
+	out.set_value(mud::direction::NORTH);
+	switch (dir.value())
 	{
-	case mud::NORTH:
-		return mud::EAST;
-	case mud::SOUTH:
-		return mud::WEST;
-	case mud::EAST:
-		return mud::SOUTH;
-	case mud::WEST:
+	case mud::direction::NORTH:
+		out.set_value(mud::direction::EAST);
+		break;
+	case mud::direction::SOUTH:
+		out.set_value(mud::direction::WEST);
+		break;
+	case mud::direction::EAST:
+		out.set_value(mud::direction::SOUTH);
+		break;
+	case mud::direction::WEST:
+		out.set_value(mud::direction::NORTH);
+		break;
 	default:
-		return mud::NORTH;
+		out = get_random_direction();
+		break;
 	}
+	return out;
 }
 
 mud::direction get_random_direction() {
+	mud::direction out{};
 	static std::random_device rd;
 	static std::mt19937 gen(rd());
-	static std::vector<mud::direction> directions = 
-		{ mud::NORTH, mud::SOUTH, mud::WEST, mud::EAST };
+	static std::vector<mud::direction::direction_enum> directions = {
+		mud::direction::NORTH, 
+		mud::direction::SOUTH, 
+		mud::direction::WEST, 
+		mud::direction::EAST };
 	std::uniform_int_distribution<size_t> dis(0, directions.size() - 1);
-	return directions[dis(gen)];
+	out.set_value(directions[dis(gen)]);
+	return out;
 }
 
 std::map<mud::direction, mud::tile> around_tiles(
@@ -256,9 +304,9 @@ static bool check_stack(const std::vector<mud::direction>& stack)
 	int current_count = 0;
 	for (const auto& element : stack)
 	{
-		if (current_direction != element)
+		if (current_direction.value() != element.value())
 		{
-			current_direction = element;
+			current_direction.set_value(element.value());
 			current_count = 0;
 		}
 		if (direction_count_map.find(element) == direction_count_map.end())
@@ -320,7 +368,7 @@ static void see_around_tile_recurse(
 		}
 		std::vector<mud::direction> stack = direction_stack;
 		stack.push_back(field.first);
-		if (field.second.type() == mud::EMPTY && check_stack(stack))
+		if (field.second.type() == mud::tile::EMPTY && check_stack(stack))
 		{
 			initial_set.push_back({ stack.front(), field.second });
 			see_around_tile_recurse(

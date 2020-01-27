@@ -12,7 +12,7 @@ namespace server {
 			mud::tile& current_tile = id_tiles_[enemy.tile_id()];
 			// Set the enemy in place on the map (if possible).
 			current_tile.set_occupant_id(enemy.id());
-			current_tile.set_occupant_type(mud::ENEMY);
+			current_tile.set_occupant_type(mud::tile::ENEMY);
 			const auto neighbour_tiles = 
 				see_around_tiles(current_tile, id_tiles_);
 			mud::tile character_tile = {};
@@ -21,7 +21,8 @@ namespace server {
 			// Search if there is any target around.
 			for (const auto& direction_tile : neighbour_tiles)
 			{
-				if (direction_tile.second.occupant_type() == mud::CHARACTER)
+				if (direction_tile.second.occupant_type() == 
+					mud::tile::CHARACTER)
 				{
 					direction = direction_tile.first;
 					character_tile = direction_tile.second;
@@ -32,15 +33,18 @@ namespace server {
 			// Face the correct direction.
 			if (direction != enemy.facing()) {
 				if (get_invert_direction(enemy.facing()) == direction) {
-					enemy.set_facing(get_right_direction(enemy.facing()));
+					*enemy.mutable_facing() = 
+						get_right_direction(enemy.facing());
 				}
 				else if (get_right_direction(enemy.facing()) == direction)
 				{
-					enemy.set_facing(get_right_direction(enemy.facing()));
+					*enemy.mutable_facing() = 
+						get_right_direction(enemy.facing());
 				}
 				else
 				{
-					enemy.set_facing(get_left_direction(enemy.facing()));
+					*enemy.mutable_facing() =
+						get_left_direction(enemy.facing());
 				}
 				continue;
 			}
@@ -48,7 +52,8 @@ namespace server {
 			if (!found) continue;
 			const auto around_tile = around_tiles(current_tile, id_tiles_);
 			// Move the enemy toward the target.
-			if (around_tile.at(direction).occupant_type() != mud::CHARACTER)
+			if (around_tile.at(direction).occupant_type() != 
+				mud::tile::CHARACTER)
 			{
 				move_to(enemy, around_tile.at(direction));
 				continue; 
@@ -60,16 +65,16 @@ namespace server {
 
 	void process_enemy::move_to(const mud::enemy& enemy, const mud::tile& tile)
 	{
-		if (tile.type() != mud::EMPTY) return;
-		if (tile.occupant_type() != mud::NOBODY) return;
+		if (tile.type() != mud::tile::EMPTY) return;
+		if (tile.occupant_type() != mud::tile::NOBODY) return;
 		mud::enemy& me = id_enemies_[enemy.id()];
 		mud::tile& there = id_tiles_[tile.id()];
 		mud::tile& previous = id_tiles_[me.tile_id()];
 		me.set_tile_id(there.id());
 		there.set_occupant_id(me.id());
-		there.set_occupant_type(mud::ENEMY);
+		there.set_occupant_type(mud::tile::ENEMY);
 		previous.set_occupant_id(0);
-		previous.set_occupant_type(mud::NOBODY);
+		previous.set_occupant_type(mud::tile::NOBODY);
 	}
 
 } // End namespace server.

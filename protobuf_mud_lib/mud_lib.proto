@@ -9,39 +9,42 @@ message player {
 	repeated int64 id_characters = 4;
 }
 
-enum character_state {
-	NONE = 0;
-	WALKING = 1;
-	COMBAT = 2;
-}
-
-enum attribute_name {
-	LIFE = 0;
-	STRENGTH = 1;
-	AGILITY = 2;
-	INTELLIGENCE = 3;
-}
-
-enum direction {
-	NORTH = 0;
-	SOUTH = 1;
-	EAST = 2;
-	WEST = 3;
+message direction {
+	enum direction_enum {
+		NORTH = 0;
+		SOUTH = 1;
+		EAST = 2;
+		WEST = 3;
+	}
+	direction_enum value = 1;
 }
 
 message attribute {
-	attribute_name name = 1;
+	// List of various attributes.
+	enum attribute_name_enum {
+		LIFE = 0;
+		STRENGTH = 1;
+		AGILITY = 2;
+		INTELLIGENCE = 3;
+	}
+	attribute_name_enum name = 1;
 	int32 value = 2;
 	int32 regen = 3;
 }
 
 message character {
+	// What is the character doing?
+	enum character_state_enum {
+		NONE = 0;
+		WALKING = 1;
+		COMBAT = 2;
+	}
 	string name = 1;
 	int64 id = 2;
 	int64 tile_id = 3;
 	direction facing = 4;
 	repeated attribute attributes = 5;
-	character_state state = 7;
+	character_state_enum state = 6;
 }
 
 message enemy {
@@ -50,14 +53,6 @@ message enemy {
 	int64 tile_id = 3;
 	direction facing = 4;
 	repeated attribute attributes = 5;
-	character_state state = 6;
-}
-
-enum tile_type {
-	EMPTY = 0;
-	WALL = 1;
-	TREE = 2;
-	PORTAL = 3;
 }
 
 message location {
@@ -65,16 +60,23 @@ message location {
 	int64 id = 2;
 }
 
-enum resident_type {
-	NOBODY = 0;
-	CHARACTER = 1;
-	ENEMY = 2;
-}
-
 message tile {
+	// Is tile usable for anything?
+	enum tile_type_enum {
+		EMPTY = 0;
+		WALL = 1;
+		TREE = 2;
+		PORTAL = 3;
+	}
+	// Who is there?
+	enum resident_type_enum {
+		NOBODY = 0;
+		CHARACTER = 1;
+		ENEMY = 2;
+	}
 	int64 id = 1;
-	tile_type type = 2;
-	resident_type occupant_type = 3;
+	tile_type_enum type = 2;
+	resident_type_enum occupant_type = 3;
 	int64 occupant_id = 4;
 	string mood = 5;
 	repeated location neighbours = 6;

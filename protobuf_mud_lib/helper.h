@@ -105,15 +105,37 @@ void write_json(const std::string& filename, const Book& book)
 	ofs.flush();
 }
 
+// For std::map<mud::direction...>.
+template<>
+struct std::less<mud::direction> {
+	bool operator()(
+		const mud::direction& l, 
+		const mud::direction& r) const
+	{
+		return l.value() < r.value();
+	}
+};
+
+bool operator==(const mud::direction& l, const mud::direction& r);
+bool operator!=(const mud::direction& l, const mud::direction& r);
+
 std::ostream& operator<< (std::ostream& os, const mud::player& player);
 std::ostream& operator<< (std::ostream& os, const mud::character& character);
 std::ostream& operator<< (std::ostream& os, const mud::tile& tile);
 
 std::ostream& operator<< (std::ostream& os, const mud::direction& direction);
-std::ostream& operator<< (std::ostream& os, const mud::character_state& state);
-std::ostream& operator<< (std::ostream& os, const mud::resident_type& resident);
-std::ostream& operator<< (std::ostream& os, const mud::tile_type& tile);
-std::ostream& operator<< (std::ostream& os, const mud::attribute_name& name);
+std::ostream& operator<< (
+	std::ostream& os, 
+	const mud::character::character_state_enum& state);
+std::ostream& operator<< (
+	std::ostream& os, 
+	const mud::tile::resident_type_enum& resident);
+std::ostream& operator<< (
+	std::ostream& os,
+	const mud::tile::tile_type_enum& tile);
+std::ostream& operator<< (
+	std::ostream& os, 
+	const mud::attribute::attribute_name_enum& name);
 
 std::ostream& operator<< (std::ostream& os, const input_t& key);
 
