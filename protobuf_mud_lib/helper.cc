@@ -183,14 +183,14 @@ mud::direction get_invert_direction(const mud::direction& dir)
 	switch (dir)
 	{
 	case mud::NORTH:
-		return mud::WEST;
+		return mud::SOUTH;
 	case mud::SOUTH:
-		return mud::EAST;
-	case mud::EAST:
 		return mud::NORTH;
+	case mud::EAST:
+		return mud::WEST;
 	case mud::WEST:
 	default:
-		return mud::SOUTH;
+		return mud::EAST;
 	}
 }
 

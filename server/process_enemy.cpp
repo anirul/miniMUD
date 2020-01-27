@@ -58,12 +58,15 @@ namespace server {
 	void process_enemy::move_to(const mud::enemy& enemy, const mud::tile& tile)
 	{
 		if (tile.type() != mud::EMPTY) return;
-		if (tile.occupant_type() != mud::NONE) return;
+		if (tile.occupant_type() != mud::NOBODY) return;
 		mud::enemy& me = id_enemies_[enemy.id()];
 		mud::tile& there = id_tiles_[tile.id()];
+		mud::tile& previous = id_tiles_[me.tile_id()];
 		me.set_tile_id(there.id());
 		there.set_occupant_id(me.id());
 		there.set_occupant_type(mud::ENEMY);
+		previous.set_occupant_id(0);
+		previous.set_occupant_type(mud::NOBODY);
 	}
 
 } // End namespace server.
