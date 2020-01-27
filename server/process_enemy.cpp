@@ -10,6 +10,9 @@ namespace server {
 			// Enemy is not on a valid tile.
 			if (enemy.tile_id() == 0) continue;
 			mud::tile& current_tile = id_tiles_[enemy.tile_id()];
+			// Set the enemy in place on the map (if possible).
+			current_tile.set_occupant_id(enemy.id());
+			current_tile.set_occupant_type(mud::ENEMY);
 			const auto neighbour_tiles = 
 				see_around_tiles(current_tile, id_tiles_);
 			mud::tile character_tile = {};

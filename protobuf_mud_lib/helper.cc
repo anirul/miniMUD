@@ -314,7 +314,7 @@ static void see_around_tile_recurse(
 			return 
 				(field.first == element.first) && 
 				(field.second.id() == element.second.id());
-		}) == initial_set.end())
+		}) != initial_set.end())
 		{
 			continue;
 		}
@@ -322,7 +322,7 @@ static void see_around_tile_recurse(
 		stack.push_back(field.first);
 		if (field.second.type() == mud::EMPTY && check_stack(stack))
 		{
-			initial_set.push_back(field);
+			initial_set.push_back({ stack.front(), field.second });
 			see_around_tile_recurse(
 				field.second, 
 				id_tiles, 
@@ -341,7 +341,8 @@ std::vector<std::pair<mud::direction, mud::tile>> see_around_tiles(
 	std::vector<std::pair<mud::direction, mud::tile>> see_tile_set = {};
 	std::vector<mud::direction> direction_stack;
 	see_around_tile_recurse(
-		current_tile, id_tiles, 
+		current_tile, 
+		id_tiles, 
 		range, 
 		see_tile_set, 
 		direction_stack);
