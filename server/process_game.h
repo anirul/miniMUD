@@ -2,18 +2,13 @@
 #include <cstdint>
 #include <string>
 #include <chrono>
-#if defined(_WIN32) || defined(_WIN64)
-#pragma warning(push)
-#pragma warning(disable: 4005)
-#pragma warning(disable: 4251)
-#pragma warning(disable: 4996)
-#endif
-#include "../protobuf_mud_lib/mud_lib.pb.h"
-#if defined(_WIN32) || defined(_WIN64)
-#pragma warning(pop)
-#endif
+#include <iostream>
+#include <fstream>
+#include <type_traits>
 #include "../protobuf_mud_lib/helper.h"
 #include "process_keyboard.h"
+#include "process_enemy.h"
+#include "process_character.h"
 
 namespace server {
 
@@ -41,8 +36,10 @@ namespace server {
 		bool has_actif_character();
 		input_t execute_keyboard();
 		void exit_game();
-		bool execute_characters(const input_t& entry, mud::tile& current_tile);
+		bool execute_characters(const input_t& entry);
+		void execute_enemies();
 	private:
+		process_enemy pe_;
 		process_keyboard pk_;
 		const std::chrono::duration<double> total_time_;
 		const std::string player_file_;

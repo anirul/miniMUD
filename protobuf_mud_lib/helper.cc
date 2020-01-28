@@ -161,41 +161,6 @@ std::ostream& operator<< (
 	return os;
 }
 
-std::ostream& operator<< (std::ostream& os, const input_t& key)
-{
-	switch (key)
-	{
-	case input_t::ATTACK:
-		os << "ATTACK";
-		break;
-	case input_t::BACKWARD:
-		os << "BACKWARD";
-		break;
-	case input_t::FORWARD:
-		os << "FORWARD";
-		break;
-	case input_t::INFO:
-		os << "INFO";
-		break;
-	case input_t::LEFT:
-		os << "LEFT";
-		break;
-	case input_t::NONE:
-		os << "NONE";
-		break;
-	case input_t::PRINT:
-		os << "PRINT";
-		break;
-	case input_t::QUIT:
-		os << "QUIT";
-		break;
-	case input_t::RIGHT:
-		os << "RIGHT";
-		break;
-	}
-	return os;
-}
-
 mud::direction get_invert_direction(const mud::direction& dir)
 {
 	mud::direction out{};
@@ -269,6 +234,15 @@ mud::direction get_right_direction(const mud::direction& dir)
 	return out;
 }
 
+std::ostream& operator<< (std::ostream& os, const std::vector<mud::direction>& stack)
+{
+	for (const auto& field : stack)
+	{
+		os << field << std::endl;
+	}
+	return os;
+}
+
 mud::direction get_random_direction() {
 	mud::direction out{};
 	static std::random_device rd;
@@ -294,6 +268,61 @@ std::map<mud::direction, mud::tile> around_tiles(
 		neighbour.insert({ location.direction(), tile });
 	}
 	return neighbour;
+}
+
+bool is_tile_empty(const mud::tile& tile)
+{
+	return
+		tile.type() == mud::tile::EMPTY &&
+		tile.occupant_type() == mud::tile::NOBODY &&
+		tile.occupant_id() == 0;
+}
+
+bool is_tile_empty_or_character(const mud::tile& tile)
+{
+	return
+		tile.type() == mud::tile::EMPTY &&
+		((tile.occupant_type() == mud::tile::NOBODY &&
+			tile.occupant_id() == 0) ||
+			(tile.occupant_type() == mud::tile::CHARACTER &&
+				tile.occupant_id() != 0));
+}
+
+bool is_tile_empty_or_enemy(const mud::tile& tile)
+{
+	return
+		tile.type() == mud::tile::EMPTY &&
+		((tile.occupant_type() == mud::tile::NOBODY &&
+			tile.occupant_id() == 0) ||
+			(tile.occupant_type() == mud::tile::ENEMY &&
+				tile.occupant_id() != 0));
+}
+
+static bool check_in_out(const std::vector<mud::direction>& v)
+{
+	{
+		auto it1 = std::find_if(
+			v.begin(), 
+			v.end(), 
+			[](const mud::direction& d) { return d == direction::north; });
+		auto it2 = std::find_if(
+			v.begin(), 
+			v.end(), 
+			[](const mud::direction& d) { return d == direction::south; });
+		if (it1 != v.end() &&	it2 != v.end()) return true;
+	}
+	{
+		auto it1 = std::find_if(
+			v.begin(), 
+			v.end(), 
+			[](const mud::direction& d) { return d == direction::west; });
+		auto it2 = std::find_if(
+			v.begin(), 
+			v.end(), 
+			[](const mud::direction& d) { return d == direction::east; });
+		if (it1 != v.end() &&	it2 != v.end()) return true;
+	}
+	return false;
 }
 
 static bool check_stack(const std::vector<mud::direction>& stack)
@@ -324,14 +353,22 @@ static bool check_stack(const std::vector<mud::direction>& stack)
 			current_max = current_count;
 		}
 	}
-	if (direction_count_map.size() > 2) return false;
 	if (direction_count_map.size() == 1) return true;
-	auto result = std::minmax(
-		direction_count_map.begin(), 
-		direction_count_map.end(), 
+	if (direction_count_map.size() != 2) return false;
+	{
+		std::vector<mud::direction> v{};
+		for (const auto& field : direction_count_map)
+		{
+			v.push_back(field.first);
+		}
+		if (check_in_out(v)) return false;
+	}
+	auto result = std::minmax_element(
+		direction_count_map.begin(),
+		direction_count_map.end(),
 		[](const auto& l, const auto& r)
 	{
-		return l->second < r->second;
+		return l.second < r.second;
 	});
 	const float value = 
 		static_cast<float>(result.second->second) / 
@@ -368,15 +405,17 @@ static void see_around_tile_recurse(
 		}
 		std::vector<mud::direction> stack = direction_stack;
 		stack.push_back(field.first);
-		if (field.second.type() == mud::tile::EMPTY && check_stack(stack))
+		if (is_tile_empty_or_character(field.second) && check_stack(stack))
 		{
-			initial_set.push_back({ stack.front(), field.second });
+			initial_set.push_back({ 
+				stack.front(), 
+				field.second });
 			see_around_tile_recurse(
 				field.second, 
 				id_tiles, 
 				range - 1, 
 				initial_set, 
-				direction_stack);
+				stack);
 		}
 	}
 }

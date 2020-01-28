@@ -1,12 +1,5 @@
 #include "process_game.h"
 
-#include <type_traits>
-#include "../protobuf_mud_lib/helper.h"
-#include "process_character.h"
-#include "process_enemy.h"
-#include "process_keyboard.h"
-#include "process_enemy.h"
-
 namespace server {
 
 	process_game::process_game(
@@ -119,10 +112,8 @@ namespace server {
 	{
 		bool running = true;
 		std::int64_t current_tile_id = 0;
-		mud::tile& current_tile = mud::tile{};
 		// This is a hack to select a character.
 		if (!has_actif_character()) select_character();
-		process_enemy pe(id_enemies_, id_tiles_);
 		pk_.run();
 		while (running) 
 		{
@@ -137,15 +128,9 @@ namespace server {
 				continue;
 			}
 			// Set character moves
-			running = execute_characters(entry, current_tile);
+			running = execute_characters(entry);
 			// Set the enemy moves.
-			pe.run();
-			// Output the map.
-			if (current_tile_id != current_tile.id())
-			{
-				std::cout << current_tile;
-				current_tile_id = current_tile.id();
-			}
+			execute_enemies();
 			auto end_time = std::chrono::high_resolution_clock::now();
 			std::chrono::duration<double> duration = end_time - start_time;
 			if (total_time_ > duration)
@@ -242,9 +227,7 @@ namespace server {
 		}
 	}
 
-	bool process_game::execute_characters(
-		const input_t& entry, 
-		mud::tile& current_tile)
+	bool process_game::execute_characters(const input_t& entry)
 	{
 		bool running = true;
 		for (auto& id_character : id_characters_)
@@ -252,10 +235,11 @@ namespace server {
 			if (id_character.second.state() != mud::character::NONE)
 			{
 				process_character pc(id_character.second);
-				current_tile = id_tiles_[id_character.second.tile_id()];
+				mud::tile& current_tile = id_tiles_[id_character.second.tile_id()];
 				// Set the character in the gaming field.
 				// CHECKME this is potentialy dangerous in multiplayer.
-				if (current_tile.occupant_type() == mud::tile::NOBODY)
+				if (current_tile.occupant_type() == mud::tile::NOBODY ||
+					current_tile.occupant_id() == 0)
 				{
 					current_tile.set_occupant_type(mud::tile::CHARACTER);
 					current_tile.set_occupant_id(id_character.first);
@@ -275,9 +259,18 @@ namespace server {
 					new_tile.set_occupant_id(id_character.second.id());
 					current_tile = new_tile;
 				}
+				id_tiles_.insert({ current_tile.id(), current_tile });
 			}
 		}
 		return running;
+	}
+
+	void process_game::execute_enemies()
+	{
+		for (auto& id_enemy : id_enemies_)
+		{
+			pe_.run(id_enemy.second, id_tiles_);
+		}
 	}
 
 } // End namespace server.

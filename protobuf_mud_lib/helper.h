@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <iostream>
 #include <fstream>
 #include <functional>
 #if defined(_WIN32) || defined(_WIN64)
@@ -8,23 +9,11 @@
 #pragma warning(disable: 4251)
 #pragma warning(disable: 4996)
 #endif
-#include "mud_lib.pb.h"
+#include "../protobuf_mud_lib/mud_lib.pb.h"
 #include <google/protobuf/util/json_util.h>
 #if defined(_WIN32) || defined(_WIN64)
 #pragma warning(pop)
 #endif
-
-enum class input_t {
-	NONE = 0,
-	FORWARD = 1,
-	BACKWARD = 2,
-	LEFT = 3,
-	RIGHT = 4,
-	ATTACK = 5,
-	QUIT = 6,
-	INFO = 7,
-	PRINT = 8,
-};
 
 template <typename Book>
 Book read_file(const std::string& filename)
@@ -105,7 +94,7 @@ void write_json(const std::string& filename, const Book& book)
 	ofs.flush();
 }
 
-// For std::map<mud::direction...>.
+// For std::map<mud::direction, ...>.
 template<>
 struct std::less<mud::direction> {
 	bool operator()(
@@ -115,6 +104,39 @@ struct std::less<mud::direction> {
 		return l.value() < r.value();
 	}
 };
+
+// Some direction constants.
+namespace direction {
+
+	const mud::direction north = []
+	{
+		mud::direction d{};
+		d.set_value(mud::direction::NORTH);
+		return d;
+	}();
+
+	const mud::direction south = []
+	{
+		mud::direction d{};
+		d.set_value(mud::direction::SOUTH);
+		return d;
+	}();
+
+	const mud::direction west = []
+	{
+		mud::direction d{};
+		d.set_value(mud::direction::WEST);
+		return d;
+	}();
+
+	const mud::direction east = []
+	{
+		mud::direction d{};
+		d.set_value(mud::direction::EAST);
+		return d;
+	}();
+
+} // End namespace direction.
 
 bool operator==(const mud::direction& l, const mud::direction& r);
 bool operator!=(const mud::direction& l, const mud::direction& r);
@@ -137,12 +159,16 @@ std::ostream& operator<< (
 	std::ostream& os, 
 	const mud::attribute::attribute_name_enum& name);
 
-std::ostream& operator<< (std::ostream& os, const input_t& key);
-
+// Get the direction according to present one.
 mud::direction get_invert_direction(const mud::direction& dir);
 mud::direction get_left_direction(const mud::direction& dir);
 mud::direction get_right_direction(const mud::direction& dir);
 mud::direction get_random_direction();
+
+// Check if a tile is empty (or there is someone).
+bool is_tile_empty(const mud::tile& tile);
+bool is_tile_empty_or_character(const mud::tile& tile);
+bool is_tile_empty_or_enemy(const mud::tile& tile);
 
 // Get a map of the surrounding tiles.
 std::map<mud::direction, mud::tile> around_tiles(

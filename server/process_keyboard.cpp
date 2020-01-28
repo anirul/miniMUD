@@ -63,4 +63,39 @@ namespace server {
 		backgroud_thread_.join();
 	}
 
+} // End namespace server.
+
+std::ostream& operator<< (std::ostream& os, const server::input_t& key)
+{
+	switch (key)
+	{
+	case server::input_t::ATTACK:
+		os << "ATTACK";
+		break;
+	case server::input_t::BACKWARD:
+		os << "BACKWARD";
+		break;
+	case server::input_t::FORWARD:
+		os << "FORWARD";
+		break;
+	case server::input_t::INFO:
+		os << "INFO";
+		break;
+	case server::input_t::LEFT:
+		os << "LEFT";
+		break;
+	case server::input_t::NONE:
+		os << "NONE";
+		break;
+	case server::input_t::PRINT:
+		os << "PRINT";
+		break;
+	case server::input_t::QUIT:
+		os << "QUIT";
+		break;
+	case server::input_t::RIGHT:
+		os << "RIGHT";
+		break;
+	}
+	return os;
 }

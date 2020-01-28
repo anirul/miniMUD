@@ -17,17 +17,14 @@ namespace server {
 	class process_enemy 
 	{
 	public:
-		process_enemy(
-			std::map<std::int64_t, mud::enemy>& id_enemies,
-			std::map<std::int64_t, mud::tile>& id_tiles) :
-			id_enemies_(id_enemies),
-			id_tiles_(id_tiles) {}
-		void run();
+		void run(
+			mud::enemy& enemy,
+			std::map<std::int64_t, mud::tile>& id_tiles);
 	protected:
-		void move_to(const mud::enemy& enemy, const mud::tile& tile);
-	private:
-		std::map<std::int64_t, mud::enemy>& id_enemies_;
-		std::map<std::int64_t, mud::tile>& id_tiles_;
+		bool move_to(
+			mud::enemy& enemy,
+			const mud::tile& tile,
+			std::map<std::int64_t, mud::tile>& id_tiles);
 	};
 
 } // End namespace server.

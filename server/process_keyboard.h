@@ -9,6 +9,18 @@
 
 namespace server {
 
+	enum class input_t {
+		NONE = 0,
+		FORWARD = 1,
+		BACKWARD = 2,
+		LEFT = 3,
+		RIGHT = 4,
+		ATTACK = 5,
+		QUIT = 6,
+		INFO = 7,
+		PRINT = 8,
+	};
+
 	class process_keyboard
 	{
 	public:
@@ -44,3 +56,5 @@ namespace server {
 	};
 
 } // End namespace server.
+
+std::ostream& operator<< (std::ostream& os, const server::input_t& key);
