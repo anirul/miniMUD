@@ -1,5 +1,4 @@
 #include "process_enemy.h"
-#include "../protobuf_mud_lib/helper.h"
 
 namespace server {
 

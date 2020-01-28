@@ -5,7 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <type_traits>
-#include "../protobuf_mud_lib/helper.h"
+#include "../mud_lib/helper.h"
 #include "process_keyboard.h"
 #include "process_enemy.h"
 #include "process_character.h"

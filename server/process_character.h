@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include "../mud_lib/helper.h"
 #include "process_keyboard.h"
 
 namespace server {

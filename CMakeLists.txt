@@ -10,14 +10,14 @@ set(CMAKE_CXX_STANDARD 17)
 
 find_package(protobuf CONFIG REQUIRED)
 
-add_library(protobuf_mud_lib
-	${CMAKE_CURRENT_SOURCE_DIR}/protobuf_mud_lib/mud_lib.pb.cc
-	${CMAKE_CURRENT_SOURCE_DIR}/protobuf_mud_lib/mud_lib.pb.h
-	${CMAKE_CURRENT_SOURCE_DIR}/protobuf_mud_lib/helper.cc
-	${CMAKE_CURRENT_SOURCE_DIR}/protobuf_mud_lib/helper.h
+add_library(mud_lib
+	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/mud_lib.pb.cc
+	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/mud_lib.pb.h
+	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/helper.cc
+	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/helper.h
 )
 
-target_link_libraries(protobuf_mud_lib
+target_link_libraries(mud_lib
   PRIVATE
 	protobuf::libprotobuf
 )
@@ -36,7 +36,7 @@ add_executable(server
 
 target_link_libraries(server
   PUBLIC
-	protobuf_mud_lib
+	mud_lib
   PRIVATE 
 	protobuf::libprotobuf
 )

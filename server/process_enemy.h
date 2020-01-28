@@ -1,16 +1,7 @@
 #pragma once
 #include <map>
 #include <cstdint>
-#if defined(_WIN32) || defined(_WIN64)
-#pragma warning(push)
-#pragma warning(disable: 4005)
-#pragma warning(disable: 4251)
-#pragma warning(disable: 4996)
-#endif
-#include "../protobuf_mud_lib/mud_lib.pb.h"
-#if defined(_WIN32) || defined(_WIN64)
-#pragma warning(pop)
-#endif
+#include "../mud_lib/helper.h"
 
 namespace server {
 

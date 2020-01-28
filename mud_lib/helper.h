@@ -9,7 +9,7 @@
 #pragma warning(disable: 4251)
 #pragma warning(disable: 4996)
 #endif
-#include "../protobuf_mud_lib/mud_lib.pb.h"
+#include "../mud_lib/mud_lib.pb.h"
 #include <google/protobuf/util/json_util.h>
 #if defined(_WIN32) || defined(_WIN64)
 #pragma warning(pop)

@@ -1,5 +1,4 @@
 #include "process_character.h"
-#include "../protobuf_mud_lib/helper.h"
 
 namespace server {
 
