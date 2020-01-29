@@ -21,38 +21,55 @@ message direction {
 
 message attribute {
 	// List of various attributes.
-	enum attribute_name_enum {
+	enum attribute_enum {
 		LIFE = 0;
 		STRENGTH = 1;
 		AGILITY = 2;
 		INTELLIGENCE = 3;
+		MELEE_POWER = 4;
+		RANGE_POWER = 5;
+		EXPERIENCE = 6;
 	}
-	attribute_name_enum name = 1;
-	int32 value = 2;
+	attribute_enum name = 1;
+	int32 score = 2;
 	int32 regen = 3;
 }
 
+message item {
+	string name = 1;
+	string description = 2;
+	int64 id = 3;
+	repeated attribute attributes = 4;
+}
+
+// Next id: 10
 message character {
+	string name = 1;
+	string description = 9;
+	int64 id = 2;
+	int64 tile_id = 3;
+	direction facing = 4;
+	repeated attribute attributes = 5;
+	repeated int64 equiped_item_ids = 7;
+	repeated int64 stored_item_ids = 8;
 	// What is the character doing?
 	enum character_state_enum {
 		NONE = 0;
 		WALKING = 1;
 		COMBAT = 2;
 	}
-	string name = 1;
-	int64 id = 2;
-	int64 tile_id = 3;
-	direction facing = 4;
-	repeated attribute attributes = 5;
 	character_state_enum state = 6;
 }
 
+// Next id: 8
 message enemy {
 	string name = 1;
+	string description = 7;
 	int64 id = 2;
 	int64 tile_id = 3;
 	direction facing = 4;
 	repeated attribute attributes = 5;
+	repeated int64 droppable_item_ids = 6;
 }
 
 message location {
@@ -96,4 +113,8 @@ message character_book {
 
 message enemy_book {
 	repeated enemy enemies = 1;
+}
+
+message item_book {
+	repeated item items = 1;
 }

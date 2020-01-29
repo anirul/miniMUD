@@ -4,6 +4,7 @@
 #include <thread>
 #include <array>
 #include "../mud_lib/helper.h"
+// This has to change to a more portable way.
 #ifdef WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>

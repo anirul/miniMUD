@@ -30,8 +30,10 @@ namespace server {
 			}
 		}
 		// Face the correct direction.
-		if (direction != enemy.facing()) {
-			if (get_invert_direction(enemy.facing()) == direction) {
+		if (direction != enemy.facing()) 
+		{
+			if (get_invert_direction(enemy.facing()) == direction) 
+			{
 				*enemy.mutable_facing() = 
 					get_right_direction(enemy.facing());
 			}
@@ -84,6 +86,11 @@ namespace server {
 		previous.set_occupant_id(0);
 		previous.set_occupant_type(mud::tile::NOBODY);
 		return true;
+	}
+
+	bool process_enemy::attack(std::int64_t from_id, std::int64_t to_id)
+	{
+
 	}
 
 } // End namespace server.

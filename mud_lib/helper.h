@@ -157,7 +157,7 @@ std::ostream& operator<< (
 	const mud::tile::tile_type_enum& tile);
 std::ostream& operator<< (
 	std::ostream& os, 
-	const mud::attribute::attribute_name_enum& name);
+	const mud::attribute::attribute_enum& name);
 
 // Get the direction according to present one.
 mud::direction get_invert_direction(const mud::direction& dir);

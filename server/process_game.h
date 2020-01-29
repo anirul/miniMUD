@@ -26,6 +26,7 @@ namespace server {
 			const std::string& character_file = "character.json",
 			const std::string& enemy_file = "enemy.json",
 			const std::string& tile_file = "tile.json",
+			const std::string& item_file = "item.json",
 			binary_or_json_t binary_or_json = binary_or_json_t::JSON);
 		// Save the structure at the end of the game.
 		virtual ~process_game();
@@ -46,11 +47,13 @@ namespace server {
 		const std::string character_file_;
 		const std::string enemy_file_;
 		const std::string tile_file_;
+		const std::string item_file_;
 		const binary_or_json_t binary_or_json_;
 		std::map<std::int64_t, mud::player> id_players_;
 		std::map<std::int64_t, mud::character> id_characters_;
 		std::map<std::int64_t, mud::enemy> id_enemies_;
 		std::map<std::int64_t, mud::tile> id_tiles_;
+		std::map<std::int64_t, mud::item> id_items_;
 	};
 
 }

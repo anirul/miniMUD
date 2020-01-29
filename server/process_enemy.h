@@ -16,6 +16,7 @@ namespace server {
 			mud::enemy& enemy,
 			const mud::tile& tile,
 			std::map<std::int64_t, mud::tile>& id_tiles);
+		bool attack(std::int64_t from_id, std::int64_t to_id);
 	};
 
 } // End namespace server.

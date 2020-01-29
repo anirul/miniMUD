@@ -1,0 +1,138 @@
+{
+ "tiles": [
+  {
+   "id": "0",
+   "type": "TREE",
+   "occupant_type": "NOBODY",
+   "occupant_id": "0",
+   "mood": "this is tile 0",
+   "neighbours": []
+  },
+  {
+   "id": "1",
+   "type": "EMPTY",
+   "occupant_type": "ENEMY",
+   "occupant_id": "1",
+   "mood": "this is the starting tile!",
+   "neighbours": [
+    {
+     "direction": {
+      "value": "EAST"
+     },
+     "id": "2"
+    },
+    {
+     "direction": {
+      "value": "SOUTH"
+     },
+     "id": "3"
+    },
+    {
+     "direction": {
+      "value": "NORTH"
+     },
+     "id": "6"
+    },
+    {
+     "direction": {
+      "value": "WEST"
+     },
+     "id": "4"
+    }
+   ]
+  },
+  {
+   "id": "2",
+   "type": "EMPTY",
+   "occupant_type": "NOBODY",
+   "occupant_id": "0",
+   "mood": "this is a tile on the right of t1",
+   "neighbours": [
+    {
+     "direction": {
+      "value": "WEST"
+     },
+     "id": "1"
+    }
+   ]
+  },
+  {
+   "id": "3",
+   "type": "EMPTY",
+   "occupant_type": "NOBODY",
+   "occupant_id": "0",
+   "mood": "this is an edge",
+   "neighbours": [
+    {
+     "direction": {
+      "value": "NORTH"
+     },
+     "id": "1"
+    }
+   ]
+  },
+  {
+   "id": "4",
+   "type": "EMPTY",
+   "occupant_type": "NOBODY",
+   "occupant_id": "0",
+   "mood": "this is an edge",
+   "neighbours": [
+    {
+     "direction": {
+      "value": "EAST"
+     },
+     "id": "1"
+    },
+    {
+     "direction": {
+      "value": "NORTH"
+     },
+     "id": "5"
+    }
+   ]
+  },
+  {
+   "id": "5",
+   "type": "EMPTY",
+   "occupant_type": "NOBODY",
+   "occupant_id": "0",
+   "mood": "this is an edge",
+   "neighbours": [
+    {
+     "direction": {
+      "value": "SOUTH"
+     },
+     "id": "4"
+    },
+    {
+     "direction": {
+      "value": "EAST"
+     },
+     "id": "6"
+    }
+   ]
+  },
+  {
+   "id": "6",
+   "type": "EMPTY",
+   "occupant_type": "NOBODY",
+   "occupant_id": "0",
+   "mood": "this is an edge",
+   "neighbours": [
+    {
+     "direction": {
+      "value": "SOUTH"
+     },
+     "id": "1"
+    },
+    {
+     "direction": {
+      "value": "WEST"
+     },
+     "id": "5"
+    }
+   ]
+  }
+ ]
+}

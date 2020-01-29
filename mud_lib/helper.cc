@@ -37,7 +37,7 @@ std::ostream& operator<< (std::ostream& os, const mud::character& character)
 	for (const auto& attr : character.attributes())
 	{
 		os << "\tname      : " << attr.name() << std::endl;
-		os << "\tvalue     : " << attr.value() << std::endl;
+		os << "\tscore     : " << attr.score() << std::endl;
 		os << "\tregen     : " << attr.regen() << std::endl;
 	}
 	return os;
@@ -141,7 +141,7 @@ std::ostream& operator<< (
 
 std::ostream& operator<< (
 	std::ostream& os,
-	const mud::attribute::attribute_name_enum& name)
+	const mud::attribute::attribute_enum& name)
 {
 	switch (name)
 	{

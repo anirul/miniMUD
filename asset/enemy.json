@@ -1,0 +1,15 @@
+{
+ "enemies": [
+  {
+   "name": "Orc",
+   "description": "",
+   "id": "1",
+   "tile_id": "1",
+   "facing": {
+    "value": "WEST"
+   },
+   "attributes": [],
+   "droppable_item_ids": []
+  }
+ ]
+}

@@ -8,12 +8,14 @@ namespace server {
 		const std::string& character_file,
 		const std::string& enemy_file,
 		const std::string& tile_file,
+		const std::string& item_file,
 		binary_or_json_t binary_or_json) :
 		total_time_(total_time),
 		player_file_(player_file),
 		character_file_(character_file),
 		enemy_file_(enemy_file),
 		tile_file_(tile_file),
+		item_file_(item_file),
 		binary_or_json_(binary_or_json)
 	{
 		auto load = [this](const std::string& file, auto& book)
@@ -57,6 +59,14 @@ namespace server {
 			for (const mud::tile& tile : book.tiles())
 			{
 				id_tiles_.insert({ tile.id(), tile });
+			}
+		}
+		{
+			mud::item_book book;
+			load(item_file_, book);
+			for (const mud::item& item : book.items())
+			{
+				id_items_.insert({ item.id(), item });
 			}
 		}
 	}
@@ -105,6 +115,14 @@ namespace server {
 				*book.add_tiles() = pair.second;
 			}
 			save(tile_file_, book);
+		}
+		{
+			mud::item_book book;
+			for (const auto& pair : id_items_)
+			{
+				*book.add_items() = pair.second;
+			}
+			save(item_file_, book);
 		}
 	}
 
