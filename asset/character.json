@@ -8,7 +8,26 @@
    "facing": {
     "value": "NORTH"
    },
-   "attributes": [],
+   "attributes": [
+    {
+     "name": "MELEE_POWER",
+     "score": 10,
+     "regen": 0,
+     "score_max": 100
+    },
+    {
+     "name": "STRENGTH",
+     "score": 10,
+     "regen": 0,
+     "score_max": 100
+    },
+    {
+     "name": "LIFE",
+     "score": 100,
+     "regen": 1,
+     "score_max": 100
+    }
+   ],
    "equiped_item_ids": [],
    "stored_item_ids": [],
    "state": "NONE"

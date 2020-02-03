@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package mud;
 
+// Next id: 5
 message player {
 	string name = 1;
 	string password_hash = 2;
@@ -9,6 +10,7 @@ message player {
 	repeated int64 id_characters = 4;
 }
 
+// Next id: 2
 message direction {
 	enum direction_enum {
 		NORTH = 0;
@@ -19,6 +21,7 @@ message direction {
 	direction_enum value = 1;
 }
 
+// Next id: 5
 message attribute {
 	// List of various attributes.
 	enum attribute_enum {
@@ -33,8 +36,10 @@ message attribute {
 	attribute_enum name = 1;
 	int32 score = 2;
 	int32 regen = 3;
+	int32 score_max = 4;
 }
 
+// Next id: 5
 message item {
 	string name = 1;
 	string description = 2;
@@ -72,11 +77,13 @@ message enemy {
 	repeated int64 droppable_item_ids = 6;
 }
 
+// Next id: 3
 message location {
 	direction direction = 1;
 	int64 id = 2;
 }
 
+// Next id: 7
 message tile {
 	// Is tile usable for anything?
 	enum tile_type_enum {

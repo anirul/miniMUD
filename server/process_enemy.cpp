@@ -4,7 +4,8 @@ namespace server {
 
 	void process_enemy::run(
 		mud::enemy& enemy,
-		std::map<std::int64_t, mud::tile>& id_tiles)
+		std::map<std::int64_t, mud::tile>& id_tiles,
+		std::map<std::int64_t, mud::character>& id_characters)
 	{
 		// Enemy is not on a valid tile.
 		if (enemy.tile_id() == 0) return;
@@ -57,8 +58,13 @@ namespace server {
 		if (it != around_tile.end()) {
 			switch (it->second.occupant_type()) {
 			case mud::tile::CHARACTER:
-				// TODO attack!
-				std::cout << "\a" << std::flush;
+				// Attack!
+				if (attack_character(
+					enemy,
+					id_characters[it->second.occupant_id()]))
+				{
+					std::cout << "\a" << std::flush;
+				}
 				break;
 			case mud::tile::EMPTY:
 				move_to(enemy, around_tile.at(direction), id_tiles);
@@ -88,9 +94,43 @@ namespace server {
 		return true;
 	}
 
-	bool process_enemy::attack(std::int64_t from_id, std::int64_t to_id)
+	bool process_enemy::attack_character(
+		const mud::enemy& enemy,
+		mud::character& character)
 	{
-
+		float attack_strength = .0f;
+		for (const auto& attr : enemy.attributes())
+		{
+			if (attr.name() == mud::attribute::MELEE_POWER) 
+			{
+				attack_strength += attr.score();
+			}
+			if (attr.name() == mud::attribute::STRENGTH)
+			{
+				attack_strength += attr.score();
+			}
+		}
+		if (attack_strength > .0f)
+		{
+			for (auto& attr : *character.mutable_attributes())
+			{
+				if (attr.name() == mud::attribute::LIFE)
+				{
+					float temporary_life = static_cast<float>(attr.score());
+					if (temporary_life <= .0f)
+					{
+						attr.set_score(0);
+						return false;
+					}
+					temporary_life -= attack_strength;
+					if (temporary_life <= .0f)
+						temporary_life = .0f;
+					attr.set_score(static_cast<std::int32_t>(temporary_life));
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 } // End namespace server.

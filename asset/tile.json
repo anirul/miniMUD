@@ -11,8 +11,8 @@
   {
    "id": "1",
    "type": "EMPTY",
-   "occupant_type": "ENEMY",
-   "occupant_id": "1",
+   "occupant_type": "NOBODY",
+   "occupant_id": "0",
    "mood": "this is the starting tile!",
    "neighbours": [
     {

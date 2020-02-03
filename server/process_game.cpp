@@ -112,7 +112,13 @@ namespace server {
 			mud::tile_book book;
 			for (const auto& pair : id_tiles_)
 			{
-				*book.add_tiles() = pair.second;
+				mud::tile t = pair.second;
+				// Clean the map before saving.
+				if (t.occupant_type() != mud::tile::NOBODY)
+					t.set_occupant_type(mud::tile::NOBODY);
+				if (t.occupant_id() != 0)
+					t.set_occupant_id(0);
+				*book.add_tiles() = t;
 			}
 			save(tile_file_, book);
 		}
@@ -159,6 +165,12 @@ namespace server {
 			{
 				std::cerr << "too long..." << std::endl;
 			}
+			// CHECKME change this when multi players.
+			if (execute_dead()) {
+				std::cout << "you died!" << std::endl;
+				return;
+			}
+			execute_postprocess();
 		}
 		pk_.stop();
 	}
@@ -253,9 +265,10 @@ namespace server {
 			if (id_character.second.state() != mud::character::NONE)
 			{
 				process_character pc(id_character.second);
-				mud::tile& current_tile = id_tiles_[id_character.second.tile_id()];
+				mud::tile& current_tile = 
+					id_tiles_[id_character.second.tile_id()];
 				// Set the character in the gaming field.
-				// CHECKME this is potentialy dangerous in multiplayer.
+				// CHECKME this is potentially dangerous in multi player.
 				if (current_tile.occupant_type() == mud::tile::NOBODY ||
 					current_tile.occupant_id() == 0)
 				{
@@ -287,8 +300,77 @@ namespace server {
 	{
 		for (auto& id_enemy : id_enemies_)
 		{
-			pe_.run(id_enemy.second, id_tiles_);
+			pe_.run(id_enemy.second, id_tiles_, id_characters_);
 		}
+	}
+
+	bool process_game::execute_dead()
+	{
+		for (auto& character : id_characters_)
+		{
+			for (auto& attr : character.second.attributes())
+			{
+				if (attr.name() == mud::attribute::LIFE)
+				{
+					if (attr.score() <= 0)
+					{
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	void process_game::execute_postprocess()
+	{
+		std::mutex mutex_;
+		std::vector<std::int64_t> deleted_id;
+		std::for_each(
+#ifndef __APPLE__
+			std::execution::par,
+#endif
+			id_enemies_.begin(),
+			id_enemies_.end(),
+			[&mutex_, &deleted_id](const std::pair<std::int64_t, mud::enemy>& p)
+		{
+			for (auto& attr : p.second.attributes())
+			{
+				if (attr.name() == mud::attribute::LIFE)
+				{
+					if (attr.score() <= 0)
+					{
+						std::lock_guard l(mutex_);
+						deleted_id.push_back(p.first);
+					}
+				}
+			}
+		});
+		// This should not be parallelized.
+		std::for_each(
+			deleted_id.begin(), 
+			deleted_id.end(), 
+			[this](const std::int64_t id) 
+		{
+			id_enemies_.erase(id);
+		});
+		std::for_each(
+#ifndef __APPLE__
+			std::execution::par,
+#endif
+			id_characters_.begin(),
+			id_characters_.end(),
+			[&mutex_, this](const std::pair<std::int64_t, mud::character>& p)
+		{
+			for (auto& attr : *id_characters_[p.first].mutable_attributes())
+			{
+				if (attr.regen() != 0 && attr.score() != attr.score_max())
+				{
+					std::lock_guard l(mutex_);
+					attr.set_score(attr.score() + attr.regen());
+				}
+			}
+		});
 	}
 
 } // End namespace server.

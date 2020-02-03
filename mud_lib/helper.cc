@@ -37,7 +37,8 @@ std::ostream& operator<< (std::ostream& os, const mud::character& character)
 	for (const auto& attr : character.attributes())
 	{
 		os << "\tname      : " << attr.name() << std::endl;
-		os << "\tscore     : " << attr.score() << std::endl;
+		os << "\tscore     : " << attr.score() 
+			<< " [" << attr.score_max() << "]" << std::endl;
 		os << "\tregen     : " << attr.regen() << std::endl;
 	}
 	return os;

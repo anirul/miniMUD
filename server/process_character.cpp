@@ -48,8 +48,12 @@ namespace server {
 		break;
 		case input_t::ATTACK:
 		{
-			// TODO make an attack on the character that is in front me.
-			std::cout << "\a" << std::flush;
+			if (surrounding_tiles[character_.facing()].occupant_type() == 
+				mud::tile::ENEMY)
+			{
+				auto id = surrounding_tiles[character_.facing()].occupant_id();
+				std::cout << "\a" << std::flush;
+			}
 		}
 		break;
 		case input_t::QUIT:

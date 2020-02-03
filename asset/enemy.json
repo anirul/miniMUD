@@ -4,11 +4,30 @@
    "name": "Orc",
    "description": "",
    "id": "1",
-   "tile_id": "1",
+   "tile_id": "2",
    "facing": {
     "value": "WEST"
    },
-   "attributes": [],
+   "attributes": [
+    {
+     "name": "MELEE_POWER",
+     "score": 1,
+     "regen": 0,
+     "score_max": 100
+    },
+    {
+     "name": "STRENGTH",
+     "score": 1,
+     "regen": 0,
+     "score_max": 100
+    },
+    {
+     "name": "LIFE",
+     "score": 50,
+     "regen": 0,
+     "score_max": 100
+    }
+   ],
    "droppable_item_ids": []
   }
  ]

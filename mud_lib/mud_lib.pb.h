@@ -146,7 +146,7 @@ enum attribute_attribute_enum : int {
   attribute_attribute_enum_AGILITY = 2,
   attribute_attribute_enum_INTELLIGENCE = 3,
   attribute_attribute_enum_MELEE_POWER = 4,
-  attribute_attribute_enum_RANGED_POWER = 5,
+  attribute_attribute_enum_RANGE_POWER = 5,
   attribute_attribute_enum_EXPERIENCE = 6,
   attribute_attribute_enum_attribute_attribute_enum_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   attribute_attribute_enum_attribute_attribute_enum_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
@@ -716,8 +716,8 @@ class attribute :
     attribute_attribute_enum_INTELLIGENCE;
   static constexpr attribute_enum MELEE_POWER =
     attribute_attribute_enum_MELEE_POWER;
-  static constexpr attribute_enum RANGED_POWER =
-    attribute_attribute_enum_RANGED_POWER;
+  static constexpr attribute_enum RANGE_POWER =
+    attribute_attribute_enum_RANGE_POWER;
   static constexpr attribute_enum EXPERIENCE =
     attribute_attribute_enum_EXPERIENCE;
   static inline bool attribute_enum_IsValid(int value) {
@@ -751,6 +751,7 @@ class attribute :
     kNameFieldNumber = 1,
     kScoreFieldNumber = 2,
     kRegenFieldNumber = 3,
+    kScoreMaxFieldNumber = 4,
   };
   // .mud.attribute.attribute_enum name = 1;
   void clear_name();
@@ -779,6 +780,15 @@ class attribute :
   void _internal_set_regen(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
+  // int32 score_max = 4;
+  void clear_score_max();
+  ::PROTOBUF_NAMESPACE_ID::int32 score_max() const;
+  void set_score_max(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_score_max() const;
+  void _internal_set_score_max(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:mud.attribute)
  private:
   class _Internal;
@@ -787,6 +797,7 @@ class attribute :
   int name_;
   ::PROTOBUF_NAMESPACE_ID::int32 score_;
   ::PROTOBUF_NAMESPACE_ID::int32 regen_;
+  ::PROTOBUF_NAMESPACE_ID::int32 score_max_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_mud_5flib_2eproto;
 };
@@ -2895,6 +2906,26 @@ inline void attribute::_internal_set_regen(::PROTOBUF_NAMESPACE_ID::int32 value)
 inline void attribute::set_regen(::PROTOBUF_NAMESPACE_ID::int32 value) {
   _internal_set_regen(value);
   // @@protoc_insertion_point(field_set:mud.attribute.regen)
+}
+
+// int32 score_max = 4;
+inline void attribute::clear_score_max() {
+  score_max_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 attribute::_internal_score_max() const {
+  return score_max_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 attribute::score_max() const {
+  // @@protoc_insertion_point(field_get:mud.attribute.score_max)
+  return _internal_score_max();
+}
+inline void attribute::_internal_set_score_max(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  score_max_ = value;
+}
+inline void attribute::set_score_max(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_score_max(value);
+  // @@protoc_insertion_point(field_set:mud.attribute.score_max)
 }
 
 // -------------------------------------------------------------------

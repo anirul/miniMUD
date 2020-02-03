@@ -298,6 +298,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_mud_5flib_2eproto::offsets[] P
   PROTOBUF_FIELD_OFFSET(::mud::attribute, name_),
   PROTOBUF_FIELD_OFFSET(::mud::attribute, score_),
   PROTOBUF_FIELD_OFFSET(::mud::attribute, regen_),
+  PROTOBUF_FIELD_OFFSET(::mud::attribute, score_max_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::mud::item, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -386,16 +387,16 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 0, -1, sizeof(::mud::player)},
   { 9, -1, sizeof(::mud::direction)},
   { 15, -1, sizeof(::mud::attribute)},
-  { 23, -1, sizeof(::mud::item)},
-  { 32, -1, sizeof(::mud::character)},
-  { 46, -1, sizeof(::mud::enemy)},
-  { 58, -1, sizeof(::mud::location)},
-  { 65, -1, sizeof(::mud::tile)},
-  { 76, -1, sizeof(::mud::player_book)},
-  { 82, -1, sizeof(::mud::tile_book)},
-  { 88, -1, sizeof(::mud::character_book)},
-  { 94, -1, sizeof(::mud::enemy_book)},
-  { 100, -1, sizeof(::mud::item_book)},
+  { 24, -1, sizeof(::mud::item)},
+  { 33, -1, sizeof(::mud::character)},
+  { 47, -1, sizeof(::mud::enemy)},
+  { 59, -1, sizeof(::mud::location)},
+  { 66, -1, sizeof(::mud::tile)},
+  { 77, -1, sizeof(::mud::player_book)},
+  { 83, -1, sizeof(::mud::tile_book)},
+  { 89, -1, sizeof(::mud::character_book)},
+  { 95, -1, sizeof(::mud::enemy_book)},
+  { 101, -1, sizeof(::mud::item_book)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -420,41 +421,42 @@ const char descriptor_table_protodef_mud_5flib_2eproto[] PROTOBUF_SECTION_VARIAB
   "\025\n\rid_characters\030\004 \003(\003\"u\n\tdirection\022,\n\005v"
   "alue\030\001 \001(\0162\035.mud.direction.direction_enu"
   "m\":\n\016direction_enum\022\t\n\005NORTH\020\000\022\t\n\005SOUTH\020"
-  "\001\022\010\n\004EAST\020\002\022\010\n\004WEST\020\003\"\322\001\n\tattribute\022+\n\004n"
+  "\001\022\010\n\004EAST\020\002\022\010\n\004WEST\020\003\"\344\001\n\tattribute\022+\n\004n"
   "ame\030\001 \001(\0162\035.mud.attribute.attribute_enum"
-  "\022\r\n\005score\030\002 \001(\005\022\r\n\005regen\030\003 \001(\005\"z\n\016attrib"
-  "ute_enum\022\010\n\004LIFE\020\000\022\014\n\010STRENGTH\020\001\022\013\n\007AGIL"
-  "ITY\020\002\022\020\n\014INTELLIGENCE\020\003\022\017\n\013MELEE_POWER\020\004"
-  "\022\020\n\014RANGED_POWER\020\005\022\016\n\nEXPERIENCE\020\006\"Y\n\004it"
-  "em\022\014\n\004name\030\001 \001(\t\022\023\n\013description\030\002 \001(\t\022\n\n"
-  "\002id\030\003 \001(\003\022\"\n\nattributes\030\004 \003(\0132\016.mud.attr"
-  "ibute\"\261\002\n\tcharacter\022\014\n\004name\030\001 \001(\t\022\023\n\013des"
-  "cription\030\t \001(\t\022\n\n\002id\030\002 \001(\003\022\017\n\007tile_id\030\003 "
-  "\001(\003\022\036\n\006facing\030\004 \001(\0132\016.mud.direction\022\"\n\na"
-  "ttributes\030\005 \003(\0132\016.mud.attribute\022\030\n\020equip"
-  "ed_item_ids\030\007 \003(\003\022\027\n\017stored_item_ids\030\010 \003"
-  "(\003\0222\n\005state\030\006 \001(\0162#.mud.character.charac"
-  "ter_state_enum\"9\n\024character_state_enum\022\010"
-  "\n\004NONE\020\000\022\013\n\007WALKING\020\001\022\n\n\006COMBAT\020\002\"\247\001\n\005en"
-  "emy\022\014\n\004name\030\001 \001(\t\022\023\n\013description\030\007 \001(\t\022\n"
-  "\n\002id\030\002 \001(\003\022\017\n\007tile_id\030\003 \001(\003\022\036\n\006facing\030\004 "
-  "\001(\0132\016.mud.direction\022\"\n\nattributes\030\005 \003(\0132"
-  "\016.mud.attribute\022\032\n\022droppable_item_ids\030\006 "
-  "\003(\003\"9\n\010location\022!\n\tdirection\030\001 \001(\0132\016.mud"
-  ".direction\022\n\n\002id\030\002 \001(\003\"\256\002\n\004tile\022\n\n\002id\030\001 "
-  "\001(\003\022&\n\004type\030\002 \001(\0162\030.mud.tile.tile_type_e"
-  "num\0223\n\roccupant_type\030\003 \001(\0162\034.mud.tile.re"
-  "sident_type_enum\022\023\n\013occupant_id\030\004 \001(\003\022\014\n"
-  "\004mood\030\005 \001(\t\022!\n\nneighbours\030\006 \003(\0132\r.mud.lo"
-  "cation\";\n\016tile_type_enum\022\t\n\005EMPTY\020\000\022\010\n\004W"
-  "ALL\020\001\022\010\n\004TREE\020\002\022\n\n\006PORTAL\020\003\":\n\022resident_"
-  "type_enum\022\n\n\006NOBODY\020\000\022\r\n\tCHARACTER\020\001\022\t\n\005"
-  "ENEMY\020\002\"+\n\013player_book\022\034\n\007players\030\001 \003(\0132"
-  "\013.mud.player\"%\n\ttile_book\022\030\n\005tiles\030\001 \003(\013"
-  "2\t.mud.tile\"4\n\016character_book\022\"\n\ncharact"
-  "ers\030\001 \003(\0132\016.mud.character\")\n\nenemy_book\022"
-  "\033\n\007enemies\030\001 \003(\0132\n.mud.enemy\"%\n\titem_boo"
-  "k\022\030\n\005items\030\001 \003(\0132\t.mud.itemb\006proto3"
+  "\022\r\n\005score\030\002 \001(\005\022\r\n\005regen\030\003 \001(\005\022\021\n\tscore_"
+  "max\030\004 \001(\005\"y\n\016attribute_enum\022\010\n\004LIFE\020\000\022\014\n"
+  "\010STRENGTH\020\001\022\013\n\007AGILITY\020\002\022\020\n\014INTELLIGENCE"
+  "\020\003\022\017\n\013MELEE_POWER\020\004\022\017\n\013RANGE_POWER\020\005\022\016\n\n"
+  "EXPERIENCE\020\006\"Y\n\004item\022\014\n\004name\030\001 \001(\t\022\023\n\013de"
+  "scription\030\002 \001(\t\022\n\n\002id\030\003 \001(\003\022\"\n\nattribute"
+  "s\030\004 \003(\0132\016.mud.attribute\"\261\002\n\tcharacter\022\014\n"
+  "\004name\030\001 \001(\t\022\023\n\013description\030\t \001(\t\022\n\n\002id\030\002"
+  " \001(\003\022\017\n\007tile_id\030\003 \001(\003\022\036\n\006facing\030\004 \001(\0132\016."
+  "mud.direction\022\"\n\nattributes\030\005 \003(\0132\016.mud."
+  "attribute\022\030\n\020equiped_item_ids\030\007 \003(\003\022\027\n\017s"
+  "tored_item_ids\030\010 \003(\003\0222\n\005state\030\006 \001(\0162#.mu"
+  "d.character.character_state_enum\"9\n\024char"
+  "acter_state_enum\022\010\n\004NONE\020\000\022\013\n\007WALKING\020\001\022"
+  "\n\n\006COMBAT\020\002\"\247\001\n\005enemy\022\014\n\004name\030\001 \001(\t\022\023\n\013d"
+  "escription\030\007 \001(\t\022\n\n\002id\030\002 \001(\003\022\017\n\007tile_id\030"
+  "\003 \001(\003\022\036\n\006facing\030\004 \001(\0132\016.mud.direction\022\"\n"
+  "\nattributes\030\005 \003(\0132\016.mud.attribute\022\032\n\022dro"
+  "ppable_item_ids\030\006 \003(\003\"9\n\010location\022!\n\tdir"
+  "ection\030\001 \001(\0132\016.mud.direction\022\n\n\002id\030\002 \001(\003"
+  "\"\256\002\n\004tile\022\n\n\002id\030\001 \001(\003\022&\n\004type\030\002 \001(\0162\030.mu"
+  "d.tile.tile_type_enum\0223\n\roccupant_type\030\003"
+  " \001(\0162\034.mud.tile.resident_type_enum\022\023\n\013oc"
+  "cupant_id\030\004 \001(\003\022\014\n\004mood\030\005 \001(\t\022!\n\nneighbo"
+  "urs\030\006 \003(\0132\r.mud.location\";\n\016tile_type_en"
+  "um\022\t\n\005EMPTY\020\000\022\010\n\004WALL\020\001\022\010\n\004TREE\020\002\022\n\n\006POR"
+  "TAL\020\003\":\n\022resident_type_enum\022\n\n\006NOBODY\020\000\022"
+  "\r\n\tCHARACTER\020\001\022\t\n\005ENEMY\020\002\"+\n\013player_book"
+  "\022\034\n\007players\030\001 \003(\0132\013.mud.player\"%\n\ttile_b"
+  "ook\022\030\n\005tiles\030\001 \003(\0132\t.mud.tile\"4\n\016charact"
+  "er_book\022\"\n\ncharacters\030\001 \003(\0132\016.mud.charac"
+  "ter\")\n\nenemy_book\022\033\n\007enemies\030\001 \003(\0132\n.mud"
+  ".enemy\"%\n\titem_book\022\030\n\005items\030\001 \003(\0132\t.mud"
+  ".itemb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_mud_5flib_2eproto_deps[1] = {
 };
@@ -476,7 +478,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_mud
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_mud_5flib_2eproto_once;
 static bool descriptor_table_mud_5flib_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_mud_5flib_2eproto = {
-  &descriptor_table_mud_5flib_2eproto_initialized, descriptor_table_protodef_mud_5flib_2eproto, "mud_lib.proto", 1595,
+  &descriptor_table_mud_5flib_2eproto_initialized, descriptor_table_protodef_mud_5flib_2eproto, "mud_lib.proto", 1613,
   &descriptor_table_mud_5flib_2eproto_once, descriptor_table_mud_5flib_2eproto_sccs, descriptor_table_mud_5flib_2eproto_deps, 13, 0,
   schemas, file_default_instances, TableStruct_mud_5flib_2eproto::offsets,
   file_level_metadata_mud_5flib_2eproto, 13, file_level_enum_descriptors_mud_5flib_2eproto, file_level_service_descriptors_mud_5flib_2eproto,
@@ -535,7 +537,7 @@ constexpr attribute_attribute_enum attribute::STRENGTH;
 constexpr attribute_attribute_enum attribute::AGILITY;
 constexpr attribute_attribute_enum attribute::INTELLIGENCE;
 constexpr attribute_attribute_enum attribute::MELEE_POWER;
-constexpr attribute_attribute_enum attribute::RANGED_POWER;
+constexpr attribute_attribute_enum attribute::RANGE_POWER;
 constexpr attribute_attribute_enum attribute::EXPERIENCE;
 constexpr attribute_attribute_enum attribute::attribute_enum_MIN;
 constexpr attribute_attribute_enum attribute::attribute_enum_MAX;
@@ -1121,15 +1123,15 @@ attribute::attribute(const attribute& from)
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&name_, &from.name_,
-    static_cast<size_t>(reinterpret_cast<char*>(&regen_) -
-    reinterpret_cast<char*>(&name_)) + sizeof(regen_));
+    static_cast<size_t>(reinterpret_cast<char*>(&score_max_) -
+    reinterpret_cast<char*>(&name_)) + sizeof(score_max_));
   // @@protoc_insertion_point(copy_constructor:mud.attribute)
 }
 
 void attribute::SharedCtor() {
   ::memset(&name_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&regen_) -
-      reinterpret_cast<char*>(&name_)) + sizeof(regen_));
+      reinterpret_cast<char*>(&score_max_) -
+      reinterpret_cast<char*>(&name_)) + sizeof(score_max_));
 }
 
 attribute::~attribute() {
@@ -1156,8 +1158,8 @@ void attribute::Clear() {
   (void) cached_has_bits;
 
   ::memset(&name_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&regen_) -
-      reinterpret_cast<char*>(&name_)) + sizeof(regen_));
+      reinterpret_cast<char*>(&score_max_) -
+      reinterpret_cast<char*>(&name_)) + sizeof(score_max_));
   _internal_metadata_.Clear();
 }
 
@@ -1187,6 +1189,13 @@ const char* attribute::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
           regen_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 score_max = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          score_max_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1235,6 +1244,12 @@ failure:
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_regen(), target);
   }
 
+  // int32 score_max = 4;
+  if (this->score_max() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_score_max(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target, stream);
@@ -1269,6 +1284,13 @@ size_t attribute::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->_internal_regen());
+  }
+
+  // int32 score_max = 4;
+  if (this->score_max() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_score_max());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1311,6 +1333,9 @@ void attribute::MergeFrom(const attribute& from) {
   if (from.regen() != 0) {
     _internal_set_regen(from._internal_regen());
   }
+  if (from.score_max() != 0) {
+    _internal_set_score_max(from._internal_score_max());
+  }
 }
 
 void attribute::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -1337,6 +1362,7 @@ void attribute::InternalSwap(attribute* other) {
   swap(name_, other->name_);
   swap(score_, other->score_);
   swap(regen_, other->regen_);
+  swap(score_max_, other->score_max_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata attribute::GetMetadata() const {

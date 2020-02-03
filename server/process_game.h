@@ -5,6 +5,9 @@
 #include <iostream>
 #include <fstream>
 #include <type_traits>
+#ifndef __APPLE__
+#include <execution>
+#endif
 #include "../mud_lib/helper.h"
 #include "process_keyboard.h"
 #include "process_enemy.h"
@@ -39,6 +42,8 @@ namespace server {
 		void exit_game();
 		bool execute_characters(const input_t& entry);
 		void execute_enemies();
+		bool execute_dead();
+		void execute_postprocess();
 	private:
 		process_enemy pe_;
 		process_keyboard pk_;
