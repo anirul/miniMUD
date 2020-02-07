@@ -106,6 +106,8 @@ message tile {
 	repeated location neighbours = 6;
 }
 
+// Books used to store to disk.
+
 message player_book {
 	repeated player players = 1;
 }
@@ -124,4 +126,40 @@ message enemy_book {
 
 message item_book {
 	repeated item items = 1;
+}
+
+// Message that we use for gRPC.
+
+// Next id: 2
+message token_in {}
+
+// Next id: 2
+message token_out {
+	int64 token = 1;
+}
+
+// Next id: 4
+message login_in {
+	string name = 1;
+	string password_hash = 2;
+	int64 token = 3;
+}
+
+// Next id: 3
+message login_out {
+	enum status_enum {
+		FAILURE = 0;
+		UNKNOWN_TOKEN = 1;
+		TOO_OLD_TOKEN = 2;
+		ALREADY_CONNECTED = 3;
+		SUCCESS = 4;
+	}
+	status_enum status = 1;
+	repeated character characters = 2;
+}
+
+// gRPC description.
+service game_server {
+	rpc GetToken(token_in) returns (token_out) {}
+	rpc Login(login_in) returns (login_out) {}
 }

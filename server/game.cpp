@@ -143,9 +143,9 @@ namespace server {
 		{
 			auto start_time = std::chrono::high_resolution_clock::now();
 			// Check keyboard.
-			input_t entry = execute_keyboard();
+			input::input_t entry = execute_keyboard();
 			// Special case of quit.
-			if (entry == input_t::QUIT)
+			if (entry == input::input_t::QUIT)
 			{
 				exit_game();
 				running = false;
@@ -225,9 +225,9 @@ namespace server {
 		return false;
 	}
 
-	input_t game::execute_keyboard()
+	input::input_t game::execute_keyboard()
 	{
-		input_t entry = input_t::NONE;
+		input::input_t entry = input::input_t::NONE;
 		// Get keyboard entries.
 		for (const auto& field : pk_.input_key)
 		{
@@ -257,7 +257,7 @@ namespace server {
 		}
 	}
 
-	bool game::execute_characters(const input_t& entry)
+	bool game::execute_characters(const input::input_t& entry)
 	{
 		bool running = true;
 		for (auto& id_character : id_characters_)

@@ -9,7 +9,7 @@
 #include <execution>
 #endif
 #include "../mud_lib/helper.h"
-#include "keyboard.h"
+#include "../mud_lib/keyboard.h"
 #include "enemy.h"
 #include "character.h"
 
@@ -35,18 +35,28 @@ namespace server {
 		virtual ~game();
 		// Does return at the end of the game!
 		void run();
+	public:
+		std::map<int64_t, mud::player> get_id_players() const 
+		{
+			return id_players_;
+		}
+		void set_id_players(
+			const std::map<std::int64_t, mud::player>& id_players)
+		{
+			id_players_ = id_players;
+		}
 	protected:
 		void select_character();
 		bool has_actif_character();
-		input_t execute_keyboard();
+		input::input_t execute_keyboard();
 		void exit_game();
-		bool execute_characters(const input_t& entry);
+		bool execute_characters(const input::input_t& entry);
 		void execute_enemies();
 		bool execute_dead();
 		void execute_postprocess();
 	private:
 		enemy pe_;
-		keyboard pk_;
+		input::keyboard pk_;
 		const std::chrono::duration<double> total_time_;
 		const std::string player_file_;
 		const std::string character_file_;

@@ -10,10 +10,15 @@ set(CMAKE_CXX_STANDARD 17)
 
 find_package(protobuf CONFIG REQUIRED)
 find_package(gRPC CONFIG REQUIRED)
+find_package(cryptopp CONFIG REQUIRED)
 
 add_library(mud_lib
 	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/mud_lib.pb.cc
 	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/mud_lib.pb.h
+	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/mud_lib.grpc.pb.cc
+	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/mud_lib.grpc.pb.h
+	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/keyboard.h
+	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/keyboard.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/helper.cc
 	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/helper.h
 )
@@ -24,6 +29,7 @@ target_link_libraries(mud_lib
 	gRPC::gpr
 	gRPC::grpc
 	gRPC::grpc++
+	cryptopp-static
 )
 
 add_executable(server
@@ -34,8 +40,6 @@ add_executable(server
 	${CMAKE_CURRENT_SOURCE_DIR}/server/character.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/server/enemy.h
 	${CMAKE_CURRENT_SOURCE_DIR}/server/enemy.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/server/keyboard.h
-	${CMAKE_CURRENT_SOURCE_DIR}/server/keyboard.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/server/session.h
 	${CMAKE_CURRENT_SOURCE_DIR}/server/session.cpp
 )
@@ -48,4 +52,22 @@ target_link_libraries(server
 	gRPC::gpr
 	gRPC::grpc
 	gRPC::grpc++
+	cryptopp-static
+)
+
+add_executable(client
+	${CMAKE_CURRENT_SOURCE_DIR}/client/main.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/client/client.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/client/client.h
+)
+
+target_link_libraries(client
+  PUBLIC
+	mud_lib
+  PRIVATE 
+	protobuf::libprotobuf
+	gRPC::gpr
+	gRPC::grpc
+	gRPC::grpc++
+	cryptopp-static
 )

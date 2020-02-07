@@ -10,6 +10,7 @@
 #pragma warning(disable: 4996)
 #endif
 #include "../mud_lib/mud_lib.pb.h"
+#include "../mud_lib/mud_lib.grpc.pb.h"
 #include <google/protobuf/util/json_util.h>
 #if defined(_WIN32) || defined(_WIN64)
 #pragma warning(pop)
@@ -70,7 +71,7 @@ void write_file(const std::string& filename, const Book& book)
 	std::ofstream ofs(filename, std::ios::out | std::ios::binary);
 	if (!book.SerializeToOstream(&ofs))
 	{
-		std::cerr << "error outputing to file: " << filename << std::endl;
+		std::cerr << "error outputting to file: " << filename << std::endl;
 	}
 }
 

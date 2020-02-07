@@ -10,7 +10,7 @@
 #include <windows.h>
 #endif
 
-namespace server {
+namespace input {
 
 	enum class input_t {
 		NONE = 0,
@@ -60,4 +60,4 @@ namespace server {
 
 } // End namespace server.
 
-std::ostream& operator<< (std::ostream& os, const server::input_t& key);
+std::ostream& operator<< (std::ostream& os, const input::input_t& key);

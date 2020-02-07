@@ -3,13 +3,13 @@
 namespace server {
 
 	bool character::run(
-		const input_t& entry, 
+		const input::input_t& entry, 
 		mud::tile& present_tile,
 		std::map<mud::direction, mud::tile>& surrounding_tiles)
 	{
 		if (character_.state() == mud::character::NONE) return true;
 		switch (entry) {
-		case input_t::FORWARD:
+		case input::input_t::FORWARD:
 		{
 			auto& it = surrounding_tiles.find(character_.facing());
 			if (it == surrounding_tiles.end()) break;
@@ -21,7 +21,7 @@ namespace server {
 			}
 		}
 		break;
-		case input_t::BACKWARD:
+		case input::input_t::BACKWARD:
 		{
 			auto& it = surrounding_tiles.find(
 				get_invert_direction(character_.facing()));
@@ -34,19 +34,19 @@ namespace server {
 			}
 		}
 		break;
-		case input_t::LEFT:
+		case input::input_t::LEFT:
 		{
 			*character_.mutable_facing() = 
 				get_left_direction(character_.facing());
 		}
 		break;
-		case input_t::RIGHT:
+		case input::input_t::RIGHT:
 		{
 			*character_.mutable_facing() = 
 				get_right_direction(character_.facing());
 		}
 		break;
-		case input_t::ATTACK:
+		case input::input_t::ATTACK:
 		{
 			if (surrounding_tiles[character_.facing()].occupant_type() == 
 				mud::tile::ENEMY)
@@ -56,12 +56,12 @@ namespace server {
 			}
 		}
 		break;
-		case input_t::QUIT:
+		case input::input_t::QUIT:
 		{
 			return false;
 		}
 		break;
-		case input_t::INFO:
+		case input::input_t::INFO:
 		{
 			std::cout << "Who am I" << std::endl;
 			std::cout << character_;

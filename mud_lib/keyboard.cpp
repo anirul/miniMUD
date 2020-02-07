@@ -1,6 +1,6 @@
 #include "keyboard.h"
 
-namespace server {
+namespace input {
 
 	void keyboard::run()
 	{
@@ -65,35 +65,35 @@ namespace server {
 
 } // End namespace server.
 
-std::ostream& operator<< (std::ostream& os, const server::input_t& key)
+std::ostream& operator<< (std::ostream& os, const input::input_t& key)
 {
 	switch (key)
 	{
-	case server::input_t::ATTACK:
+	case input::input_t::ATTACK:
 		os << "ATTACK";
 		break;
-	case server::input_t::BACKWARD:
+	case input::input_t::BACKWARD:
 		os << "BACKWARD";
 		break;
-	case server::input_t::FORWARD:
+	case input::input_t::FORWARD:
 		os << "FORWARD";
 		break;
-	case server::input_t::INFO:
+	case input::input_t::INFO:
 		os << "INFO";
 		break;
-	case server::input_t::LEFT:
+	case input::input_t::LEFT:
 		os << "LEFT";
 		break;
-	case server::input_t::NONE:
+	case input::input_t::NONE:
 		os << "NONE";
 		break;
-	case server::input_t::PRINT:
+	case input::input_t::PRINT:
 		os << "PRINT";
 		break;
-	case server::input_t::QUIT:
+	case input::input_t::QUIT:
 		os << "QUIT";
 		break;
-	case server::input_t::RIGHT:
+	case input::input_t::RIGHT:
 		os << "RIGHT";
 		break;
 	}
