@@ -1,8 +1,8 @@
-#include "process_keyboard.h"
+#include "keyboard.h"
 
 namespace server {
 
-	void process_keyboard::run()
+	void keyboard::run()
 	{
 		if (running_) return;
 		running_ = true;
@@ -44,7 +44,7 @@ namespace server {
 		});
 	}
 
-	bool process_keyboard::check_released_input(const input_t& key)
+	bool keyboard::check_released_input(const input_t& key)
 	{
 		std::lock_guard l(mutex_);
 		if (key_released_[key]) {
@@ -55,7 +55,7 @@ namespace server {
 		return false;
 	}
 
-	void process_keyboard::stop() {
+	void keyboard::stop() {
 		{
 			std::lock_guard l(mutex_);
 			running_ = false;

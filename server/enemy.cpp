@@ -1,17 +1,17 @@
-#include "process_enemy.h"
+#include "enemy.h"
 
 namespace server {
 
-	void process_enemy::run(
-		mud::enemy& enemy,
+	void enemy::run(
+		mud::enemy& e,
 		std::map<std::int64_t, mud::tile>& id_tiles,
 		std::map<std::int64_t, mud::character>& id_characters)
 	{
 		// Enemy is not on a valid tile.
-		if (enemy.tile_id() == 0) return;
-		mud::tile& current_tile = id_tiles[enemy.tile_id()];
+		if (e.tile_id() == 0) return;
+		mud::tile& current_tile = id_tiles[e.tile_id()];
 		// Set the enemy in place on the map (if possible).
-		current_tile.set_occupant_id(enemy.id());
+		current_tile.set_occupant_id(e.id());
 		current_tile.set_occupant_type(mud::tile::ENEMY);
 		const auto neighbour_tiles = 
 			see_around_tiles(current_tile, id_tiles);
@@ -31,22 +31,19 @@ namespace server {
 			}
 		}
 		// Face the correct direction.
-		if (direction != enemy.facing()) 
+		if (direction != e.facing()) 
 		{
-			if (get_invert_direction(enemy.facing()) == direction) 
+			if (get_invert_direction(e.facing()) == direction) 
 			{
-				*enemy.mutable_facing() = 
-					get_right_direction(enemy.facing());
+				*e.mutable_facing() = get_right_direction(e.facing());
 			}
-			else if (get_right_direction(enemy.facing()) == direction)
+			else if (get_right_direction(e.facing()) == direction)
 			{
-				*enemy.mutable_facing() = 
-					get_right_direction(enemy.facing());
+				*e.mutable_facing() = get_right_direction(e.facing());
 			}
 			else
 			{
-				*enemy.mutable_facing() =
-					get_left_direction(enemy.facing());
+				*e.mutable_facing() = get_left_direction(e.facing());
 			}
 			return;
 		}
@@ -60,14 +57,14 @@ namespace server {
 			case mud::tile::CHARACTER:
 				// Attack!
 				if (attack_character(
-					enemy,
+					e,
 					id_characters[it->second.occupant_id()]))
 				{
 					std::cout << "\a" << std::flush;
 				}
 				break;
 			case mud::tile::EMPTY:
-				move_to(enemy, around_tile.at(direction), id_tiles);
+				move_to(e, around_tile.at(direction), id_tiles);
 				break;
 			case mud::tile::ENEMY:
 				// DO NOTHING!
@@ -76,8 +73,8 @@ namespace server {
 		}
 	}
 
-	bool process_enemy::move_to(
-		mud::enemy& enemy, 
+	bool enemy::move_to(
+		mud::enemy& e, 
 		const mud::tile& tile,
 		std::map<std::int64_t, mud::tile>& id_tiles)
 	{
@@ -85,21 +82,21 @@ namespace server {
 		if (tile.occupant_type() != mud::tile::NOBODY) return false;
 		if (tile.occupant_id() != 0) return false;
 		mud::tile& to = id_tiles[tile.id()];
-		mud::tile& previous = id_tiles[enemy.tile_id()];
-		enemy.set_tile_id(to.id());
-		to.set_occupant_id(enemy.id());
+		mud::tile& previous = id_tiles[e.tile_id()];
+		e.set_tile_id(to.id());
+		to.set_occupant_id(e.id());
 		to.set_occupant_type(mud::tile::ENEMY);
 		previous.set_occupant_id(0);
 		previous.set_occupant_type(mud::tile::NOBODY);
 		return true;
 	}
 
-	bool process_enemy::attack_character(
-		const mud::enemy& enemy,
+	bool enemy::attack_character(
+		const mud::enemy& e,
 		mud::character& character)
 	{
 		float attack_strength = .0f;
-		for (const auto& attr : enemy.attributes())
+		for (const auto& attr : e.attributes())
 		{
 			if (attr.name() == mud::attribute::MELEE_POWER) 
 			{

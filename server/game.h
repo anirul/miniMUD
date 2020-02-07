@@ -9,20 +9,20 @@
 #include <execution>
 #endif
 #include "../mud_lib/helper.h"
-#include "process_keyboard.h"
-#include "process_enemy.h"
-#include "process_character.h"
+#include "keyboard.h"
+#include "enemy.h"
+#include "character.h"
 
 namespace server {
 
-	class process_game
+	class game
 	{
 	public:
 		// Decide if you want binary or json as output and input.
 		enum class binary_or_json_t { BINARY, JSON, };
 	public:
 		// Initiate the game structure.
-		process_game(
+		game(
 			const std::chrono::duration<double> total_time = 
 				std::chrono::milliseconds(100),
 			const std::string& player_file = "player.json",
@@ -32,7 +32,7 @@ namespace server {
 			const std::string& item_file = "item.json",
 			binary_or_json_t binary_or_json = binary_or_json_t::JSON);
 		// Save the structure at the end of the game.
-		virtual ~process_game();
+		virtual ~game();
 		// Does return at the end of the game!
 		void run();
 	protected:
@@ -45,8 +45,8 @@ namespace server {
 		bool execute_dead();
 		void execute_postprocess();
 	private:
-		process_enemy pe_;
-		process_keyboard pk_;
+		enemy pe_;
+		keyboard pk_;
 		const std::chrono::duration<double> total_time_;
 		const std::string player_file_;
 		const std::string character_file_;

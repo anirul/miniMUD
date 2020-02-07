@@ -24,7 +24,7 @@ namespace server {
 		PRINT = 8,
 	};
 
-	class process_keyboard
+	class keyboard
 	{
 	public:
 		const std::map<input_t, int> input_key =

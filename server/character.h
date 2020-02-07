@@ -2,14 +2,14 @@
 
 #include <array>
 #include "../mud_lib/helper.h"
-#include "process_keyboard.h"
+#include "keyboard.h"
 
 namespace server {
 
-	class process_character 
+	class character 
 	{
 	public:
-		process_character(mud::character& character) : character_(character) {}
+		character(mud::character& c) : character_(c) {}
 		bool run(
 			const input_t& entry,
 			mud::tile& present_tile,

@@ -1,8 +1,8 @@
-#include "process_character.h"
+#include "character.h"
 
 namespace server {
 
-	bool process_character::run(
+	bool character::run(
 		const input_t& entry, 
 		mud::tile& present_tile,
 		std::map<mud::direction, mud::tile>& surrounding_tiles)

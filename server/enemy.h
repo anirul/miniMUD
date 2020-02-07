@@ -5,21 +5,21 @@
 
 namespace server {
 
-	class process_enemy 
+	class enemy 
 	{
 	public:
 		void run(
-			mud::enemy& enemy,
+			mud::enemy& e,
 			std::map<std::int64_t, mud::tile>& id_tiles,
 			std::map<std::int64_t, mud::character>& id_characters);
 	protected:
 		bool move_to(
-			mud::enemy& enemy,
+			mud::enemy& e,
 			const mud::tile& tile,
 			std::map<std::int64_t, mud::tile>& id_tiles);
 		bool attack_character(
-			const mud::enemy& enemy, 
-			mud::character& character);
+			const mud::enemy& e, 
+			mud::character& c);
 	};
 
 } // End namespace server.

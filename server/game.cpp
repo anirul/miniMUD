@@ -1,8 +1,8 @@
-#include "process_game.h"
+#include "game.h"
 
 namespace server {
 
-	process_game::process_game(
+	game::game(
 		const std::chrono::duration<double> total_time,
 		const std::string& player_file,
 		const std::string& character_file,
@@ -71,7 +71,7 @@ namespace server {
 		}
 	}
 
-	process_game::~process_game()
+	game::~game()
 	{
 		auto save = [this](const std::string& file, const auto& book)
 		{
@@ -132,7 +132,7 @@ namespace server {
 		}
 	}
 
-	void process_game::run()
+	void game::run()
 	{
 		bool running = true;
 		std::int64_t current_tile_id = 0;
@@ -175,7 +175,7 @@ namespace server {
 		pk_.stop();
 	}
 
-	void process_game::select_character()
+	void game::select_character()
 	{
 		std::int64_t free_id = 1;
 		for (const auto& field : id_characters_) 
@@ -213,7 +213,7 @@ namespace server {
 		}
 	}
 
-	bool process_game::has_actif_character()
+	bool game::has_actif_character()
 	{
 		for (auto& id_character : id_characters_)
 		{
@@ -225,7 +225,7 @@ namespace server {
 		return false;
 	}
 
-	input_t process_game::execute_keyboard()
+	input_t game::execute_keyboard()
 	{
 		input_t entry = input_t::NONE;
 		// Get keyboard entries.
@@ -239,7 +239,7 @@ namespace server {
 		return entry;
 	}
 
-	void process_game::exit_game()
+	void game::exit_game()
 	{
 		// Reset all character to nothing before shutdown.
 		for (auto& field : id_characters_)
@@ -257,14 +257,14 @@ namespace server {
 		}
 	}
 
-	bool process_game::execute_characters(const input_t& entry)
+	bool game::execute_characters(const input_t& entry)
 	{
 		bool running = true;
 		for (auto& id_character : id_characters_)
 		{
 			if (id_character.second.state() != mud::character::NONE)
 			{
-				process_character pc(id_character.second);
+				character pc(id_character.second);
 				mud::tile& current_tile = 
 					id_tiles_[id_character.second.tile_id()];
 				// Set the character in the gaming field.
@@ -296,7 +296,7 @@ namespace server {
 		return running;
 	}
 
-	void process_game::execute_enemies()
+	void game::execute_enemies()
 	{
 		for (auto& id_enemy : id_enemies_)
 		{
@@ -304,7 +304,7 @@ namespace server {
 		}
 	}
 
-	bool process_game::execute_dead()
+	bool game::execute_dead()
 	{
 		for (auto& character : id_characters_)
 		{
@@ -322,7 +322,7 @@ namespace server {
 		return false;
 	}
 
-	void process_game::execute_postprocess()
+	void game::execute_postprocess()
 	{
 		std::mutex mutex_;
 		std::vector<std::int64_t> deleted_id;
