@@ -1,5 +1,7 @@
 #include "session.h"
 
+#include "../mud_lib/hash.h"
+
 namespace server {
 
 	grpc::Status session::GetToken(
@@ -37,6 +39,7 @@ namespace server {
 		{
 			token_presence_.erase(token);
 			token_ids_.erase(token);
+			id_connection_status_.erase(token);
 			response->set_status(mud::login_out::TOO_OLD_TOKEN);
 			return grpc::Status::OK;
 		}
@@ -51,9 +54,27 @@ namespace server {
 		if (it_name == name_ids_.end())
 		{
 			response->set_status(mud::login_out::FAILURE);
+			id_connection_status_.insert({ token, connection_status::NONE });
 			return grpc::Status::OK;
 		}
-		// TODO(dubouchet): now we should check the password.
+		auto it_player = id_players_.find(it_name->second);
+		if (it_player == id_players_.end())
+		{
+			response->set_status(mud::login_out::FAILURE);
+			id_connection_status_.insert({ token, connection_status::NONE });
+			return grpc::Status::OK;
+		}
+		// Now we should check the password.
+		crypto::hash hash
+		{ it_player->second.password_hash() + ":" + std::to_string(token) };
+		if (request->password_hash() != hash.get_string())
+		{
+			response->set_status(mud::login_out::FAILURE);
+			id_connection_status_.insert({ token, connection_status::NONE });
+			return grpc::Status::OK;
+		}
+		response->set_status(mud::login_out::SUCCESS);
+		id_connection_status_.insert({ token, connection_status::CONNECTED });
 		return grpc::Status::OK;
 	}
 

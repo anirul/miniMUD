@@ -12,18 +12,37 @@ find_package(protobuf CONFIG REQUIRED)
 find_package(gRPC CONFIG REQUIRED)
 find_package(cryptopp CONFIG REQUIRED)
 
+enable_testing()
+find_package(Gtest CONFIG REQUIRED)
+
+add_library(proto
+	${CMAKE_CURRENT_SOURCE_DIR}/proto/mud_lib.pb.cc
+	${CMAKE_CURRENT_SOURCE_DIR}/proto/mud_lib.pb.h
+	${CMAKE_CURRENT_SOURCE_DIR}/proto/mud_lib.grpc.pb.cc
+	${CMAKE_CURRENT_SOURCE_DIR}/proto/mud_lib.grpc.pb.h
+)
+
+target_link_libraries(proto
+  PRIVATE
+	protobuf::libprotobuf
+	gRPC::gpr
+	gRPC::grpc
+	gRPC::grpc++
+	cryptopp-static
+)
+
 add_library(mud_lib
-	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/mud_lib.pb.cc
-	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/mud_lib.pb.h
-	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/mud_lib.grpc.pb.cc
-	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/mud_lib.grpc.pb.h
-	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/keyboard.h
 	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/keyboard.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/helper.cc
+	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/keyboard.h
+	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/helper.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/helper.h
+	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/hash.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib/hash.h
 )
 
 target_link_libraries(mud_lib
+  PUBLIC
+	proto
   PRIVATE
 	protobuf::libprotobuf
 	gRPC::gpr
@@ -46,6 +65,7 @@ add_executable(server
 
 target_link_libraries(server
   PUBLIC
+	proto
 	mud_lib
   PRIVATE 
 	protobuf::libprotobuf
@@ -63,6 +83,7 @@ add_executable(client
 
 target_link_libraries(client
   PUBLIC
+	proto
 	mud_lib
   PRIVATE 
 	protobuf::libprotobuf
