@@ -36,15 +36,8 @@ namespace server {
 		// Does return at the end of the game!
 		void run();
 	public:
-		std::map<int64_t, mud::player> get_id_players() const 
-		{
-			return id_players_;
-		}
-		void set_id_players(
-			const std::map<std::int64_t, mud::player>& id_players)
-		{
-			id_players_ = id_players;
-		}
+		mud::player get_player(const std::string& name);
+		mud::character get_character(const std::int64_t id);
 	protected:
 		void select_character();
 		bool has_actif_character();
@@ -64,6 +57,7 @@ namespace server {
 		const std::string tile_file_;
 		const std::string item_file_;
 		const binary_or_json_t binary_or_json_;
+		std::map<std::string, std::int64_t> name_player_ids_;
 		std::map<std::int64_t, mud::player> id_players_;
 		std::map<std::int64_t, mud::character> id_characters_;
 		std::map<std::int64_t, mud::enemy> id_enemies_;

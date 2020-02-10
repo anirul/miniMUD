@@ -235,7 +235,9 @@ mud::direction get_right_direction(const mud::direction& dir)
 	return out;
 }
 
-std::ostream& operator<< (std::ostream& os, const std::vector<mud::direction>& stack)
+std::ostream& operator<< (
+	std::ostream& os, 
+	const std::vector<mud::direction>& stack)
 {
 	for (const auto& field : stack)
 	{
@@ -408,9 +410,7 @@ static void see_around_tile_recurse(
 		stack.push_back(field.first);
 		if (is_tile_empty_or_character(field.second) && check_stack(stack))
 		{
-			initial_set.push_back({ 
-				stack.front(), 
-				field.second });
+			initial_set.push_back({ stack.front(), field.second });
 			see_around_tile_recurse(
 				field.second, 
 				id_tiles, 

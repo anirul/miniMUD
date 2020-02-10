@@ -6,13 +6,13 @@
 #include <grpcpp/server_builder.h>
 #include <grpcpp/security/credentials.h>
 
-int main(int ac, char** av) 
+int main(int ac, char** av)
 {
 	std::cout << "starting server..." << std::endl;
-	server::game pg{};
+	auto pg = std::make_shared<server::game>();
 	// pg.run();
 	std::string server_address("0.0.0.0:4242");
-	server::session session{pg.get_id_players()};
+	server::session session{pg};
 	grpc::ServerBuilder builder{};
 	builder.AddListeningPort(
 		server_address, 

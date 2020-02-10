@@ -35,6 +35,7 @@ namespace server {
 			for (const mud::player& player : book.players()) 
 			{
 				id_players_.insert({ player.id(), player });
+				name_player_ids_.insert({ player.name(), player.id() });
 			}
 		}
 		{
@@ -173,6 +174,21 @@ namespace server {
 			execute_postprocess();
 		}
 		pk_.stop();
+	}
+
+	mud::player game::get_player(const std::string& name)
+	{
+		auto it = name_player_ids_.find(name);
+		if (it == name_player_ids_.end())
+		{
+			return {};
+		}
+		return id_players_[it->second];
+	}
+
+	mud::character game::get_character(const std::int64_t id)
+	{
+		return id_characters_[id];
 	}
 
 	void game::select_character()

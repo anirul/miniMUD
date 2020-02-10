@@ -14,8 +14,11 @@ namespace server {
 		{
 			token = GenerateNewToken();
 		} 
-		while (token_presence_.find(token) != token_presence_.end());
-		token_presence_.insert({ token, std::chrono::system_clock::now() });
+		while (token_states_.find(token) != token_states_.end());
+		state state_present{};
+		state_present.time_ = std::chrono::system_clock::now();
+		state_present.status_ = state::status::TOKEN;
+		token_states_.insert({ token,  state_present });
 		response->set_token(token);
 		return grpc::Status::OK;
 	}
@@ -28,53 +31,46 @@ namespace server {
 		std::int64_t token = request->token();
 		auto now = std::chrono::system_clock::now();
 		// No one with this token is alive.
-		auto it_presence = token_presence_.find(token);
-		if (it_presence == token_presence_.end())
+		auto& it = token_states_.find(token);
+		if (it == token_states_.end())
 		{
 			response->set_status(mud::login_out::UNKNOWN_TOKEN);
 			return grpc::Status::OK;
 		}
 		// This token is old.
-		if (it_presence->second + timeout_ < now)
+		if (it->second.time_ + timeout_ < now)
 		{
-			token_presence_.erase(token);
-			token_ids_.erase(token);
-			id_connection_status_.erase(token);
+			token_states_.erase(token);
 			response->set_status(mud::login_out::TOO_OLD_TOKEN);
 			return grpc::Status::OK;
 		}
-		if (token_ids_.find(token) != token_ids_.end())
+		if (it->second.status_ != state::status::TOKEN)
 		{
 			response->set_status(mud::login_out::ALREADY_CONNECTED);
 			return grpc::Status::OK;
 		}
 		// Update the presence counter.
-		token_presence_[token] = std::chrono::system_clock::now();
-		auto it_name = name_ids_.find(request->name());
-		if (it_name == name_ids_.end())
+		token_states_[token].time_ = std::chrono::system_clock::now();
+		auto player = game_->get_player(request->name());
+		if (player.name().empty())
 		{
 			response->set_status(mud::login_out::FAILURE);
-			id_connection_status_.insert({ token, connection_status::NONE });
-			return grpc::Status::OK;
-		}
-		auto it_player = id_players_.find(it_name->second);
-		if (it_player == id_players_.end())
-		{
-			response->set_status(mud::login_out::FAILURE);
-			id_connection_status_.insert({ token, connection_status::NONE });
 			return grpc::Status::OK;
 		}
 		// Now we should check the password.
-		crypto::hash hash
-		{ it_player->second.password_hash() + ":" + std::to_string(token) };
+		crypto::hash hash{ 
+			player.password_hash() + ":" + std::to_string(token) };
 		if (request->password_hash() != hash.get_string())
 		{
 			response->set_status(mud::login_out::FAILURE);
-			id_connection_status_.insert({ token, connection_status::NONE });
 			return grpc::Status::OK;
 		}
 		response->set_status(mud::login_out::SUCCESS);
-		id_connection_status_.insert({ token, connection_status::CONNECTED });
+		it->second.status_ = state::status::LOGIN;
+		for (auto field : player.id_characters())
+		{
+			std::cout << game_->get_character(field) << std::endl;
+		}
 		return grpc::Status::OK;
 	}
 
@@ -87,15 +83,9 @@ namespace server {
 	}
 
 	session::session(
-		const std::map<std::int64_t, mud::player>& id_players, 
+		const std::shared_ptr<game> g,
 		const std::chrono::duration<double> timeout) :	
-		id_players_(id_players.begin(), id_players.end()),
-		timeout_(timeout) 
-	{
-		for (const auto& player : id_players_)
-		{
-			name_ids_.insert({ player.second.name(), player.first });
-		}
-	}
+		game_(g),
+		timeout_(timeout) {}
 
 } // End namespace server.

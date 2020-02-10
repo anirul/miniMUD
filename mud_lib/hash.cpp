@@ -3,22 +3,22 @@
 #include <ios>
 #include <iosfwd>
 #include <algorithm>
+#ifndef __APPLE__
+#include <execution>
+#endif
 
 namespace crypto {
 
-	hash::hash(const std::string& value) :
+	hash::hash(const std::string& in) :
 		value_{ 0, 0, 0, 0 }
 	{
 		CryptoPP::SHA3_256 sha3{};
 		sha3.Update(
-			reinterpret_cast<const CryptoPP::byte*>(
-				&*value.begin()),
-				std::distance(value.begin(), value.end()) * 
-					sizeof(std::string::value_type));
+			reinterpret_cast<const CryptoPP::byte*>(in.data()),
+			in.size() * sizeof(char));
 		sha3.TruncatedFinal(
-			reinterpret_cast<CryptoPP::byte*>(
-				value_.data()),
-				value_.size() * sizeof(std::int64_t));
+			reinterpret_cast<CryptoPP::byte*>(value_.data()),
+			value_.size() * sizeof(std::int64_t));
 	}
 
 	std::string hash::get_string() const
@@ -49,19 +49,45 @@ namespace crypto {
 
 bool operator<(const crypto::hash& lh, const crypto::hash& rh)
 {
-	auto lv = lh.get_value();
-	auto rv = rh.get_value();
+	const auto& lv = lh.get_value();
+	const auto& rv = rh.get_value();
+	// Default lexicographical compare use <.
 	return std::lexicographical_compare(
+#ifndef __APPLE__
+		std::execution::par,
+#endif
 		lv.begin(), lv.end(), 
 		rv.begin(), rv.end());
 }
 
 bool operator==(const crypto::hash& lh, const crypto::hash& rh)
 {
-	return !(lh < rh || rh < lh);
+	const auto& lv = lh.get_value();
+	const auto& rv = rh.get_value();
+	return std::lexicographical_compare(
+#ifndef __APPLE__
+		std::execution::par,
+#endif
+		lv.begin(), lv.end(),
+		rv.begin(), rv.end(), 
+		[](const std::int64_t r, const std::int64_t l) 
+	{
+		return r == l;
+	});
 }
 
 bool operator!=(const crypto::hash& lh, const crypto::hash& rh)
 {
-	return lh < rh || rh < lh;
+	const auto& lv = lh.get_value();
+	const auto& rv = rh.get_value();
+	return std::lexicographical_compare(
+#ifndef __APPLE__
+		std::execution::par,
+#endif
+		lv.begin(), lv.end(),
+		rv.begin(), rv.end(),
+		[](const std::int64_t r, const std::int64_t l)
+	{
+		return r != l;
+	});
 }
