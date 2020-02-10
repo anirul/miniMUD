@@ -246,14 +246,14 @@ std::ostream& operator<< (std::ostream& os, const std::vector<mud::direction>& s
 
 mud::direction get_random_direction() {
 	mud::direction out{};
-	static std::random_device rd;
+	static std::random_device rd{};
 	static std::mt19937 gen(rd());
 	static std::vector<mud::direction::direction_enum> directions = {
 		mud::direction::NORTH, 
 		mud::direction::SOUTH, 
 		mud::direction::WEST, 
 		mud::direction::EAST };
-	std::uniform_int_distribution<size_t> dis(0, directions.size() - 1);
+	static std::uniform_int_distribution<size_t> dis(0, directions.size() - 1);
 	out.set_value(directions[dis(gen)]);
 	return out;
 }

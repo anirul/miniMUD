@@ -16,3 +16,9 @@ namespace crypto {
 	};
 
 } // End namespace crypto.
+
+// Lesser than operator.
+bool operator<(const crypto::hash& lh, const crypto::hash& rh);
+// Derived from lesser than.
+bool operator==(const crypto::hash& lh, const crypto::hash& rh);
+bool operator!=(const crypto::hash& lh, const crypto::hash& rh);

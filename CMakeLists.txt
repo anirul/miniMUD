@@ -51,6 +51,32 @@ target_link_libraries(mud_lib
 	cryptopp-static
 )
 
+add_executable(mud_lib_test
+	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib_test/helper_test.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib_test/helper_test.h
+	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib_test/hash_test.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib_test/hash_test.h
+	${CMAKE_CURRENT_SOURCE_DIR}/mud_lib_test/main.cpp
+)
+
+target_link_libraries(mud_lib_test
+  PUBLIC
+	mud_lib
+	proto
+  PRIVATE
+	GTest::gtest
+	GTest::gtest_main
+	GTest::gmock
+	GTest::gmock_main
+	protobuf::libprotobuf
+	gRPC::gpr
+	gRPC::grpc
+	gRPC::grpc++
+	cryptopp-static
+)
+
+add_test(NAME mud_lib_test COMMAND mud_lib_test)
+
 add_executable(server
 	${CMAKE_CURRENT_SOURCE_DIR}/server/main.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/server/game.h
