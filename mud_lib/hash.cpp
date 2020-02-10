@@ -40,54 +40,40 @@ namespace crypto {
 		return ss.str();
 	}
 
-	std::array<std::int64_t, 4> hash::get_value() const
+	const std::array<std::int64_t, 4>& hash::get_value() const
 	{
 		return value_;
+	}
+
+	std::array<std::int64_t, 4>::const_iterator hash::begin() const
+	{
+		return value_.begin();
+	}
+
+	std::array<std::int64_t, 4>::const_iterator hash::end() const
+	{
+		return value_.end();
 	}
 
 } // End namespace crypto.
 
 bool operator<(const crypto::hash& lh, const crypto::hash& rh)
 {
-	const auto& lv = lh.get_value();
-	const auto& rv = rh.get_value();
 	// Default lexicographical compare use <.
 	return std::lexicographical_compare(
 #ifndef __APPLE__
 		std::execution::par,
 #endif
-		lv.begin(), lv.end(), 
-		rv.begin(), rv.end());
+		lh.begin(), lh.end(),
+		rh.begin(), rh.end());
 }
 
 bool operator==(const crypto::hash& lh, const crypto::hash& rh)
 {
-	const auto& lv = lh.get_value();
-	const auto& rv = rh.get_value();
-	return std::lexicographical_compare(
-#ifndef __APPLE__
-		std::execution::par,
-#endif
-		lv.begin(), lv.end(),
-		rv.begin(), rv.end(), 
-		[](const std::int64_t r, const std::int64_t l) 
-	{
-		return r == l;
-	});
+	return !(lh < rh || rh < lh);
 }
 
 bool operator!=(const crypto::hash& lh, const crypto::hash& rh)
 {
-	const auto& lv = lh.get_value();
-	const auto& rv = rh.get_value();
-	return std::lexicographical_compare(
-#ifndef __APPLE__
-		std::execution::par,
-#endif
-		lv.begin(), lv.end(),
-		rv.begin(), rv.end(),
-		[](const std::int64_t r, const std::int64_t l)
-	{
-		return r != l;
-	});
+	return lh < rh || rh < lh;
 }

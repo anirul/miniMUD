@@ -44,6 +44,7 @@ namespace server {
 			response->set_status(mud::login_out::TOO_OLD_TOKEN);
 			return grpc::Status::OK;
 		}
+		// Should never happen.
 		if (it->second.status_ != state::status::TOKEN)
 		{
 			response->set_status(mud::login_out::ALREADY_CONNECTED);
@@ -65,11 +66,20 @@ namespace server {
 			response->set_status(mud::login_out::FAILURE);
 			return grpc::Status::OK;
 		}
+		// Check if already log in.
+		const auto& it_player = player_id_tokens_.find(player.id());
+		if (it_player != player_id_tokens_.end() && 
+			it->second.time_ + timeout_ > now)
+		{
+			response->set_status(mud::login_out::FAILURE);
+			return grpc::Status::OK;
+		}
+		player_id_tokens_[player.id()] = token;
 		response->set_status(mud::login_out::SUCCESS);
 		it->second.status_ = state::status::LOGIN;
 		for (auto field : player.id_characters())
 		{
-			std::cout << game_->get_character(field) << std::endl;
+			*response->add_characters() = game_->get_character(field);
 		}
 		return grpc::Status::OK;
 	}

@@ -5,12 +5,14 @@
 
 namespace crypto {
 
-	class hash 
+	class hash
 	{
 	public:
 		hash(const std::string& str);
 		std::string get_string() const;
-		std::array<std::int64_t, 4> get_value() const;
+		const std::array<std::int64_t, 4>& get_value() const;
+		std::array<std::int64_t, 4>::const_iterator begin() const;
+		std::array<std::int64_t, 4>::const_iterator end() const;
 	private:
 		std::array<std::int64_t, 4> value_;
 	};

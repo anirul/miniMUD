@@ -3,6 +3,7 @@
 #include <mutex>
 #include <thread>
 #include <random>
+#include <unordered_map>
 #include "../mud_lib/helper.h"
 #include "game.h"
 
@@ -43,6 +44,7 @@ namespace server {
 	private:
 		const std::shared_ptr<game> game_;
 		std::unordered_map<std::int64_t, state> token_states_;
+		std::unordered_map<std::int64_t, std::int64_t> player_id_tokens_;
 		const std::chrono::duration<double> timeout_;
 	};
 

@@ -146,6 +146,12 @@ std::ostream& operator<< (
 {
 	switch (name)
 	{
+	case mud::attribute::MELEE_POWER:
+		os << "MELEE_POWER";
+		break;
+	case mud::attribute::RANGE_POWER:
+		os << "RANGE_POWER";
+		break;
 	case mud::attribute::LIFE:
 		os << "LIFE";
 		break;
@@ -312,7 +318,7 @@ static bool check_in_out(const std::vector<mud::direction>& v)
 			v.begin(), 
 			v.end(), 
 			[](const mud::direction& d) { return d == direction::south; });
-		if (it1 != v.end() &&	it2 != v.end()) return true;
+		if (it1 != v.end() && it2 != v.end()) return true;
 	}
 	{
 		auto it1 = std::find_if(
@@ -323,7 +329,7 @@ static bool check_in_out(const std::vector<mud::direction>& v)
 			v.begin(), 
 			v.end(), 
 			[](const mud::direction& d) { return d == direction::east; });
-		if (it1 != v.end() &&	it2 != v.end()) return true;
+		if (it1 != v.end() && it2 != v.end()) return true;
 	}
 	return false;
 }
