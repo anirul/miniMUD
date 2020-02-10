@@ -75,5 +75,5 @@ bool operator==(const crypto::hash& lh, const crypto::hash& rh)
 
 bool operator!=(const crypto::hash& lh, const crypto::hash& rh)
 {
-	return lh < rh || rh < lh;
+	return !(lh == rh);
 }
