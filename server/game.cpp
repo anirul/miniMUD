@@ -1,16 +1,16 @@
 #include "game.h"
+#include "character.h"
+#include "enemy.h"
 
 namespace server {
 
 	game::game(
-		const std::chrono::duration<double> total_time,
 		const std::string& player_file,
 		const std::string& character_file,
 		const std::string& enemy_file,
 		const std::string& tile_file,
 		const std::string& item_file,
 		binary_or_json_t binary_or_json) :
-		total_time_(total_time),
 		player_file_(player_file),
 		character_file_(character_file),
 		enemy_file_(enemy_file),
@@ -74,6 +74,7 @@ namespace server {
 
 	game::~game()
 	{
+		exit_game();
 		auto save = [this](const std::string& file, const auto& book)
 		{
 			if (binary_or_json_ == binary_or_json_t::BINARY)
@@ -133,126 +134,253 @@ namespace server {
 		}
 	}
 
-	void game::run()
+	void game::run_once()
 	{
-		bool running = true;
-		std::int64_t current_tile_id = 0;
-		// This is a hack to select a character.
-		if (!has_actif_character()) select_character();
-		pk_.run();
-		while (running) 
-		{
-			auto start_time = std::chrono::high_resolution_clock::now();
-			// Check keyboard.
-			input::input_t entry = execute_keyboard();
-			// Special case of quit.
-			if (entry == input::input_t::QUIT)
-			{
-				exit_game();
-				running = false;
-				continue;
-			}
-			// Set character moves
-			running = execute_characters(entry);
-			// Set the enemy moves.
-			execute_enemies();
-			auto end_time = std::chrono::high_resolution_clock::now();
-			std::chrono::duration<double> duration = end_time - start_time;
-			if (total_time_ > duration)
-			{
-				std::this_thread::sleep_for(total_time_ - duration);
-			}
-			else
-			{
-				std::cerr << "too long..." << std::endl;
-			}
-			// CHECKME change this when multi players.
-			if (execute_dead()) {
-				std::cout << "you died!" << std::endl;
-				return;
-			}
-			execute_postprocess();
-		}
-		pk_.stop();
+		// Set character moves
+		execute_characters();
+		// Set the enemy moves.
+		execute_enemies();
+		// Remove the dead.
+		execute_dead();
+		// Cleanup.
+		execute_postprocess();
+		iteration_++;
 	}
 
-	mud::player game::get_player(const std::string& name)
+	std::int64_t game::iteration()
+	{
+		return iteration_;
+	}
+
+	const mud::player& game::get_player(const std::string& name) const
 	{
 		auto it = name_player_ids_.find(name);
 		if (it == name_player_ids_.end())
 		{
-			return {};
+			throw std::runtime_error("no player with name :" + name);
 		}
-		return id_players_[it->second];
+		return id_players_.at(it->second);
 	}
 
-	mud::character game::get_character(const std::int64_t id)
+	const mud::player& game::get_player(std::int64_t id) const
 	{
-		return id_characters_[id];
+		return id_players_.at(id);
 	}
 
-	void game::select_character()
+	const bool game::has_player(std::int64_t id) const
 	{
-		std::int64_t free_id = 1;
-		for (const auto& field : id_characters_) 
+		if (id == 0) return false;
+		const auto& it = id_players_.find(id);
+		if (it == id_players_.end())
 		{
-			if (field.second.id() == free_id) free_id++;
-			std::cout << field.second;
+			return false;
 		}
-		std::cout 
-			<< "enter the name of the character you wanna play" 
-			<< std::endl;
-		std::cout << " > ";
-		std::string name;
-		std::cin >> name;
-		if (name.find("new") != std::string::npos) 
-		{
-			mud::character character{};
-			std::string character_name;
-			std::cout << "enter the name of the new character" << std::endl;
-			std::cout << " > ";
-			std::cin >> character_name;
-			character.set_name(character_name);
-			character.set_id(free_id);
-			character.set_tile_id(1);
-			id_characters_.insert({ free_id, character });
-		}
-		else
-		{
-			for (auto& field : id_characters_)
-			{
-				if (field.second.name() == name) 
-				{
-					field.second.set_state(mud::character::WALKING);
-				}
-			}
-		}
+		return true;
 	}
 
-	bool game::has_actif_character()
+	const mud::tile& game::get_tile(std::int64_t id) const
 	{
-		for (auto& id_character : id_characters_)
+		return id_tiles_.at(id);
+	}
+
+	mud::tile& game::get_tile(std::int64_t id)
+	{
+		return id_tiles_[id];
+	}
+
+	const bool game::has_tile(std::int64_t id) const
+	{
+		if (id == 0) return false;
+		const auto& it = id_tiles_.find(id);
+		if (it == id_tiles_.end()) 
 		{
-			if (id_character.second.state() != mud::character::NONE)
-			{
-				return true;
-			}
+			return false;
+		}
+		return true;
+	}
+
+	const bool game::has_player_character(
+		const std::int64_t id_player, 
+		const std::int64_t id_character) const
+	{
+		if (id_player == 0) return false;
+		if (id_character == 0) return false;
+		const auto player = id_players_.at(id_player);
+		for (const auto id : player.id_characters())
+		{
+			if (id == id_character) return true;
 		}
 		return false;
 	}
 
-	input::input_t game::execute_keyboard()
+	const mud::character& game::get_character(const std::int64_t id) const
 	{
-		input::input_t entry = input::input_t::NONE;
-		// Get keyboard entries.
-		for (const auto& field : pk_.input_key)
+		return id_characters_.at(id);
+	}
+
+	mud::character& game::get_character(std::int64_t id)
+	{
+		return id_characters_[id];
+	}
+
+	const std::unordered_map<std::int64_t, mud::character>&
+		game::get_characters() const
+	{
+		return id_characters_;
+	}
+
+	const std::unordered_map<std::int64_t, mud::enemy>& 
+		game::get_enemies() const
+	{
+		return id_enemies_;
+	}
+
+	const std::unordered_map<std::int64_t, mud::item>& game::get_items() const
+	{
+		return id_items_;
+	}
+
+	const std::unordered_map<std::int64_t, mud::tile>& game::get_tiles() const
+	{
+		return id_tiles_;
+	}
+
+	const std::unordered_map<std::int64_t, mud::player>& 
+		game::get_players() const
+	{
+		return id_players_;
+	}
+
+	void game::activate_character(std::int64_t id)
+	{
+		auto it = id_characters_.find(id);
+		if (it != id_characters_.end())
 		{
-			if (pk_.check_released_input(field.first))
+			it->second.set_state(mud::character::WALKING);
+		}
+	}
+
+	void game::deactivate_character(std::int64_t id)
+	{
+		auto it = id_characters_.find(id);
+		if (it != id_characters_.end())
+		{
+			it->second.set_state(mud::character::NONE);
+		}
+	}
+
+	std::int64_t game::create_new_character(
+		const std::string& name, 
+		std::int64_t id_player)
+	{
+		static std::int64_t new_id = 1;
+		while (id_characters_.find(new_id) == id_characters_.end())
+		{
+			new_id++;
+		}
+		auto new_character = id_characters_[0];
+		new_character.set_name(name);
+		new_character.set_id(new_id);
+		id_characters_[new_id] = new_character;
+		id_players_[id_player].add_id_characters(new_id);
+		return new_id;
+	}
+
+	void game::add_command(std::int64_t id, mud::play_in::command_enum value)
+	{
+		id_character_command_in_map_.insert({ id, value });
+	}
+
+	mud::play_out game::get_play_out(std::int64_t id)
+	{
+		mud::play_out out{};
+		std::pair<std::int64_t, mud::play_out::status_enum> value;
+		// Get the value of return for this player.
+		{
+			const auto it = id_character_command_out_map_.find(id);
+			if (it == id_character_command_out_map_.end())
 			{
-				return field.first;
+				value.first = id;
+				value.second = mud::play_out::SUCCESS;
+			}
+			else
+			{
+				value = *it;
+				id_character_command_out_map_.erase(it);
 			}
 		}
-		return entry;
+		const auto& it_id_me = id_characters_.find(value.first);
+		if (it_id_me == id_characters_.end()) return {};
+		const auto& see_tiles = see_around_tiles(
+			it_id_me->second.tile_id(), 
+			get_tiles());
+		std::set<std::int64_t> character_set = { value.first };
+		std::set<std::int64_t> enemy_set = {};
+		std::set<std::int64_t> tile_set = { it_id_me->second.tile_id() };
+		std::set<std::int64_t> item_set = {};
+		out.set_id_character(value.first);
+		out.set_status(value.second);
+		for (const auto& field : see_tiles)
+		{
+			if (field.first == 0) continue;
+			const auto it = id_tiles_.find(field.first);
+			if (it == id_tiles_.end()) continue;
+			if (it->second.id() == 0) continue;
+			tile_set.insert(field.first);
+			if (it->second.occupant_type() == mud::tile::CHARACTER)
+			{
+				const auto it_character =
+					id_characters_.find(it->second.occupant_id());
+				if (it_character == id_characters_.end()) continue;
+				if (it_character->first != 0) {
+					character_set.insert(it->second.occupant_id());
+					for (const auto& id_item :
+						it_character->second.equiped_item_ids())
+					{
+						item_set.insert(id_item);
+					}
+					for (const auto& id_item :
+						it_character->second.stored_item_ids())
+					{
+						item_set.insert(id_item);
+					}
+				}
+			}
+			if (it->second.occupant_type() == mud::tile::ENEMY)
+			{
+				const auto it_enemy =
+					id_enemies_.find(it->second.occupant_id());
+				if (it_enemy == id_enemies_.end()) continue;
+				if (it_enemy->first != 0)
+				{
+					enemy_set.insert(it->second.occupant_id());
+					*out.add_enemies() = it_enemy->second;
+					for (const auto& id_item :
+						it_enemy->second.droppable_item_ids())
+					{
+						item_set.insert(id_item);
+					}
+				}
+			}
+		}
+		for (const auto id : character_set)
+		{
+			*out.add_characters() = id_characters_[id];
+		}
+		for (const auto id : tile_set)
+		{
+			*out.add_tiles() = id_tiles_[id];
+		}
+		for (const auto id : enemy_set)
+		{
+			*out.add_enemies() = id_enemies_[id];
+		}
+		for (const auto id : item_set)
+		{
+			*out.add_items() = id_items_[id];
+		}
+		out.set_status(mud::play_out::SUCCESS);
+		return out;
 	}
 
 	void game::exit_game()
@@ -273,54 +401,22 @@ namespace server {
 		}
 	}
 
-	bool game::execute_characters(const input::input_t& entry)
+	void game::execute_characters()
 	{
-		bool running = true;
-		for (auto& id_character : id_characters_)
-		{
-			if (id_character.second.state() != mud::character::NONE)
-			{
-				character pc(id_character.second);
-				mud::tile& current_tile = 
-					id_tiles_[id_character.second.tile_id()];
-				// Set the character in the gaming field.
-				// CHECKME this is potentially dangerous in multi player.
-				if (current_tile.occupant_type() == mud::tile::NOBODY ||
-					current_tile.occupant_id() == 0)
-				{
-					current_tile.set_occupant_type(mud::tile::CHARACTER);
-					current_tile.set_occupant_id(id_character.first);
-				}
-				running = pc.run(
-					entry,
-					current_tile,
-					around_tiles(current_tile, id_tiles_));
-				// Check if character moved update if it did.
-				if (current_tile.id() != id_character.second.tile_id())
-				{
-					current_tile.set_occupant_type(mud::tile::NOBODY);
-					current_tile.set_occupant_id(0);
-					mud::tile& new_tile =
-						id_tiles_[id_character.second.tile_id()];
-					new_tile.set_occupant_type(mud::tile::CHARACTER);
-					new_tile.set_occupant_id(id_character.second.id());
-					current_tile = new_tile;
-				}
-				id_tiles_.insert({ current_tile.id(), current_tile });
-			}
-		}
-		return running;
+		character pc{ *this };
+		id_character_command_out_map_ = pc.run(
+			id_character_command_in_map_,
+			id_characters_);
+		id_character_command_in_map_.clear();
 	}
 
 	void game::execute_enemies()
 	{
-		for (auto& id_enemy : id_enemies_)
-		{
-			pe_.run(id_enemy.second, id_tiles_, id_characters_);
-		}
+		enemy pe{ *this };
+		pe.run(id_enemies_);
 	}
 
-	bool game::execute_dead()
+	void game::execute_dead()
 	{
 		for (auto& character : id_characters_)
 		{
@@ -330,17 +426,18 @@ namespace server {
 				{
 					if (attr.score() <= 0)
 					{
-						return true;
+						id_character_command_out_map_[character.first] =
+							mud::play_out::DEAD;
+						break;
 					}
 				}
 			}
 		}
-		return false;
 	}
 
 	void game::execute_postprocess()
 	{
-		std::mutex mutex_;
+		std::mutex local_mutex_;
 		std::vector<std::int64_t> deleted_id;
 		std::for_each(
 #ifndef __APPLE__
@@ -348,7 +445,8 @@ namespace server {
 #endif
 			id_enemies_.begin(),
 			id_enemies_.end(),
-			[&mutex_, &deleted_id](const std::pair<std::int64_t, mud::enemy>& p)
+			[&local_mutex_, &deleted_id](
+				const std::pair<std::int64_t, mud::enemy>& p)
 		{
 			for (auto& attr : p.second.attributes())
 			{
@@ -356,7 +454,7 @@ namespace server {
 				{
 					if (attr.score() <= 0)
 					{
-						std::lock_guard l(mutex_);
+						std::scoped_lock(local_mutex_);
 						deleted_id.push_back(p.first);
 					}
 				}
@@ -376,13 +474,14 @@ namespace server {
 #endif
 			id_characters_.begin(),
 			id_characters_.end(),
-			[&mutex_, this](const std::pair<std::int64_t, mud::character>& p)
+			[&local_mutex_, this](
+				const std::pair<std::int64_t, mud::character>& p)
 		{
 			for (auto& attr : *id_characters_[p.first].mutable_attributes())
 			{
 				if (attr.regen() != 0 && attr.score() != attr.score_max())
 				{
-					std::lock_guard l(mutex_);
+					std::scoped_lock(local_mutex_);
 					attr.set_score(attr.score() + attr.regen());
 				}
 			}

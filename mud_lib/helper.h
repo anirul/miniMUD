@@ -10,7 +10,8 @@
 #pragma warning(disable: 4996)
 #endif
 #include "../proto/mud_lib.pb.h"
-#include "../proto/mud_lib.grpc.pb.h"
+#include "../proto/mud_grpc.pb.h"
+#include "../proto/mud_grpc.grpc.pb.h"
 #include <google/protobuf/util/json_util.h>
 #if defined(_WIN32) || defined(_WIN64)
 #pragma warning(pop)
@@ -145,7 +146,11 @@ bool operator!=(const mud::direction& l, const mud::direction& r);
 std::ostream& operator<< (std::ostream& os, const mud::player& player);
 std::ostream& operator<< (std::ostream& os, const mud::character& character);
 std::ostream& operator<< (std::ostream& os, const mud::tile& tile);
+std::ostream& operator<< (std::ostream& os, const mud::enemy& enemy);
+std::ostream& operator<< (std::ostream& os, const mud::item& item);
 
+std::ostream& operator<< (std::ostream& os, const mud::attribute& attribute);
+std::ostream& operator<< (std::ostream& os, const mud::location& location);
 std::ostream& operator<< (std::ostream& os, const mud::direction& direction);
 std::ostream& operator<< (
 	std::ostream& os, 
@@ -159,6 +164,12 @@ std::ostream& operator<< (
 std::ostream& operator<< (
 	std::ostream& os, 
 	const mud::attribute::attribute_enum& name);
+std::ostream& operator<< (
+	std::ostream& os,
+	const mud::play_in::command_enum& command);
+std::ostream& operator<< (
+	std::ostream& os,
+	const mud::play_out::status_enum& status);
 
 // Get the direction according to present one.
 mud::direction get_invert_direction(const mud::direction& dir);
@@ -172,12 +183,12 @@ bool is_tile_empty_or_character(const mud::tile& tile);
 bool is_tile_empty_or_enemy(const mud::tile& tile);
 
 // Get a map of the surrounding tiles.
-std::map<mud::direction, mud::tile> around_tiles(
-	const mud::tile& current_tile,
-	const std::map<std::int64_t, mud::tile>& id_tiles);
+std::map<std::int64_t, mud::direction> around_tiles(
+	std::int64_t id_tile_current,
+	const std::unordered_map<std::int64_t, mud::tile>& id_tiles);
 
 // Get the tiles you can see (hear) around you.
-std::vector<std::pair<mud::direction, mud::tile>> see_around_tiles(
-	const mud::tile& current_tile,
-	const std::map<std::int64_t, mud::tile>& id_tiles,
+std::map<std::int64_t, mud::direction> see_around_tiles(
+	std::int64_t id_tile_current,
+	const std::unordered_map<std::int64_t, mud::tile>& id_tiles,
 	const int range = 2);

@@ -44,7 +44,7 @@ namespace input {
 		});
 	}
 
-	bool keyboard::check_released_input(const input_t& key)
+	bool keyboard::check_released_input(const mud::play_in::command_enum& key)
 	{
 		std::lock_guard l(mutex_);
 		if (key_released_[key]) {
@@ -55,7 +55,19 @@ namespace input {
 		return false;
 	}
 
-	void keyboard::stop() {
+	mud::play_in::command_enum keyboard::get_key()
+	{
+		for (const auto k : input_key)
+		{
+			if (check_released_input(k.first)) {
+				return k.first;
+			}
+		}
+		return mud::play_in::NO_COMMAND;
+	}
+
+	void keyboard::stop()
+	{
 		{
 			std::lock_guard l(mutex_);
 			running_ = false;
@@ -64,38 +76,3 @@ namespace input {
 	}
 
 } // End namespace server.
-
-std::ostream& operator<< (std::ostream& os, const input::input_t& key)
-{
-	switch (key)
-	{
-	case input::input_t::ATTACK:
-		os << "ATTACK";
-		break;
-	case input::input_t::BACKWARD:
-		os << "BACKWARD";
-		break;
-	case input::input_t::FORWARD:
-		os << "FORWARD";
-		break;
-	case input::input_t::INFO:
-		os << "INFO";
-		break;
-	case input::input_t::LEFT:
-		os << "LEFT";
-		break;
-	case input::input_t::NONE:
-		os << "NONE";
-		break;
-	case input::input_t::PRINT:
-		os << "PRINT";
-		break;
-	case input::input_t::QUIT:
-		os << "QUIT";
-		break;
-	case input::input_t::RIGHT:
-		os << "RIGHT";
-		break;
-	}
-	return os;
-}

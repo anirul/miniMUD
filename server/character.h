@@ -1,21 +1,21 @@
 #pragma once
 
 #include <array>
+#include "game.h"
 #include "../mud_lib/helper.h"
-#include "../mud_lib/keyboard.h"
 
 namespace server {
 
 	class character 
 	{
 	public:
-		character(mud::character& c) : character_(c) {}
-		bool run(
-			const input::input_t& entry,
-			mud::tile& present_tile,
-			std::map<mud::direction, mud::tile>& surrounding_tiles);
+		character(game& g) : game_(g) {}
+		std::unordered_map<std::int64_t, mud::play_out::status_enum> run(
+			const std::unordered_map<std::int64_t, mud::play_in::command_enum>& 
+				entries,
+			std::unordered_map<std::int64_t, mud::character>& id_characters);
 	protected:
-		mud::character& character_;
+		game& game_;
 	};
 
 }

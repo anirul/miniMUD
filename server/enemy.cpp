@@ -2,101 +2,118 @@
 
 namespace server {
 
-	void enemy::run(
-		mud::enemy& e,
-		std::map<std::int64_t, mud::tile>& id_tiles,
-		std::map<std::int64_t, mud::character>& id_characters)
+	void enemy::run(std::unordered_map<std::int64_t, mud::enemy>& id_enemies)
 	{
-		// Enemy is not on a valid tile.
-		if (e.tile_id() == 0) return;
-		mud::tile& current_tile = id_tiles[e.tile_id()];
-		// Set the enemy in place on the map (if possible).
-		current_tile.set_occupant_id(e.id());
-		current_tile.set_occupant_type(mud::tile::ENEMY);
-		const auto neighbour_tiles = 
-			see_around_tiles(current_tile, id_tiles);
-		mud::tile character_tile = {};
-		mud::direction direction = get_random_direction();
-		bool found = false;
-		// Search if there is any target around.
-		for (const auto& direction_tile : neighbour_tiles)
-		{
-			if (direction_tile.second.occupant_type() == 
-				mud::tile::CHARACTER)
+		for (auto& id_enemy : id_enemies) {
+			// Enemy is not on a valid tile.
+			if (id_enemy.second.tile_id() == 0) return;
+			if (!game_.has_tile(id_enemy.second.tile_id())) return;
+			mud::tile& current_tile = game_.get_tile(id_enemy.second.tile_id());
+			// Set the enemy in place on the map (if possible).
+			current_tile.set_occupant_id(id_enemy.second.id());
+			current_tile.set_occupant_type(mud::tile::ENEMY);
+			const auto neighbour_tiles =
+				see_around_tiles(current_tile.id(), game_.get_tiles());
+			mud::tile character_tile = {};
+			mud::direction direction = get_random_direction();
+			bool found = false;
+			// Search if there is any target around.
+			for (const auto& direction_tile : neighbour_tiles)
 			{
-				direction = direction_tile.first;
-				character_tile = direction_tile.second;
-				found = true;
-				break;
-			}
-		}
-		// Face the correct direction.
-		if (direction != e.facing()) 
-		{
-			if (get_invert_direction(e.facing()) == direction) 
-			{
-				*e.mutable_facing() = get_right_direction(e.facing());
-			}
-			else if (get_right_direction(e.facing()) == direction)
-			{
-				*e.mutable_facing() = get_right_direction(e.facing());
-			}
-			else
-			{
-				*e.mutable_facing() = get_left_direction(e.facing());
-			}
-			return;
-		}
-		// Didn't found anyone so bail out.
-		if (!found) return;
-		const auto around_tile = around_tiles(current_tile, id_tiles);
-		// Move the enemy toward the target.
-		auto it = around_tile.find(direction);
-		if (it != around_tile.end()) {
-			switch (it->second.occupant_type()) {
-			case mud::tile::CHARACTER:
-				// Attack!
-				if (attack_character(
-					e,
-					id_characters[it->second.occupant_id()]))
+				const mud::tile& tile = game_.get_tile(direction_tile.first);
+				if (tile.occupant_type() == mud::tile::CHARACTER)
 				{
-					std::cout << "\a" << std::flush;
+					direction = direction_tile.second;
+					character_tile = tile;
+					found = true;
+					break;
 				}
-				break;
-			case mud::tile::EMPTY:
-				move_to(e, around_tile.at(direction), id_tiles);
-				break;
-			case mud::tile::ENEMY:
-				// DO NOTHING!
-				break;
+			}
+			// Face the correct direction.
+			if (direction != id_enemy.second.facing())
+			{
+				if (get_invert_direction(id_enemy.second.facing()) == direction)
+				{
+					*id_enemy.second.mutable_facing() = 
+						get_right_direction(id_enemy.second.facing());
+				}
+				else if (get_right_direction(id_enemy.second.facing()) == 
+					direction)
+				{
+					*id_enemy.second.mutable_facing() = 
+						get_right_direction(id_enemy.second.facing());
+				}
+				else
+				{
+					*id_enemy.second.mutable_facing() = 
+						get_left_direction(id_enemy.second.facing());
+				}
+				return;
+			}
+			// Didn't found anyone so bail out.
+			if (!found) return;
+			const auto around_tile = around_tiles(
+				current_tile.id(),
+				game_.get_tiles());
+			// Move the enemy toward the target.
+			auto it = std::find_if(
+#ifndef __APPLE__
+				std::execution::par,
+#endif
+				around_tile.begin(),
+				around_tile.end(),
+				[&direction](const std::pair<std::int64_t, mud::direction> p)
+			{
+				if (p.second == direction) return true;
+				return false;
+			});
+			if (it != around_tile.end()) {
+				const auto& tile = game_.get_tile(it->first);
+				switch (tile.occupant_type()) {
+				case mud::tile::CHARACTER:
+					// Attack!
+					if (attack_character(
+						game_.get_character(tile.occupant_id()),
+						id_enemy.second))
+					{
+						std::cout << "\a" << std::flush;
+					}
+					break;
+				case mud::tile::EMPTY:
+					move_to(
+						id_enemy.second.tile_id(), 
+						it->first, 
+						id_enemy.second);
+					break;
+				case mud::tile::ENEMY:
+					// DO NOTHING!
+					break;
+				}
 			}
 		}
 	}
 
-	bool enemy::move_to(
-		mud::enemy& e, 
-		const mud::tile& tile,
-		std::map<std::int64_t, mud::tile>& id_tiles)
+	bool enemy::move_to(std::int64_t from, std::int64_t to, mud::enemy& me)
 	{
-		if (tile.type() != mud::tile::EMPTY) return false;
-		if (tile.occupant_type() != mud::tile::NOBODY) return false;
-		if (tile.occupant_id() != 0) return false;
-		mud::tile& to = id_tiles[tile.id()];
-		mud::tile& previous = id_tiles[e.tile_id()];
-		e.set_tile_id(to.id());
-		to.set_occupant_id(e.id());
-		to.set_occupant_type(mud::tile::ENEMY);
-		previous.set_occupant_id(0);
-		previous.set_occupant_type(mud::tile::NOBODY);
+		mud::tile& tile_to = game_.get_tile(to);
+		if (tile_to.type() != mud::tile::EMPTY) return false;
+		if (tile_to.occupant_type() != mud::tile::NOBODY) return false;
+		if (tile_to.occupant_id() != 0) return false;
+		mud::tile& tile_from = game_.get_tile(from);
+		me.set_tile_id(tile_to.id());
+		tile_to.set_occupant_id(me.id());
+		tile_to.set_occupant_type(mud::tile::ENEMY);
+		tile_from.set_occupant_id(0);
+		tile_from.set_occupant_type(mud::tile::NOBODY);
 		return true;
 	}
 
 	bool enemy::attack_character(
-		const mud::enemy& e,
-		mud::character& character)
+		mud::character& character, 
+		const mud::enemy& me)
 	{
 		float attack_strength = .0f;
-		for (const auto& attr : e.attributes())
+		for (const auto& attr : me.attributes())
 		{
 			if (attr.name() == mud::attribute::MELEE_POWER) 
 			{

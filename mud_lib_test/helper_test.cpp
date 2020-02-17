@@ -3,6 +3,71 @@
 
 namespace test {
 
+	HelperTest::HelperTest()
+	{
+		auto default_tile = [](mud::tile& t)
+		{
+			t.set_type(mud::tile::EMPTY);
+			t.set_occupant_id(0);
+			t.set_occupant_type(mud::tile::NOBODY);
+		};
+		auto create_location = [](mud::direction dir, std::int64_t v)
+		{
+			mud::location l{};
+			l.set_id(v);
+			*l.mutable_direction() = dir;
+			return l;
+		};
+		{
+			mud::tile t{};
+			t.set_id(1);
+			default_tile(t);
+			*t.add_neighbours() = create_location(direction::north, 6);
+			*t.add_neighbours() = create_location(direction::west, 4);
+			*t.add_neighbours() = create_location(direction::east, 2);
+			*t.add_neighbours() = create_location(direction::south, 3);
+			basic_tiles_.insert({ 1, t });
+		}
+		{
+			mud::tile t{};
+			t.set_id(2);
+			default_tile(t);
+			*t.add_neighbours() = create_location(direction::west, 1);
+			basic_tiles_.insert({ 2, t });
+		}
+		{
+			mud::tile t{};
+			t.set_id(3);
+			default_tile(t);
+			*t.add_neighbours() = create_location(direction::north, 1);
+			basic_tiles_.insert({ 3, t });
+		}
+		{
+			mud::tile t{};
+			t.set_id(4);
+			default_tile(t);
+			*t.add_neighbours() = create_location(direction::east, 1);
+			*t.add_neighbours() = create_location(direction::north, 5);
+			basic_tiles_.insert({ 4, t });
+		}
+		{
+			mud::tile t{};
+			t.set_id(5);
+			default_tile(t);
+			*t.add_neighbours() = create_location(direction::south, 4);
+			*t.add_neighbours() = create_location(direction::east, 6);
+			basic_tiles_.insert({ 5, t });
+		}
+		{
+			mud::tile t{};
+			t.set_id(5);
+			default_tile(t);
+			*t.add_neighbours() = create_location(direction::west, 5);
+			*t.add_neighbours() = create_location(direction::south, 1);
+			basic_tiles_.insert({ 6, t });
+		}
+	}
+
 	TEST_F(HelperTest, LessDirectionTest)
 	{
 		std::less<mud::direction> less_direction{};
@@ -211,7 +276,160 @@ namespace test {
 			t.set_occupant_type(mud::tile::CHARACTER);
 			EXPECT_TRUE(is_tile_empty_or_character(t));
 		}
+	}
 
+	TEST_F(HelperTest, AroundTilesSizeTest)
+	{
+		EXPECT_EQ(4, around_tiles(1, basic_tiles_).size());
+		EXPECT_EQ(1, around_tiles(2, basic_tiles_).size());
+		EXPECT_EQ(1, around_tiles(3, basic_tiles_).size());
+		EXPECT_EQ(2, around_tiles(4, basic_tiles_).size());
+		EXPECT_EQ(2, around_tiles(5, basic_tiles_).size());
+		EXPECT_EQ(2, around_tiles(6, basic_tiles_).size());
+	}
+
+	TEST_F(HelperTest, AroundTilesInsideTest)
+	{
+		{
+			std::map<std::int64_t, mud::direction> result =
+			{
+				{2, direction::east},
+				{3, direction::south},
+				{4, direction::west},
+				{6, direction::north}
+			};
+			auto around_result = around_tiles(1, basic_tiles_);
+			for (std::int64_t i : {2, 3, 4, 6})
+			{
+				EXPECT_TRUE(result.find(i) != result.end());
+				EXPECT_TRUE(result.find(i) != result.end());
+				EXPECT_TRUE(result[i] == around_result[i]);
+			}
+		}
+		{
+			std::map<std::int64_t, mud::direction> result =
+			{
+				{1, direction::west}
+			};
+			auto around_result = around_tiles(2, basic_tiles_);
+			for (std::int64_t i : {1})
+			{
+				EXPECT_TRUE(result.find(i) != result.end());
+				EXPECT_TRUE(result.find(i) != result.end());
+				EXPECT_TRUE(result[i] == around_result[i]);
+			}
+		}
+		{
+			std::map<std::int64_t, mud::direction> result =
+			{
+				{1, direction::north}
+			};
+			auto around_result = around_tiles(3, basic_tiles_);
+			for (std::int64_t i : {1})
+			{
+				EXPECT_TRUE(result.find(i) != result.end());
+				EXPECT_TRUE(result.find(i) != result.end());
+				EXPECT_TRUE(result[i] == around_result[i]);
+			}
+		}
+		{
+			std::map<std::int64_t, mud::direction> result =
+			{
+				{1, direction::east},
+				{5, direction::north}
+			};
+			auto around_result = around_tiles(4, basic_tiles_);
+			for (std::int64_t i : {1, 5})
+			{
+				EXPECT_TRUE(result.find(i) != result.end());
+				EXPECT_TRUE(result.find(i) != result.end());
+				EXPECT_TRUE(result[i] == around_result[i]);
+			}
+		}
+		{
+			std::map<std::int64_t, mud::direction> result =
+			{
+				{4, direction::south},
+				{6, direction::east}
+			};
+			auto around_result = around_tiles(5, basic_tiles_);
+			for (std::int64_t i : {4, 6})
+			{
+				EXPECT_TRUE(result.find(i) != result.end());
+				EXPECT_TRUE(result.find(i) != result.end());
+				EXPECT_TRUE(result[i] == around_result[i]);
+			}
+		}
+		{
+			std::map<std::int64_t, mud::direction> result =
+			{
+				{1, direction::south},
+				{5, direction::west}
+			};
+			auto around_result = around_tiles(6, basic_tiles_);
+			for (std::int64_t i : {1, 5})
+			{
+				EXPECT_TRUE(result.find(i) != result.end());
+				EXPECT_TRUE(result.find(i) != result.end());
+				EXPECT_TRUE(result[i] == around_result[i]);
+			}
+		}
+	}
+
+	TEST_F(HelperTest, SeeAroundTilesSizeTest)
+	{
+		EXPECT_EQ(5, see_around_tiles(1, basic_tiles_).size());
+		EXPECT_EQ(4, see_around_tiles(2, basic_tiles_).size());
+		EXPECT_EQ(4, see_around_tiles(3, basic_tiles_).size());
+		EXPECT_EQ(5, see_around_tiles(4, basic_tiles_).size());
+		EXPECT_EQ(3, see_around_tiles(5, basic_tiles_).size());
+		EXPECT_EQ(5, see_around_tiles(6, basic_tiles_).size());
+	}
+
+	TEST_F(HelperTest, SeeAroundTilesInsideTest)
+	{
+		{
+			auto result = see_around_tiles(1, basic_tiles_);
+			for (std::int64_t i : {2, 3, 4, 5, 6})
+			{
+				EXPECT_TRUE(result.find(i) != result.end());
+			}
+		}
+		{
+			auto result = see_around_tiles(2, basic_tiles_);
+			for (std::int64_t i : {1, 3, 4, 6})
+			{
+				EXPECT_TRUE(result.find(i) != result.end());
+			}
+		}
+		{
+			auto result = see_around_tiles(3, basic_tiles_);
+			for (std::int64_t i : {1, 2, 4, 6})
+			{
+				EXPECT_TRUE(result.find(i) != result.end());
+			}
+		}
+		{
+			auto result = see_around_tiles(4, basic_tiles_);
+			for (std::int64_t i : {1, 2, 3, 5, 6})
+			{
+				EXPECT_TRUE(result.find(i) != result.end());
+			}
+		}
+		{
+			auto result = see_around_tiles(5, basic_tiles_);
+			for (std::int64_t i : {1, 4, 6})
+			{
+				EXPECT_TRUE(result.find(i) != result.end());
+			}
+		}
+		{
+			auto result = see_around_tiles(6, basic_tiles_);
+			for (std::int64_t i : {1, 2, 3, 4, 5})
+			{
+				EXPECT_TRUE(result.find(i) != result.end());
+			}
+		}
 	}
 
 } // End namespace test.

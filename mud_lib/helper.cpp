@@ -16,47 +16,124 @@ bool operator!=(const mud::direction& l, const mud::direction& r)
 
 std::ostream& operator<< (std::ostream& os, const mud::player& player)
 {
-	os << "name     : " << player.name() << std::endl;
-	os << "password : " << player.password_hash() << std::endl;
-	os << "id       : " << player.id() << std::endl;
+	// size to           :
+	os << "name          : " << player.name() << std::endl;
+	os << "password      : " << player.password_hash() << std::endl;
+	os << "id            : " << player.id() << std::endl;
 	os << "characters(" << player.id_characters().size() << ")" << std::endl;
+	bool first = true;
 	for (const auto& id : player.id_characters())
 	{
-		os << "\t" << id << std::endl;
+		if (first)
+		{
+			first = false;
+			os << "\t";
+		}
+		else
+		{
+			os << ", ";
+		}
+		os << id;
 	}
+	os << std::endl;
 	return os;
 }
 
 std::ostream& operator<< (std::ostream& os, const mud::character& character)
 {
-	os << "name     : " << character.name() << std::endl;
-	os << "id       : " << character.id() << std::endl;
-	os << "tile id  : " << character.tile_id() << std::endl;
-	os << "facing   : " << character.facing() << std::endl;
-	os << "state    : " << character.state() << std::endl;
+	// size to           :
+	os << "name          : " << character.name() << std::endl;
+	os << "id            : " << character.id() << std::endl;
+	os << "tile id       : " << character.tile_id() << std::endl;
+	os << "facing        : " << character.facing() << std::endl;
+	os << "state         : " << character.state() << std::endl;
+	os << "attributes(" << character.attributes().size() << ")" << std::endl;
 	for (const auto& attr : character.attributes())
 	{
-		os << "\tname      : " << attr.name() << std::endl;
-		os << "\tscore     : " << attr.score() 
-			<< " [" << attr.score_max() << "]" << std::endl;
-		os << "\tregen     : " << attr.regen() << std::endl;
+		os << attr << std::endl;
 	}
 	return os;
 }
 
 std::ostream& operator<< (std::ostream& os, const mud::tile& tile)
 {
-	os << "mood     : " << tile.mood() << std::endl;
-	os << "type     : " << tile.type() << std::endl;
-	os << "id       : " << tile.id() << std::endl;
-	os << "occ type : " << tile.occupant_type() << std::endl;
-	os << "occ id   : " << tile.occupant_id() << std::endl;
+	// size to           :
+	os << "mood          : " << tile.mood() << std::endl;
+	os << "type          : " << tile.type() << std::endl;
+	os << "id            : " << tile.id() << std::endl;
+	os << "occupant type : " << tile.occupant_type() << std::endl;
+	os << "occupant id   : " << tile.occupant_id() << std::endl;
 	os << "neighbours(" << tile.neighbours().size() << ")" << std::endl;
 	for (const auto& field : tile.neighbours()) 
 	{
-		os << "\tlocation direction : " << field.direction() << std::endl;
-		os << "\tlocation id        : " << field.id() << std::endl;
+		os << field << std::endl;
 	}
+	return os;
+}
+
+std::ostream& operator<< (std::ostream& os, const mud::enemy& enemy)
+{
+	// size to           :
+	os << "name          : " << enemy.name() << std::endl;
+	os << "description   : " << enemy.description() << std::endl;
+	os << "id            : " << enemy.id() << std::endl;
+	os << "tile id       : " << enemy.tile_id() << std::endl;
+	os << "facing        : " << enemy.facing() << std::endl;
+	os << "attributes(" << enemy.attributes().size() << ")" << std::endl;
+	for (const auto& attribute : enemy.attributes())
+	{
+		os << attribute << std::endl;
+	}
+	os 
+		<< "droppable_item_ids(" << enemy.attributes().size() << ")" 
+		<< std::endl;
+	bool first = true;
+	for (const auto& id_item : enemy.droppable_item_ids())
+	{
+		if (first)
+		{
+			first = false;
+			os << "\t";
+		}
+		else
+		{
+			os << ", ";
+		}
+		os << id_item;
+	}
+	os << std::endl;
+	return os;
+}
+
+std::ostream& operator<< (std::ostream& os, const mud::item& item)
+{
+	// size to           :
+	os << "name          : " << item.name() << std::endl;
+	os << "description   : " << item.description() << std::endl;
+	os << "id            : " << item.id() << std::endl;
+	os << "attributes(" << item.attributes().size() << ")" << std::endl;
+	for (const auto& attribute : item.attributes())
+	{
+		os << attribute;
+	}
+	return os;
+}
+
+std::ostream& operator<< (std::ostream& os, const mud::attribute& attribute)
+{
+	// size to \t               :
+	os << "\tname               : " << attribute.name() << std::endl;
+	os << "\tscore              : " << attribute.score()
+		<< " [" << attribute.score_max() << "]" << std::endl;
+	os << "\tregen              : " << attribute.regen() << std::endl;
+	return os;
+}
+
+std::ostream& operator<< (std::ostream& os, const mud::location& location)
+{
+	// size to \t               :
+	os << "\tlocation direction : " << location.direction() << std::endl;
+	os << "\tlocation id        : " << location.id() << std::endl;
 	return os;
 }
 
@@ -75,6 +152,9 @@ std::ostream& operator<< (std::ostream& os, const mud::direction& direction)
 		break;
 	case mud::direction::EAST:
 		os << "EAST";
+		break;
+	default:
+		os << "unknown";
 		break;
 	}
 	return os;
@@ -95,6 +175,9 @@ std::ostream& operator<< (
 	case mud::character::COMBAT:
 		os << "COMBAT";
 		break;
+	default:
+		os << "unknown";
+		break;
 	}
 	return os;
 }
@@ -113,6 +196,9 @@ std::ostream& operator<< (
 		break;
 	case mud::tile::ENEMY:
 		os << "ENEMY";
+		break;
+	default:
+		os << "unknown";
 		break;
 	}
 	return os;
@@ -135,6 +221,9 @@ std::ostream& operator<< (
 		break;
 	case mud::tile::PORTAL:
 		os << "PORTAL";
+		break;
+	default:
+		os << "unknown";
 		break;
 	}
 	return os;
@@ -163,6 +252,80 @@ std::ostream& operator<< (
 		break;
 	case mud::attribute::INTELLIGENCE:
 		os << "INTELLIGENCE";
+		break;
+	default:
+		os << "unknown";
+		break;
+	}
+	return os;
+}
+
+std::ostream& operator<<(
+	std::ostream& os, 
+	const mud::play_in::command_enum& command)
+{
+	switch (command)
+	{
+	case mud::play_in::NO_COMMAND:
+		os << "NO_COMMAND";
+		break;
+	case mud::play_in::TURN_LEFT:
+		os << "TURN_LEFT";
+		break;
+	case mud::play_in::TURN_RIGHT:
+		os << "TURN_RIGHT";
+		break;
+	case mud::play_in::FORWARD:
+		os << "FORWARD";
+		break;
+	case mud::play_in::BACKWARD:
+		os << "BACKWARD";
+		break;
+	case mud::play_in::ATTACK_MELEE:
+		os << "ATTACK_MELEE";
+		break;
+	case mud::play_in::ATTACK_RANGE:
+		os << "ATTACK_RANGE";
+		break;
+	case mud::play_in::DEFEND:
+		os << "DEFEND";
+		break;
+	case mud::play_in::HEAL:
+		os << "HEAL";
+		break;
+	case mud::play_in::INFO:
+		os << "INFO";
+		break;
+	case mud::play_in::QUIT:
+		os << "QUIT";
+		break;
+	default:
+		os << "unknown";
+		break;
+	}
+	return os;
+}
+
+std::ostream& operator<<(
+	std::ostream& os, 
+	const mud::play_out::status_enum& status)
+{
+	switch (status)
+	{
+	case mud::play_out::FAILURE:
+		os << "FAILURE";
+		break;
+	case mud::play_out::SUCCESS:
+		os << "SUCCESS";
+		break;
+	case mud::play_out::QUIT:
+		os << "QUIT";
+		break;
+	case mud::play_out::DEAD:
+		os << "DEAD";
+		break;
+	default:
+		os << "unknown";
 		break;
 	}
 	return os;
@@ -266,19 +429,6 @@ mud::direction get_random_direction() {
 	return out;
 }
 
-std::map<mud::direction, mud::tile> around_tiles(
-	const mud::tile& current_tile,
-	const std::map<std::int64_t, mud::tile>& id_tiles)
-{
-	std::map<mud::direction, mud::tile> neighbour;
-	for (const auto& location : current_tile.neighbours())
-	{
-		mud::tile tile = id_tiles.find(location.id())->second;
-		neighbour.insert({ location.direction(), tile });
-	}
-	return neighbour;
-}
-
 bool is_tile_empty(const mud::tile& tile)
 {
 	return
@@ -307,138 +457,40 @@ bool is_tile_empty_or_enemy(const mud::tile& tile)
 				tile.occupant_id() != 0));
 }
 
-static bool check_in_out(const std::vector<mud::direction>& v)
+std::map<std::int64_t, mud::direction> around_tiles(
+	std::int64_t id_tile_current,
+	const std::unordered_map<std::int64_t, mud::tile>& id_tiles)
 {
+	std::map<std::int64_t, mud::direction> neighbour;
+	auto it = id_tiles.find(id_tile_current);
+	if (it != id_tiles.end())
 	{
-		auto it1 = std::find_if(
-			v.begin(), 
-			v.end(), 
-			[](const mud::direction& d) { return d == direction::north; });
-		auto it2 = std::find_if(
-			v.begin(), 
-			v.end(), 
-			[](const mud::direction& d) { return d == direction::south; });
-		if (it1 != v.end() && it2 != v.end()) return true;
+		for (const auto& location : it->second.neighbours())
+		{
+			neighbour.insert({ location.id(), location.direction() });
+		}
 	}
-	{
-		auto it1 = std::find_if(
-			v.begin(), 
-			v.end(), 
-			[](const mud::direction& d) { return d == direction::west; });
-		auto it2 = std::find_if(
-			v.begin(), 
-			v.end(), 
-			[](const mud::direction& d) { return d == direction::east; });
-		if (it1 != v.end() && it2 != v.end()) return true;
-	}
-	return false;
+	return neighbour;
 }
 
-static bool check_stack(const std::vector<mud::direction>& stack)
-{
-	std::map<mud::direction, int> direction_count_map;
-	mud::direction current_direction = get_invert_direction(stack.front());
-	int current_max = 0;
-	int current_count = 0;
-	for (const auto& element : stack)
-	{
-		if (current_direction.value() != element.value())
-		{
-			current_direction.set_value(element.value());
-			current_count = 0;
-		}
-		if (direction_count_map.find(element) == direction_count_map.end())
-		{
-			direction_count_map.insert({ element, 1 });
-			current_count = 1;
-		}
-		else
-		{
-			direction_count_map[element]++;
-			current_count++;
-		}
-		if (current_max < current_count)
-		{
-			current_max = current_count;
-		}
-	}
-	if (direction_count_map.size() == 1) return true;
-	if (direction_count_map.size() != 2) return false;
-	{
-		std::vector<mud::direction> v{};
-		for (const auto& field : direction_count_map)
-		{
-			v.push_back(field.first);
-		}
-		if (check_in_out(v)) return false;
-	}
-	auto result = std::minmax_element(
-		direction_count_map.begin(),
-		direction_count_map.end(),
-		[](const auto& l, const auto& r)
-	{
-		return l.second < r.second;
-	});
-	const float value = 
-		static_cast<float>(result.second->second) / 
-		static_cast<float>(result.first->second + 1);
-	const float max = static_cast<float>(current_max);
-	if ((value <= max) && (value + 1.f >= max))
-	{
-		return true;
-	}
-	return false;
-}
-
-static void see_around_tile_recurse(
-	const mud::tile& current_tile,
-	const std::map<std::int64_t, mud::tile>& id_tiles,
-	const int range,
-	std::vector<std::pair<mud::direction, mud::tile>>& initial_set,
-	const std::vector<mud::direction>& direction_stack)
-{
-	if (range == 0) return;
-	for (const auto& field : around_tiles(current_tile, id_tiles))
-	{
-		if (std::find_if(
-			initial_set.begin(),
-			initial_set.end(),
-			[&field](const auto& element) 
-		{
-			return 
-				(field.first == element.first) && 
-				(field.second.id() == element.second.id());
-		}) != initial_set.end())
-		{
-			continue;
-		}
-		std::vector<mud::direction> stack = direction_stack;
-		stack.push_back(field.first);
-		if (is_tile_empty_or_character(field.second) && check_stack(stack))
-		{
-			initial_set.push_back({ stack.front(), field.second });
-			see_around_tile_recurse(
-				field.second, 
-				id_tiles, 
-				range - 1, 
-				initial_set, 
-				stack);
-		}
-	}
-}
-
-std::vector<std::pair<mud::direction, mud::tile>> see_around_tiles(
-	const mud::tile& current_tile,
-	const std::map<std::int64_t, mud::tile>& id_tiles,
+std::map<std::int64_t, mud::direction> see_around_tiles(
+	std::int64_t id_tile_current,
+	const std::unordered_map<std::int64_t, mud::tile>& id_tiles,
 	const int range)
 {
-	std::vector<std::pair<mud::direction, mud::tile>> see_tile_set = {};
-	std::vector<mud::direction> direction_stack;
-	see_around_tile_recurse(
-		current_tile, 
-		id_tiles, 
-		range, 
-		see_tile_set, 
-		direction_stack);
-	return see_tile_set;
+	if (range <= 0) return {};
+	std::map<std::int64_t, mud::direction> out{};
+	for (const auto& field : around_tiles(id_tile_current, id_tiles))
+	{
+		if (field.first == 0) continue;
+		if (id_tiles.find(field.first) == id_tiles.end()) continue;
+		out.insert({ field.first, field.second });
+		auto new_map = see_around_tiles(field.first, id_tiles, range - 1);
+		for (const auto& in_field : new_map)
+		{
+			if (in_field.first == id_tile_current) continue;
+			out.insert({ in_field.first, field.second });
+		}
+	}
+	return out;
 }

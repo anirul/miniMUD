@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+package mud;
+
+import "mud_lib.proto";
+
+// Message that we use for gRPC.
+
+// Next id: 2
+message get_token_in {}
+
+// Next id: 2
+message get_token_out {
+	int64 id_token = 1;
+}
+
+// Next id: 4
+message login_in {
+	string name = 1;
+	string password_hash = 2;
+	int64 id_token = 3;
+}
+
+// Next id: 4
+message login_out {
+	enum status_enum {
+		FAILURE = 0;
+		UNKNOWN_TOKEN = 1;
+		TOO_OLD_TOKEN = 2;
+		ALREADY_CONNECTED = 3;
+		SUCCESS = 4;
+	}
+	status_enum status = 1;
+	int64 id_player = 3;
+	repeated character characters = 2;
+}
+
+// Next id: 3
+message select_character_in {
+	int64 id_character = 1;
+	int64 id_token = 2;
+}
+
+// Next id: 2
+message select_character_out {
+	enum status_enum {
+		FAILURE = 0;
+		FORBIDDEN = 1;
+		SUCCESS = 2;
+	}
+	status_enum status = 1;
+}
+
+// Next id: 4
+message create_character_in {
+	string name = 1;
+	string description = 2;
+	int64 id_token = 3;
+}
+
+// Next id: 4
+message create_character_out {
+	enum status_enum {
+		FAILURE = 0;
+		ALREADY_IN = 1;
+		SUCCESS = 2;
+	}
+	status_enum status = 1;
+	int64 id_character = 2;
+	repeated character characters = 3;
+}
+
+// Next id: 5
+message play_in {
+	enum command_enum {
+		NO_COMMAND = 0;
+		TURN_LEFT = 1;
+		TURN_RIGHT = 2;
+		FORWARD = 3;
+		BACKWARD = 4;
+		ATTACK_MELEE = 5;
+		ATTACK_RANGE = 6;
+		DEFEND = 7;
+		HEAL = 8;
+		INFO = 9;
+		QUIT = 10;
+	}
+	int64 id_token = 1;
+	int64 id_player = 2;
+	int64 id_character = 3;
+	command_enum command = 4;
+}
+
+// Next id: 7
+message play_out {
+	enum status_enum {
+		FAILURE = 0;
+		SUCCESS = 1;
+		QUIT = 2;
+		DEAD = 3;
+	}
+	int64 id_character = 1;
+	status_enum status = 2;
+	repeated tile tiles = 3;
+	repeated character characters = 4;
+	repeated enemy enemies = 5;
+	repeated item items = 6;
+}
+
+// gRPC description.
+service game_server {
+	rpc GetToken(get_token_in) returns (get_token_out) {}
+	rpc Login(login_in) returns (login_out) {}
+	rpc SelectCharacter(select_character_in) returns (select_character_out) {}
+	rpc CreateCharacter(create_character_in) returns (create_character_out) {}
+	rpc Play(play_in) returns (play_out) {}
+}

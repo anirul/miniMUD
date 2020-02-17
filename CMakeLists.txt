@@ -18,8 +18,10 @@ find_package(Gtest CONFIG REQUIRED)
 add_library(proto
 	${CMAKE_CURRENT_SOURCE_DIR}/proto/mud_lib.pb.cc
 	${CMAKE_CURRENT_SOURCE_DIR}/proto/mud_lib.pb.h
-	${CMAKE_CURRENT_SOURCE_DIR}/proto/mud_lib.grpc.pb.cc
-	${CMAKE_CURRENT_SOURCE_DIR}/proto/mud_lib.grpc.pb.h
+	${CMAKE_CURRENT_SOURCE_DIR}/proto/mud_grpc.pb.cc
+	${CMAKE_CURRENT_SOURCE_DIR}/proto/mud_grpc.pb.h
+	${CMAKE_CURRENT_SOURCE_DIR}/proto/mud_grpc.grpc.pb.cc
+	${CMAKE_CURRENT_SOURCE_DIR}/proto/mud_grpc.grpc.pb.h
 )
 
 target_link_libraries(proto
@@ -101,13 +103,15 @@ target_link_libraries(server
 	cryptopp-static
 )
 
-add_executable(client
-	${CMAKE_CURRENT_SOURCE_DIR}/client/main.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/client/client.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/client/client.h
+add_executable(client_cmd
+	${CMAKE_CURRENT_SOURCE_DIR}/client_cmd/main.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/client_cmd/client.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/client_cmd/client.h
+	${CMAKE_CURRENT_SOURCE_DIR}/client_cmd/control.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/client_cmd/control.h
 )
 
-target_link_libraries(client
+target_link_libraries(client_cmd
   PUBLIC
 	proto
 	mud_lib

@@ -1,8 +1,8 @@
 {
  "enemies": [
   {
-   "name": "Orc",
-   "description": "",
+   "name": "Gobelin",
+   "description": "A nasty little creature",
    "id": "1",
    "tile_id": "2",
    "facing": {
