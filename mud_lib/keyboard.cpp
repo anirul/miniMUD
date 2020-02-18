@@ -10,7 +10,9 @@ namespace input {
 		{
 			bool local_running = true;
 			do {
-				for (int i = 0; i < 256; ++i) {
+#ifndef __APPLE__
+				for (int i = 0; i < 256; ++i)
+                {
 					new_key_states_[i] = GetAsyncKeyState(i);
 					key_state_inputs_[i].pressed_ = false;
 					key_state_inputs_[i].released_ = false;
@@ -30,15 +32,29 @@ namespace input {
 					}
 					old_key_states_[i] = new_key_states_[i];
 				}
+#endif
 				{
 					std::lock_guard l(mutex_);
 					local_running = running_;
-					for (const auto& key : input_key) {
+#ifdef __APPLE__
+                    last_input_ = getchar();
+                    auto it = find_if(
+                        input_key.begin(),
+                        input_key.end(),
+                        [this](const auto& p)
+                    {
+                        return p.second == last_input_;
+                    });
+                    key_released_[it->first] = true;
+#else
+					for (const auto& key : input_key)
+                    {
 						if (key_state_inputs_[key.second].released_)
 						{
 							key_released_[key.first] = true;
 						}
 					}
+#endif
 				}
 			} while (local_running);
 		});

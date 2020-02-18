@@ -25,7 +25,7 @@ namespace server {
 		try
 		{
 			// Check if token exist.
-			auto& it = token_state_map_.find(token);
+			const auto& it = token_state_map_.find(token);
 			if (it == token_state_map_.end())
 			{
 				return false;
@@ -123,7 +123,7 @@ namespace server {
 			{
 				return grpc::Status::OK;
 			}
-			auto& it = token_state_map_.find(token);
+			const auto& it = token_state_map_.find(token);
 			// Should never happen.
 			if (it->second.status_ != state::status::TOKEN)
 			{
@@ -193,7 +193,7 @@ namespace server {
 		{
 			return grpc::Status::OK;
 		}
-		auto& it = token_state_map_.find(request->id_token());
+		const auto& it = token_state_map_.find(request->id_token());
 		// Probably should avoid using exception here.
 		try 
 		{

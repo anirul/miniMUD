@@ -27,7 +27,7 @@ namespace server {
 			{
 			case mud::play_in::FORWARD:
 			{
-				auto& it = direction_id_tile_map.find(
+				const auto& it = direction_id_tile_map.find(
 					id_character.second.facing());
 				if (it == direction_id_tile_map.end()) continue;
 				const mud::tile& front = game_.get_tile(it->second);
@@ -49,7 +49,7 @@ namespace server {
 			break;
 			case mud::play_in::BACKWARD:
 			{
-				auto& it = direction_id_tile_map.find(
+				const auto& it = direction_id_tile_map.find(
 					get_invert_direction(id_character.second.facing()));
 				if (it == direction_id_tile_map.end()) continue;
 				const mud::tile& back = game_.get_tile(it->second);

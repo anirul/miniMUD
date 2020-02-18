@@ -454,7 +454,7 @@ namespace server {
 				{
 					if (attr.score() <= 0)
 					{
-						std::scoped_lock(local_mutex_);
+						std::scoped_lock l(local_mutex_);
 						deleted_id.push_back(p.first);
 					}
 				}
@@ -481,7 +481,7 @@ namespace server {
 			{
 				if (attr.regen() != 0 && attr.score() != attr.score_max())
 				{
-					std::scoped_lock(local_mutex_);
+					std::scoped_lock l(local_mutex_);
 					attr.set_score(attr.score() + attr.regen());
 				}
 			}

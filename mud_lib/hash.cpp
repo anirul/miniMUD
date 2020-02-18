@@ -2,6 +2,7 @@
 #include <cryptopp/sha3.h>
 #include <ios>
 #include <iosfwd>
+#include <sstream>
 #include <algorithm>
 #ifndef __APPLE__
 #include <execution>
