@@ -89,6 +89,8 @@ namespace server {
 		const mud::get_token_in* request, 
 		mud::get_token_out* response)
 	{
+		std::string peer = context->peer();
+		std::cout << "connection from : " << peer << std::endl;
 		std::int64_t token = 0;
 		do 
 		{
@@ -236,20 +238,22 @@ namespace server {
 			return grpc::Status::OK;
 		}
 		const auto& it = token_state_map_.find(request->id_token());
-		std::int64_t id = [this, &request, &it] 
+		std::int64_t id = 0;
 		{
 			std::scoped_lock l(*mutex_);
-			return game_->create_new_character(
+			id = game_->create_new_character(
 				request->name(),
 				it->second.id_player_);
-		}();
+		}
+		if (id == 0) {
+			return grpc::Status::OK;
+		}
 		response->set_id_character(id);
 		response->set_status(mud::create_character_out::SUCCESS);
 		{
 			std::scoped_lock l(*mutex_);
 			for (const auto& field : game_->get_characters())
 			{
-				std::scoped_lock l(*mutex_);
 				*response->add_characters() = field.second;
 			}
 		}

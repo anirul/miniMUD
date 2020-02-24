@@ -274,7 +274,7 @@ namespace server {
 		std::int64_t id_player)
 	{
 		static std::int64_t new_id = 1;
-		while (id_characters_.find(new_id) == id_characters_.end())
+		while (id_characters_.find(new_id) != id_characters_.end())
 		{
 			new_id++;
 		}

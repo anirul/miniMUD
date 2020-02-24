@@ -102,7 +102,7 @@ namespace client {
 		else
 		{
 			std::string name;
-			std::cout << "Enter the name of your character.";
+			std::cout << "Enter the name of your character." << std::endl;
 			std::cout << " > ";
 			std::cin >> name;
 			if (name.empty())
@@ -110,7 +110,10 @@ namespace client {
 				std::cout << "no name selected." << std::endl;
 				return false;
 			}
-			mud::create_character_in in;
+			mud::create_character_in in{};
+			in.set_name(name);
+			in.set_description("");
+			in.set_id_token(id_token_);
 			auto out = std::make_shared<mud::create_character_out>();
 			client_->CreateCharacter(in, out);
 		}
