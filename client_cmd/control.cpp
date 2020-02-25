@@ -5,7 +5,7 @@
 
 namespace client {
 
-	control::control(std::shared_ptr<client> c) : client_(c)	{}
+	control::control(std::shared_ptr<client> c) : client_(c) {}
 
 	control::~control()
 	{
@@ -87,7 +87,7 @@ namespace client {
 			auto out = std::make_shared<mud::select_character_out>();
 			in.set_id_token(id_token_);
 			in.set_id_character(id_character);
-			client_->SelectCharacter(in, out);
+			[[maybe_unused]] auto s = client_->SelectCharacter(in, out);
 			if (out->status() != mud::select_character_out::SUCCESS)
 			{
 				std::cerr << "error!" << std::endl;
@@ -115,7 +115,16 @@ namespace client {
 			in.set_description("");
 			in.set_id_token(id_token_);
 			auto out = std::make_shared<mud::create_character_out>();
-			client_->CreateCharacter(in, out);
+			[[maybe_unused]] auto s = client_->CreateCharacter(in, out);
+			if (out->status() == mud::create_character_out::SUCCESS)
+			{
+				std::cout << "Success!!!" << std::endl;
+				characters_.clear();
+				for (const auto& character : out->characters())
+				{
+					characters_.push_back(character);
+				}
+			}
 		}
 		return false;
 	}
@@ -129,7 +138,7 @@ namespace client {
 		in.set_id_token(id_token_);
 		in.set_id_player(id_player_);
 		in.set_id_character(id_character_);
-		client_->Play(in, out);
+		[[maybe_unused]] auto s = client_->Play(in, out);
 		if (out->status() != mud::play_out::SUCCESS)
 		{
 			return false;
@@ -169,7 +178,8 @@ namespace client {
 			{
 				oss << c;
 			});
-			std::string new_hash_characters = crypto::hash(oss.str()).get_string();
+			std::string new_hash_characters = 
+				crypto::hash(oss.str()).get_string();
 			if (hash_characters_ != new_hash_characters)
 			{
 				std::cout
